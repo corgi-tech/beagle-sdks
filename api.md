@@ -14,6 +14,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/property-managers.ts">Pagination</a></code>
 - <code><a href="./src/resources/property-managers.ts">PropertyManager</a></code>
 - <code><a href="./src/resources/property-managers.ts">PropertyManagerListResponse</a></code>
 

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -90,38 +91,9 @@ export interface Tenant {
 }
 
 export interface TenantListResponse {
-  pagination: TenantListResponse.Pagination;
+  pagination: PropertyManagersAPI.Pagination;
 
   tenants: Array<Tenant>;
-}
-
-export namespace TenantListResponse {
-  export interface Pagination {
-    /**
-     * List of items.
-     */
-    data: Array<unknown>;
-
-    /**
-     * Current page number.
-     */
-    page: number;
-
-    /**
-     * Total number of pages.
-     */
-    pages: number;
-
-    /**
-     * Total number of records.
-     */
-    records: number;
-
-    /**
-     * Number of items per page.
-     */
-    size: number;
-  }
 }
 
 export interface TenantCreateParams {
