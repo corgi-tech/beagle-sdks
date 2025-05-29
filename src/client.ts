@@ -23,10 +23,8 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import {
   Enrollment,
   EnrollmentCreateParams,
-  EnrollmentLapseParams,
   EnrollmentListParams,
   EnrollmentListResponse,
-  EnrollmentRetrieveParams,
   Enrollments,
 } from './resources/enrollments';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
@@ -34,10 +32,8 @@ import {
   Pagination,
   PropertyManager,
   PropertyManagerCreateParams,
-  PropertyManagerDeleteParams,
   PropertyManagerListParams,
   PropertyManagerListResponse,
-  PropertyManagerRetrieveParams,
   PropertyManagerUpdateParams,
   PropertyManagers,
 } from './resources/property-managers';
@@ -46,10 +42,8 @@ import {
   Contact,
   Tenant,
   TenantCreateParams,
-  TenantDeleteParams,
   TenantListParams,
   TenantListResponse,
-  TenantRetrieveParams,
   TenantUpdateParams,
   Tenants,
 } from './resources/tenants';
@@ -749,10 +743,8 @@ export declare namespace Beagle {
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
-    type PropertyManagerRetrieveParams as PropertyManagerRetrieveParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
-    type PropertyManagerDeleteParams as PropertyManagerDeleteParams,
   };
 
   export {
@@ -762,10 +754,8 @@ export declare namespace Beagle {
     type Tenant as Tenant,
     type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
-    type TenantRetrieveParams as TenantRetrieveParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
-    type TenantDeleteParams as TenantDeleteParams,
   };
 
   export {
@@ -773,8 +763,6 @@ export declare namespace Beagle {
     type Enrollment as Enrollment,
     type EnrollmentListResponse as EnrollmentListResponse,
     type EnrollmentCreateParams as EnrollmentCreateParams,
-    type EnrollmentRetrieveParams as EnrollmentRetrieveParams,
     type EnrollmentListParams as EnrollmentListParams,
-    type EnrollmentLapseParams as EnrollmentLapseParams,
   };
 }

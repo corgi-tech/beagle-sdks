@@ -15,7 +15,6 @@ describe('resource enrollments', () => {
       plan: 'plan',
       propertyManagerId: 0,
       tenantId: 0,
-      'x-api-key': 'x-api-key',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,14 +32,13 @@ describe('resource enrollments', () => {
       plan: 'plan',
       propertyManagerId: 0,
       tenantId: 0,
-      'x-api-key': 'x-api-key',
       note: 'note',
     });
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.enrollments.retrieve(42, { 'x-api-key': 'x-api-key' });
+  test.skip('retrieve', async () => {
+    const responsePromise = client.enrollments.retrieve(42);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,13 +49,8 @@ describe('resource enrollments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.enrollments.retrieve(42, { 'x-api-key': 'x-api-key' });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.enrollments.list({ 'x-api-key': 'x-api-key' });
+  test.skip('list', async () => {
+    const responsePromise = client.enrollments.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -68,18 +61,19 @@ describe('resource enrollments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.enrollments.list({
-      'x-api-key': 'x-api-key',
-      page: 1,
-      propertyManagerId: 1,
-      size: 1,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.enrollments.list(
+        { page: 1, propertyManagerId: 1, size: 1 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Beagle.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('lapse: only required params', async () => {
-    const responsePromise = client.enrollments.lapse(42, { 'x-api-key': 'x-api-key' });
+  test.skip('lapse', async () => {
+    const responsePromise = client.enrollments.lapse(42);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -87,10 +81,5 @@ describe('resource enrollments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('lapse: required and optional params', async () => {
-    const response = await client.enrollments.lapse(42, { 'x-api-key': 'x-api-key' });
   });
 });

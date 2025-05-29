@@ -11,28 +11,15 @@ export class PropertyManagers extends APIResource {
   /**
    * create a new property manager.
    */
-  create(params: PropertyManagerCreateParams, options?: RequestOptions): APIPromise<PropertyManager> {
-    const { 'x-api-key': xAPIKey, ...body } = params;
-    return this._client.post('/api/property-managers', {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  create(body: PropertyManagerCreateParams, options?: RequestOptions): APIPromise<PropertyManager> {
+    return this._client.post('/api/property-managers', { body, ...options });
   }
 
   /**
    * get a property manager by id.
    */
-  retrieve(
-    id: number,
-    params: PropertyManagerRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<PropertyManager> {
-    const { 'x-api-key': xAPIKey } = params;
-    return this._client.get(path`/api/property-managers/${id}`, {
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  retrieve(id: number, options?: RequestOptions): APIPromise<PropertyManager> {
+    return this._client.get(path`/api/property-managers/${id}`, options);
   }
 
   /**
@@ -41,37 +28,29 @@ export class PropertyManagers extends APIResource {
    */
   update(
     id: number,
-    params: PropertyManagerUpdateParams,
+    body: PropertyManagerUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PropertyManager> {
-    const { 'x-api-key': xAPIKey, ...body } = params;
-    return this._client.patch(path`/api/property-managers/${id}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+    return this._client.patch(path`/api/property-managers/${id}`, { body, ...options });
   }
 
   /**
    * list all property managers, note this endpoint is paginated.
    */
-  list(params: PropertyManagerListParams, options?: RequestOptions): APIPromise<PropertyManagerListResponse> {
-    const { 'x-api-key': xAPIKey, ...query } = params;
-    return this._client.get('/api/property-managers', {
-      query,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  list(
+    query: PropertyManagerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PropertyManagerListResponse> {
+    return this._client.get('/api/property-managers', { query, ...options });
   }
 
   /**
    * delete a property manager by id.
    */
-  delete(id: number, params: PropertyManagerDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { 'x-api-key': xAPIKey } = params;
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/property-managers/${id}`, {
       ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'x-api-key': xAPIKey }, options?.headers]),
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
@@ -116,25 +95,14 @@ export interface PropertyManagerListResponse {
 }
 
 export interface PropertyManagerCreateParams {
-  /**
-   * Body param:
-   */
   addresses: Array<PropertyManagerCreateParams.Address>;
 
-  /**
-   * Body param:
-   */
   contacts: Array<PropertyManagerCreateParams.Contact>;
 
   /**
-   * Body param: name of the property manager
+   * name of the property manager
    */
   name: string;
-
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
 }
 
 export namespace PropertyManagerCreateParams {
@@ -147,28 +115,13 @@ export namespace PropertyManagerCreateParams {
   }
 }
 
-export interface PropertyManagerRetrieveParams {
-  'x-api-key': string;
-}
-
 export interface PropertyManagerUpdateParams {
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
-
-  /**
-   * Body param:
-   */
   addresses?: Array<PropertyManagerUpdateParams.Address>;
 
-  /**
-   * Body param:
-   */
   contacts?: Array<PropertyManagerUpdateParams.Contact>;
 
   /**
-   * Body param: name of the property manager
+   * name of the property manager
    */
   name?: string;
 }
@@ -184,24 +137,9 @@ export namespace PropertyManagerUpdateParams {
 }
 
 export interface PropertyManagerListParams {
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
-
-  /**
-   * Query param:
-   */
   page?: number;
 
-  /**
-   * Query param:
-   */
   size?: number;
-}
-
-export interface PropertyManagerDeleteParams {
-  'x-api-key': string;
 }
 
 export declare namespace PropertyManagers {
@@ -210,9 +148,7 @@ export declare namespace PropertyManagers {
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
-    type PropertyManagerRetrieveParams as PropertyManagerRetrieveParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
-    type PropertyManagerDeleteParams as PropertyManagerDeleteParams,
   };
 }

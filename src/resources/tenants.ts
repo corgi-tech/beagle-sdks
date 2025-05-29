@@ -11,59 +11,42 @@ export class Tenants extends APIResource {
   /**
    * create a new tenant.
    */
-  create(params: TenantCreateParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-key': xAPIKey, ...body } = params;
-    return this._client.post('/api/tenants', {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  create(body: TenantCreateParams, options?: RequestOptions): APIPromise<Tenant> {
+    return this._client.post('/api/tenants', { body, ...options });
   }
 
   /**
    * retrieve a single tenant by their id.
    */
-  retrieve(id: number, params: TenantRetrieveParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-key': xAPIKey } = params;
-    return this._client.get(path`/api/tenants/${id}`, {
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  retrieve(id: number, options?: RequestOptions): APIPromise<Tenant> {
+    return this._client.get(path`/api/tenants/${id}`, options);
   }
 
   /**
    * update an existing tenant by their id.
    */
-  update(id: number, params: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-key': xAPIKey, ...body } = params;
-    return this._client.patch(path`/api/tenants/${id}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  update(id: number, body: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
+    return this._client.patch(path`/api/tenants/${id}`, { body, ...options });
   }
 
   /**
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(params: TenantListParams, options?: RequestOptions): APIPromise<TenantListResponse> {
-    const { 'x-api-key': xAPIKey, ...query } = params;
-    return this._client.get('/api/tenants', {
-      query,
-      ...options,
-      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
-    });
+  list(
+    query: TenantListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TenantListResponse> {
+    return this._client.get('/api/tenants', { query, ...options });
   }
 
   /**
    * delete an existing tenant by their id.
    */
-  delete(id: number, params: TenantDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { 'x-api-key': xAPIKey } = params;
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/tenants/${id}`, {
       ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'x-api-key': xAPIKey }, options?.headers]),
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
@@ -117,72 +100,25 @@ export interface TenantListResponse {
 }
 
 export interface TenantCreateParams {
-  /**
-   * Body param:
-   */
   address: Address;
 
-  /**
-   * Body param:
-   */
   contact: Contact;
 
-  /**
-   * Body param:
-   */
   propertyManagerId: number;
-
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
-}
-
-export interface TenantRetrieveParams {
-  'x-api-key': string;
 }
 
 export interface TenantUpdateParams {
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
-
-  /**
-   * Body param:
-   */
   address?: Address;
 
-  /**
-   * Body param:
-   */
   contact?: Contact;
 }
 
 export interface TenantListParams {
-  /**
-   * Header param:
-   */
-  'x-api-key': string;
-
-  /**
-   * Query param:
-   */
   page?: number;
 
-  /**
-   * Query param:
-   */
   propertyManagerId?: number;
 
-  /**
-   * Query param:
-   */
   size?: number;
-}
-
-export interface TenantDeleteParams {
-  'x-api-key': string;
 }
 
 export declare namespace Tenants {
@@ -192,9 +128,7 @@ export declare namespace Tenants {
     type Tenant as Tenant,
     type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
-    type TenantRetrieveParams as TenantRetrieveParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
-    type TenantDeleteParams as TenantDeleteParams,
   };
 }
