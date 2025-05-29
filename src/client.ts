@@ -34,8 +34,8 @@ import {
   Enrollment,
   EnrollmentCreateParams,
   EnrollmentListParams,
-  EnrollmentListResponse,
   Enrollments,
+  EnrollmentsEnrollmentsPage,
 } from './resources/enrollments';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
@@ -43,9 +43,9 @@ import {
   PropertyManager,
   PropertyManagerCreateParams,
   PropertyManagerListParams,
-  PropertyManagerListResponse,
   PropertyManagerUpdateParams,
   PropertyManagers,
+  PropertyManagersPropertyManagersPage,
 } from './resources/property-managers';
 import {
   Address,
@@ -53,9 +53,9 @@ import {
   Tenant,
   TenantCreateParams,
   TenantListParams,
-  TenantListResponse,
   TenantUpdateParams,
   Tenants,
+  TenantsTenantsPage,
 } from './resources/tenants';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
@@ -785,7 +785,7 @@ export declare namespace Beagle {
     PropertyManagers as PropertyManagers,
     type PropertyManagersAPIPagination as Pagination,
     type PropertyManager as PropertyManager,
-    type PropertyManagerListResponse as PropertyManagerListResponse,
+    type PropertyManagersPropertyManagersPage as PropertyManagersPropertyManagersPage,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
@@ -796,7 +796,7 @@ export declare namespace Beagle {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantListResponse as TenantListResponse,
+    type TenantsTenantsPage as TenantsTenantsPage,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
@@ -805,7 +805,7 @@ export declare namespace Beagle {
   export {
     Enrollments as Enrollments,
     type Enrollment as Enrollment,
-    type EnrollmentListResponse as EnrollmentListResponse,
+    type EnrollmentsEnrollmentsPage as EnrollmentsEnrollmentsPage,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };
