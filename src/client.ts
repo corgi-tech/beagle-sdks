@@ -14,6 +14,8 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type PageNumberPageParams, PageNumberPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -29,7 +31,7 @@ import {
 } from './resources/enrollments';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
-  Pagination,
+  Pagination as PropertyManagersAPIPagination,
   PropertyManager,
   PropertyManagerCreateParams,
   PropertyManagerListParams,
@@ -491,6 +493,25 @@ export class Beagle {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Beagle, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -735,11 +756,17 @@ Beagle.Enrollments = Enrollments;
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import PageNumberPage = Pagination.PageNumberPage;
+  export {
+    type PageNumberPageParams as PageNumberPageParams,
+    type PageNumberPageResponse as PageNumberPageResponse,
+  };
+
   export { Plans as Plans, type Plan as Plan, type PlanListResponse as PlanListResponse };
 
   export {
     PropertyManagers as PropertyManagers,
-    type Pagination as Pagination,
+    type PropertyManagersAPIPagination as Pagination,
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
