@@ -10,7 +10,6 @@ export {
 export { Plans, type Plan, type PlanListResponse } from './plans';
 export {
   PropertyManagers,
-  type Pagination,
   type PropertyManager,
   type PropertyManagerListResponse,
   type PropertyManagerCreateParams,

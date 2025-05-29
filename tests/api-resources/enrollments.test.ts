@@ -49,8 +49,8 @@ describe('resource enrollments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = client.enrollments.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.enrollments.list({ page: 1, size: 1 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,14 +61,8 @@ describe('resource enrollments', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.enrollments.list(
-        { page: 1, propertyManagerId: 1, size: 1 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Beagle.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.enrollments.list({ page: 1, size: 1, propertyManagerId: 1 });
   });
 
   // skipped: tests are disabled for the time being
