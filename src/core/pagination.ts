@@ -3,9 +3,6 @@
 import { BeagleError } from './error';
 import { FinalRequestOptions } from '../internal/request-options';
 import { defaultParseResponse } from '../internal/parse';
-import * as EnrollmentsAPI from '../resources/enrollments';
-import * as PropertyManagersAPI from '../resources/property-managers';
-import * as TenantsAPI from '../resources/tenants';
 import { type Beagle } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
@@ -110,17 +107,31 @@ export class PagePromise<
   }
 }
 
-export interface PageNumberPageResponse<Item> {
-  propertyManagers: Array<PropertyManagersAPI.PropertyManager>;
+export interface PropertyManagersPageResponse<Item> {
+  propertyManagers: Array<Item>;
 
-  tenants: Array<TenantsAPI.Tenant>;
+  /**
+   * Total number of records.
+   */
+  records: number;
 
-  enrollments: Array<EnrollmentsAPI.Enrollment>;
+  /**
+   * Current page number.
+   */
+  page: number;
 
-  pagination: PropertyManagersAPI.Pagination;
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
 }
 
-export interface PageNumberPageParams {
+export interface PropertyManagersPageParams {
   /**
    * Page number to fetch.
    */
@@ -132,36 +143,235 @@ export interface PageNumberPageParams {
   size?: number;
 }
 
-export class PageNumberPage<Item> extends AbstractPage<Item> implements PageNumberPageResponse<Item> {
-  propertyManagers: Array<PropertyManagersAPI.PropertyManager>;
+export class PropertyManagersPage<Item>
+  extends AbstractPage<Item>
+  implements PropertyManagersPageResponse<Item>
+{
+  propertyManagers: Array<Item>;
 
-  tenants: Array<TenantsAPI.Tenant>;
+  /**
+   * Total number of records.
+   */
+  records: number;
 
-  enrollments: Array<EnrollmentsAPI.Enrollment>;
+  /**
+   * Current page number.
+   */
+  page: number;
 
-  pagination: PropertyManagersAPI.Pagination;
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
 
   constructor(
     client: Beagle,
     response: Response,
-    body: PageNumberPageResponse<Item>,
+    body: PropertyManagersPageResponse<Item>,
     options: FinalRequestOptions,
   ) {
     super(client, response, body, options);
 
     this.propertyManagers = body.propertyManagers || [];
-    this.tenants = body.tenants || [];
-    this.enrollments = body.enrollments || [];
-    this.pagination = body.pagination || {};
+    this.records = body.records || 0.0;
+    this.page = body.page || 0.0;
+    this.pages = body.pages || 0.0;
+    this.size = body.size || 0.0;
   }
 
   getPaginatedItems(): Item[] {
-    return this.data;
+    return this.propertyManagers ?? [];
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const query = this.options.query as PageNumberPageParams;
-    const currentPage = query?.page ?? 1;
+    const currentPage = this.page;
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        page: currentPage + 1,
+      },
+    };
+  }
+}
+
+export interface TenantsPageResponse<Item> {
+  tenants: Array<Item>;
+
+  /**
+   * Total number of records.
+   */
+  records: number;
+
+  /**
+   * Current page number.
+   */
+  page: number;
+
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+}
+
+export interface TenantsPageParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
+}
+
+export class TenantsPage<Item> extends AbstractPage<Item> implements TenantsPageResponse<Item> {
+  tenants: Array<Item>;
+
+  /**
+   * Total number of records.
+   */
+  records: number;
+
+  /**
+   * Current page number.
+   */
+  page: number;
+
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+
+  constructor(
+    client: Beagle,
+    response: Response,
+    body: TenantsPageResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.tenants = body.tenants || [];
+    this.records = body.records || 0.0;
+    this.page = body.page || 0.0;
+    this.pages = body.pages || 0.0;
+    this.size = body.size || 0.0;
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.tenants ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const currentPage = this.page;
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        page: currentPage + 1,
+      },
+    };
+  }
+}
+
+export interface EnrollmentsPageResponse<Item> {
+  enrollments: Array<Item>;
+
+  /**
+   * Total number of records.
+   */
+  records: number;
+
+  /**
+   * Current page number.
+   */
+  page: number;
+
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+}
+
+export interface EnrollmentsPageParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
+}
+
+export class EnrollmentsPage<Item> extends AbstractPage<Item> implements EnrollmentsPageResponse<Item> {
+  enrollments: Array<Item>;
+
+  /**
+   * Total number of records.
+   */
+  records: number;
+
+  /**
+   * Current page number.
+   */
+  page: number;
+
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+
+  constructor(
+    client: Beagle,
+    response: Response,
+    body: EnrollmentsPageResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.enrollments = body.enrollments || [];
+    this.records = body.records || 0.0;
+    this.page = body.page || 0.0;
+    this.pages = body.pages || 0.0;
+    this.size = body.size || 0.0;
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.enrollments ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const currentPage = this.page;
 
     return {
       ...this.options,

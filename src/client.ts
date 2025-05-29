@@ -15,7 +15,15 @@ import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import { AbstractPage, type PageNumberPageParams, PageNumberPageResponse } from './core/pagination';
+import {
+  AbstractPage,
+  type EnrollmentsPageParams,
+  EnrollmentsPageResponse,
+  type PropertyManagersPageParams,
+  PropertyManagersPageResponse,
+  type TenantsPageParams,
+  TenantsPageResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -756,10 +764,19 @@ Beagle.Enrollments = Enrollments;
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
-  export import PageNumberPage = Pagination.PageNumberPage;
+  export import PropertyManagersPage = Pagination.PropertyManagersPage;
   export {
-    type PageNumberPageParams as PageNumberPageParams,
-    type PageNumberPageResponse as PageNumberPageResponse,
+    type PropertyManagersPageParams as PropertyManagersPageParams,
+    type PropertyManagersPageResponse as PropertyManagersPageResponse,
+  };
+
+  export import TenantsPage = Pagination.TenantsPage;
+  export { type TenantsPageParams as TenantsPageParams, type TenantsPageResponse as TenantsPageResponse };
+
+  export import EnrollmentsPage = Pagination.EnrollmentsPage;
+  export {
+    type EnrollmentsPageParams as EnrollmentsPageParams,
+    type EnrollmentsPageResponse as EnrollmentsPageResponse,
   };
 
   export { Plans as Plans, type Plan as Plan, type PlanListResponse as PlanListResponse };
