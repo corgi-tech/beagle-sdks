@@ -14,7 +14,7 @@ describe('resource propertyManagers', () => {
       addresses: [{ city: 'city', state: 'xx', street1: 'street1', zip: '60513', kind: 'billing' }],
       contacts: [{ email: 'dev@stainless.com', name: { first: 'first', last: 'last' }, kind: 'agreements' }],
       name: 'name',
-      'x-api-token': 'x-api-token',
+      'x-api-key': 'x-api-key',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -40,13 +40,13 @@ describe('resource propertyManagers', () => {
         },
       ],
       name: 'name',
-      'x-api-token': 'x-api-token',
+      'x-api-key': 'x-api-key',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.propertyManagers.retrieve(42, { 'x-api-token': 'x-api-token' });
+    const responsePromise = client.propertyManagers.retrieve(42, { 'x-api-key': 'x-api-key' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,12 +58,12 @@ describe('resource propertyManagers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.propertyManagers.retrieve(42, { 'x-api-token': 'x-api-token' });
+    const response = await client.propertyManagers.retrieve(42, { 'x-api-key': 'x-api-key' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('update: only required params', async () => {
-    const responsePromise = client.propertyManagers.update(42, { 'x-api-token': 'x-api-token' });
+    const responsePromise = client.propertyManagers.update(42, { 'x-api-key': 'x-api-key' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,7 +76,7 @@ describe('resource propertyManagers', () => {
   // skipped: tests are disabled for the time being
   test.skip('update: required and optional params', async () => {
     const response = await client.propertyManagers.update(42, {
-      'x-api-token': 'x-api-token',
+      'x-api-key': 'x-api-key',
       addresses: [
         { city: 'city', state: 'xx', street1: 'street1', zip: '60513', street2: 'street2', kind: 'billing' },
       ],
@@ -94,7 +94,7 @@ describe('resource propertyManagers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = client.propertyManagers.list({ 'x-api-token': 'x-api-token' });
+    const responsePromise = client.propertyManagers.list({ 'x-api-key': 'x-api-key' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -106,12 +106,12 @@ describe('resource propertyManagers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('list: required and optional params', async () => {
-    const response = await client.propertyManagers.list({ 'x-api-token': 'x-api-token', page: 1, size: 1 });
+    const response = await client.propertyManagers.list({ 'x-api-key': 'x-api-key', page: 1, size: 1 });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.propertyManagers.delete(42, { 'x-api-token': 'x-api-token' });
+    const responsePromise = client.propertyManagers.delete(42, { 'x-api-key': 'x-api-key' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,6 +123,6 @@ describe('resource propertyManagers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.propertyManagers.delete(42, { 'x-api-token': 'x-api-token' });
+    const response = await client.propertyManagers.delete(42, { 'x-api-key': 'x-api-key' });
   });
 });
