@@ -18,14 +18,14 @@ export class Tenants extends APIResource {
   /**
    * retrieve a single tenant by their id.
    */
-  retrieve(id: number, options?: RequestOptions): APIPromise<Tenant> {
+  retrieve(id: number | null, options?: RequestOptions): APIPromise<Tenant> {
     return this._client.get(path`/api/tenants/${id}`, options);
   }
 
   /**
    * update an existing tenant by their id.
    */
-  update(id: number, body: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
+  update(id: number | null, body: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
     return this._client.patch(path`/api/tenants/${id}`, { body, ...options });
   }
 
@@ -40,7 +40,7 @@ export class Tenants extends APIResource {
   /**
    * delete an existing tenant by their id.
    */
-  delete(id: number, options?: RequestOptions): APIPromise<void> {
+  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/tenants/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

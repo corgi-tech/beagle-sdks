@@ -18,7 +18,7 @@ export class Enrollments extends APIResource {
   /**
    * get a specific enrollment by its id.
    */
-  retrieve(id: number, options?: RequestOptions): APIPromise<Enrollment> {
+  retrieve(id: number | null, options?: RequestOptions): APIPromise<Enrollment> {
     return this._client.get(path`/api/enrollments/${id}`, options);
   }
 
@@ -34,7 +34,7 @@ export class Enrollments extends APIResource {
    * lapses a specific enrollment for a tenant, note that if a tenant has multiple
    * enrollments (e.g., SDR and TLL), each must be lapsed individually
    */
-  lapse(id: number, options?: RequestOptions): APIPromise<void> {
+  lapse(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/enrollments/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

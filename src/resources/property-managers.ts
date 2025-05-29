@@ -18,7 +18,7 @@ export class PropertyManagers extends APIResource {
   /**
    * get a property manager by id.
    */
-  retrieve(id: number, options?: RequestOptions): APIPromise<PropertyManager> {
+  retrieve(id: number | null, options?: RequestOptions): APIPromise<PropertyManager> {
     return this._client.get(path`/api/property-managers/${id}`, options);
   }
 
@@ -27,7 +27,7 @@ export class PropertyManagers extends APIResource {
    * addresses you need to send the whole array you want to replace them with.
    */
   update(
-    id: number,
+    id: number | null,
     body: PropertyManagerUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PropertyManager> {
@@ -44,7 +44,7 @@ export class PropertyManagers extends APIResource {
   /**
    * delete a property manager by id.
    */
-  delete(id: number, options?: RequestOptions): APIPromise<void> {
+  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/property-managers/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
