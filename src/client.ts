@@ -29,7 +29,6 @@ import {
 } from './resources/enrollments';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
-  Pagination,
   PropertyManager,
   PropertyManagerCreateParams,
   PropertyManagerListParams,
@@ -739,7 +738,6 @@ export declare namespace Beagle {
 
   export {
     PropertyManagers as PropertyManagers,
-    type Pagination as Pagination,
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,

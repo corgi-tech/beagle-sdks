@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -33,10 +32,7 @@ export class Tenants extends APIResource {
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(
-    query: TenantListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<TenantListResponse> {
+  list(query: TenantListParams, options?: RequestOptions): APIPromise<TenantListResponse> {
     return this._client.get('/api/tenants', { query, ...options });
   }
 
@@ -94,9 +90,38 @@ export interface Tenant {
 }
 
 export interface TenantListResponse {
-  pagination: PropertyManagersAPI.Pagination;
+  pagination: TenantListResponse.Pagination;
 
   tenants: Array<Tenant>;
+}
+
+export namespace TenantListResponse {
+  export interface Pagination {
+    /**
+     * List of items.
+     */
+    data: Array<unknown>;
+
+    /**
+     * Current page number.
+     */
+    page: number;
+
+    /**
+     * Total number of pages.
+     */
+    pages: number;
+
+    /**
+     * Total number of records.
+     */
+    records: number;
+
+    /**
+     * Number of items per page.
+     */
+    size: number;
+  }
 }
 
 export interface TenantCreateParams {
@@ -114,11 +139,17 @@ export interface TenantUpdateParams {
 }
 
 export interface TenantListParams {
-  page?: number;
+  /**
+   * Page number to fetch.
+   */
+  page: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
 
   propertyManagerId?: number;
-
-  size?: number;
 }
 
 export declare namespace Tenants {

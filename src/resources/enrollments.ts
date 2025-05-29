@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -26,10 +25,7 @@ export class Enrollments extends APIResource {
    * list all enrollments, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(
-    query: EnrollmentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<EnrollmentListResponse> {
+  list(query: EnrollmentListParams, options?: RequestOptions): APIPromise<EnrollmentListResponse> {
     return this._client.get('/api/enrollments', { query, ...options });
   }
 
@@ -72,7 +68,36 @@ export interface Enrollment {
 export interface EnrollmentListResponse {
   enrollments: Array<Enrollment>;
 
-  pagination: PropertyManagersAPI.Pagination;
+  pagination: EnrollmentListResponse.Pagination;
+}
+
+export namespace EnrollmentListResponse {
+  export interface Pagination {
+    /**
+     * List of items.
+     */
+    data: Array<unknown>;
+
+    /**
+     * Current page number.
+     */
+    page: number;
+
+    /**
+     * Total number of pages.
+     */
+    pages: number;
+
+    /**
+     * Total number of records.
+     */
+    records: number;
+
+    /**
+     * Number of items per page.
+     */
+    size: number;
+  }
 }
 
 export interface EnrollmentCreateParams {
@@ -98,11 +123,17 @@ export interface EnrollmentCreateParams {
 }
 
 export interface EnrollmentListParams {
-  page?: number;
+  /**
+   * Page number to fetch.
+   */
+  page: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
 
   propertyManagerId?: number;
-
-  size?: number;
 }
 
 export declare namespace Enrollments {

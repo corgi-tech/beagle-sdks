@@ -37,10 +37,7 @@ export class PropertyManagers extends APIResource {
   /**
    * list all property managers, note this endpoint is paginated.
    */
-  list(
-    query: PropertyManagerListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<PropertyManagerListResponse> {
+  list(query: PropertyManagerListParams, options?: RequestOptions): APIPromise<PropertyManagerListResponse> {
     return this._client.get('/api/property-managers', { query, ...options });
   }
 
@@ -53,16 +50,6 @@ export class PropertyManagers extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
-}
-
-export interface Pagination {
-  page: number;
-
-  pages: number;
-
-  records: number;
-
-  size: number;
 }
 
 export interface PropertyManager {
@@ -89,9 +76,38 @@ export namespace PropertyManager {
 }
 
 export interface PropertyManagerListResponse {
-  pagination: Pagination;
+  pagination: PropertyManagerListResponse.Pagination;
 
   propertyManagers: Array<PropertyManager>;
+}
+
+export namespace PropertyManagerListResponse {
+  export interface Pagination {
+    /**
+     * List of items.
+     */
+    data: Array<unknown>;
+
+    /**
+     * Current page number.
+     */
+    page: number;
+
+    /**
+     * Total number of pages.
+     */
+    pages: number;
+
+    /**
+     * Total number of records.
+     */
+    records: number;
+
+    /**
+     * Number of items per page.
+     */
+    size: number;
+  }
 }
 
 export interface PropertyManagerCreateParams {
@@ -137,14 +153,19 @@ export namespace PropertyManagerUpdateParams {
 }
 
 export interface PropertyManagerListParams {
-  page?: number;
+  /**
+   * Page number to fetch.
+   */
+  page: number;
 
-  size?: number;
+  /**
+   * Number of items per page.
+   */
+  size: number;
 }
 
 export declare namespace PropertyManagers {
   export {
-    type Pagination as Pagination,
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
