@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -68,36 +69,7 @@ export interface Enrollment {
 export interface EnrollmentListResponse {
   enrollments: Array<Enrollment>;
 
-  pagination: EnrollmentListResponse.Pagination;
-}
-
-export namespace EnrollmentListResponse {
-  export interface Pagination {
-    /**
-     * List of items.
-     */
-    data: Array<unknown>;
-
-    /**
-     * Current page number.
-     */
-    page: number;
-
-    /**
-     * Total number of pages.
-     */
-    pages: number;
-
-    /**
-     * Total number of records.
-     */
-    records: number;
-
-    /**
-     * Number of items per page.
-     */
-    size: number;
-  }
+  pagination: PropertyManagersAPI.Pagination;
 }
 
 export interface EnrollmentCreateParams {

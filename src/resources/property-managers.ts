@@ -52,6 +52,33 @@ export class PropertyManagers extends APIResource {
   }
 }
 
+export interface Pagination {
+  /**
+   * List of items.
+   */
+  data: Array<unknown>;
+
+  /**
+   * Current page number.
+   */
+  page: number;
+
+  /**
+   * Total number of pages.
+   */
+  pages: number;
+
+  /**
+   * Total number of records.
+   */
+  records: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+}
+
 export interface PropertyManager {
   id: number;
 
@@ -76,38 +103,9 @@ export namespace PropertyManager {
 }
 
 export interface PropertyManagerListResponse {
-  pagination: PropertyManagerListResponse.Pagination;
+  pagination: Pagination;
 
   propertyManagers: Array<PropertyManager>;
-}
-
-export namespace PropertyManagerListResponse {
-  export interface Pagination {
-    /**
-     * List of items.
-     */
-    data: Array<unknown>;
-
-    /**
-     * Current page number.
-     */
-    page: number;
-
-    /**
-     * Total number of pages.
-     */
-    pages: number;
-
-    /**
-     * Total number of records.
-     */
-    records: number;
-
-    /**
-     * Number of items per page.
-     */
-    size: number;
-  }
 }
 
 export interface PropertyManagerCreateParams {
@@ -166,6 +164,7 @@ export interface PropertyManagerListParams {
 
 export declare namespace PropertyManagers {
   export {
+    type Pagination as Pagination,
     type PropertyManager as PropertyManager,
     type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
