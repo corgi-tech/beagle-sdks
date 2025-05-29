@@ -12,11 +12,11 @@ export class Enrollments extends APIResource {
    * create a new enrollment for a tenant.
    */
   create(params: EnrollmentCreateParams, options?: RequestOptions): APIPromise<Enrollment> {
-    const { 'x-api-token': xAPIToken, ...body } = params;
+    const { 'x-api-key': xAPIKey, ...body } = params;
     return this._client.post('/api/enrollments', {
       body,
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -24,10 +24,10 @@ export class Enrollments extends APIResource {
    * get a specific enrollment by its id.
    */
   retrieve(id: number, params: EnrollmentRetrieveParams, options?: RequestOptions): APIPromise<Enrollment> {
-    const { 'x-api-token': xAPIToken } = params;
+    const { 'x-api-key': xAPIKey } = params;
     return this._client.get(path`/api/enrollments/${id}`, {
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -36,11 +36,11 @@ export class Enrollments extends APIResource {
    * individual property manager.
    */
   list(params: EnrollmentListParams, options?: RequestOptions): APIPromise<EnrollmentListResponse> {
-    const { 'x-api-token': xAPIToken, ...query } = params;
+    const { 'x-api-key': xAPIKey, ...query } = params;
     return this._client.get('/api/enrollments', {
       query,
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -49,10 +49,10 @@ export class Enrollments extends APIResource {
    * enrollments (e.g., SDR and TLL), each must be lapsed individually
    */
   lapse(id: number, params: EnrollmentLapseParams, options?: RequestOptions): APIPromise<void> {
-    const { 'x-api-token': xAPIToken } = params;
+    const { 'x-api-key': xAPIKey } = params;
     return this._client.delete(path`/api/enrollments/${id}`, {
       ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ Accept: '*/*', 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 }
@@ -112,7 +112,7 @@ export interface EnrollmentCreateParams {
   /**
    * Header param:
    */
-  'x-api-token': string;
+  'x-api-key': string;
 
   /**
    * Body param: an optional note field, this can be used for easily appending
@@ -122,14 +122,14 @@ export interface EnrollmentCreateParams {
 }
 
 export interface EnrollmentRetrieveParams {
-  'x-api-token': string;
+  'x-api-key': string;
 }
 
 export interface EnrollmentListParams {
   /**
    * Header param:
    */
-  'x-api-token': string;
+  'x-api-key': string;
 
   /**
    * Query param:
@@ -148,7 +148,7 @@ export interface EnrollmentListParams {
 }
 
 export interface EnrollmentLapseParams {
-  'x-api-token': string;
+  'x-api-key': string;
 }
 
 export declare namespace Enrollments {

@@ -12,11 +12,11 @@ export class Tenants extends APIResource {
    * create a new tenant.
    */
   create(params: TenantCreateParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-token': xAPIToken, ...body } = params;
+    const { 'x-api-key': xAPIKey, ...body } = params;
     return this._client.post('/api/tenants', {
       body,
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -24,10 +24,10 @@ export class Tenants extends APIResource {
    * retrieve a single tenant by their id.
    */
   retrieve(id: number, params: TenantRetrieveParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-token': xAPIToken } = params;
+    const { 'x-api-key': xAPIKey } = params;
     return this._client.get(path`/api/tenants/${id}`, {
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -35,11 +35,11 @@ export class Tenants extends APIResource {
    * update an existing tenant by their id.
    */
   update(id: number, params: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
-    const { 'x-api-token': xAPIToken, ...body } = params;
+    const { 'x-api-key': xAPIKey, ...body } = params;
     return this._client.patch(path`/api/tenants/${id}`, {
       body,
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -48,11 +48,11 @@ export class Tenants extends APIResource {
    * individual property manager.
    */
   list(params: TenantListParams, options?: RequestOptions): APIPromise<TenantListResponse> {
-    const { 'x-api-token': xAPIToken, ...query } = params;
+    const { 'x-api-key': xAPIKey, ...query } = params;
     return this._client.get('/api/tenants', {
       query,
       ...options,
-      headers: buildHeaders([{ 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 
@@ -60,10 +60,10 @@ export class Tenants extends APIResource {
    * delete an existing tenant by their id.
    */
   delete(id: number, params: TenantDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { 'x-api-token': xAPIToken } = params;
+    const { 'x-api-key': xAPIKey } = params;
     return this._client.delete(path`/api/tenants/${id}`, {
       ...options,
-      headers: buildHeaders([{ Accept: '*/*', 'x-api-token': xAPIToken }, options?.headers]),
+      headers: buildHeaders([{ Accept: '*/*', 'x-api-key': xAPIKey }, options?.headers]),
     });
   }
 }
@@ -135,18 +135,18 @@ export interface TenantCreateParams {
   /**
    * Header param:
    */
-  'x-api-token': string;
+  'x-api-key': string;
 }
 
 export interface TenantRetrieveParams {
-  'x-api-token': string;
+  'x-api-key': string;
 }
 
 export interface TenantUpdateParams {
   /**
    * Header param:
    */
-  'x-api-token': string;
+  'x-api-key': string;
 
   /**
    * Body param:
@@ -163,7 +163,7 @@ export interface TenantListParams {
   /**
    * Header param:
    */
-  'x-api-token': string;
+  'x-api-key': string;
 
   /**
    * Query param:
@@ -182,7 +182,7 @@ export interface TenantListParams {
 }
 
 export interface TenantDeleteParams {
-  'x-api-token': string;
+  'x-api-key': string;
 }
 
 export declare namespace Tenants {
