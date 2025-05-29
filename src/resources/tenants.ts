@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
-import { PagePromise, TenantsPage, type TenantsPageParams } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -33,8 +33,8 @@ export class Tenants extends APIResource {
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(query: TenantListParams, options?: RequestOptions): PagePromise<TenantsTenantsPage, Tenant> {
-    return this._client.getAPIList('/api/tenants', TenantsPage<Tenant>, { query, ...options });
+  list(query: TenantListParams, options?: RequestOptions): APIPromise<TenantListResponse> {
+    return this._client.get('/api/tenants', { query, ...options });
   }
 
   /**
@@ -47,8 +47,6 @@ export class Tenants extends APIResource {
     });
   }
 }
-
-export type TenantsTenantsPage = TenantsPage<Tenant>;
 
 export interface Address {
   city: string;
@@ -92,6 +90,12 @@ export interface Tenant {
   contact: Contact;
 }
 
+export interface TenantListResponse {
+  pagination: PropertyManagersAPI.Pagination;
+
+  tenants: Array<Tenant>;
+}
+
 export interface TenantCreateParams {
   address: Address;
 
@@ -106,7 +110,17 @@ export interface TenantUpdateParams {
   contact?: Contact;
 }
 
-export interface TenantListParams extends TenantsPageParams {
+export interface TenantListParams {
+  /**
+   * Page number to fetch.
+   */
+  page: number;
+
+  /**
+   * Number of items per page.
+   */
+  size: number;
+
   propertyManagerId?: number;
 }
 
@@ -115,7 +129,7 @@ export declare namespace Tenants {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantsTenantsPage as TenantsTenantsPage,
+    type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,

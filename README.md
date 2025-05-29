@@ -27,6 +27,7 @@ import Beagle from 'beagle';
 
 const client = new Beagle({
   apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
 async function main() {
@@ -46,6 +47,7 @@ import Beagle from 'beagle';
 
 const client = new Beagle({
   apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted
+  environment: 'staging', // defaults to 'production'
 });
 
 async function main() {

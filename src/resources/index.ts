@@ -3,27 +3,27 @@
 export {
   Enrollments,
   type Enrollment,
+  type EnrollmentListResponse,
   type EnrollmentCreateParams,
   type EnrollmentListParams,
-  type EnrollmentsEnrollmentsPage,
 } from './enrollments';
 export { Plans, type Plan, type PlanListResponse } from './plans';
 export {
   PropertyManagers,
   type Pagination,
   type PropertyManager,
+  type PropertyManagerListResponse,
   type PropertyManagerCreateParams,
   type PropertyManagerUpdateParams,
   type PropertyManagerListParams,
-  type PropertyManagersPropertyManagersPage,
 } from './property-managers';
 export {
   Tenants,
   type Address,
   type Contact,
   type Tenant,
+  type TenantListResponse,
   type TenantCreateParams,
   type TenantUpdateParams,
   type TenantListParams,
-  type TenantsTenantsPage,
 } from './tenants';
