@@ -54,11 +54,6 @@ export class PropertyManagers extends APIResource {
 
 export interface Pagination {
   /**
-   * List of items.
-   */
-  data: Array<unknown>;
-
-  /**
    * Current page number.
    */
   page: number;
