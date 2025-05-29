@@ -14,16 +14,6 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
-import * as Pagination from './core/pagination';
-import {
-  AbstractPage,
-  type EnrollmentsPageParams,
-  EnrollmentsPageResponse,
-  type PropertyManagersPageParams,
-  PropertyManagersPageResponse,
-  type TenantsPageParams,
-  TenantsPageResponse,
-} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -34,18 +24,18 @@ import {
   Enrollment,
   EnrollmentCreateParams,
   EnrollmentListParams,
+  EnrollmentListResponse,
   Enrollments,
-  EnrollmentsEnrollmentsPage,
 } from './resources/enrollments';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
-  Pagination as PropertyManagersAPIPagination,
+  Pagination,
   PropertyManager,
   PropertyManagerCreateParams,
   PropertyManagerListParams,
+  PropertyManagerListResponse,
   PropertyManagerUpdateParams,
   PropertyManagers,
-  PropertyManagersPropertyManagersPage,
 } from './resources/property-managers';
 import {
   Address,
@@ -53,19 +43,34 @@ import {
   Tenant,
   TenantCreateParams,
   TenantListParams,
+  TenantListResponse,
   TenantUpdateParams,
   Tenants,
-  TenantsTenantsPage,
 } from './resources/tenants';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+
+const environments = {
+  production: 'https://developer.beagleforpm.com',
+  staging: 'https://developer.staging.beagleforpm.com',
+};
+type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
    * Defaults to process.env['BEAGLE_API_KEY'].
    */
   apiKey?: string | null | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://developer.beagleforpm.com`
+   * - `staging` corresponds to `https://developer.staging.beagleforpm.com`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -156,7 +161,8 @@ export class Beagle {
    * API Client for interfacing with the Beagle API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['BEAGLE_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['BEAGLE_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
+   * @param {string} [opts.baseURL=process.env['BEAGLE_BASE_URL'] ?? https://developer.beagleforpm.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -172,10 +178,17 @@ export class Beagle {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.example.com`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.BeagleError(
+        'Ambiguous URL; The `baseURL` option (or BEAGLE_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? Beagle.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -201,7 +214,8 @@ export class Beagle {
   withOptions(options: Partial<ClientOptions>): this {
     return new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,
@@ -501,25 +515,6 @@ export class Beagle {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
-  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
-    path: string,
-    Page: new (...args: any[]) => PageClass,
-    opts?: RequestOptions,
-  ): Pagination.PagePromise<PageClass, Item> {
-    return this.requestAPIList(Page, { method: 'get', path, ...opts });
-  }
-
-  requestAPIList<
-    Item = unknown,
-    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
-  >(
-    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
-    options: FinalRequestOptions,
-  ): Pagination.PagePromise<PageClass, Item> {
-    const request = this.makeRequest(options, null, undefined);
-    return new Pagination.PagePromise<PageClass, Item>(this as any as Beagle, request, Page);
-  }
-
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -764,28 +759,13 @@ Beagle.Enrollments = Enrollments;
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
-  export import PropertyManagersPage = Pagination.PropertyManagersPage;
-  export {
-    type PropertyManagersPageParams as PropertyManagersPageParams,
-    type PropertyManagersPageResponse as PropertyManagersPageResponse,
-  };
-
-  export import TenantsPage = Pagination.TenantsPage;
-  export { type TenantsPageParams as TenantsPageParams, type TenantsPageResponse as TenantsPageResponse };
-
-  export import EnrollmentsPage = Pagination.EnrollmentsPage;
-  export {
-    type EnrollmentsPageParams as EnrollmentsPageParams,
-    type EnrollmentsPageResponse as EnrollmentsPageResponse,
-  };
-
   export { Plans as Plans, type Plan as Plan, type PlanListResponse as PlanListResponse };
 
   export {
     PropertyManagers as PropertyManagers,
-    type PropertyManagersAPIPagination as Pagination,
+    type Pagination as Pagination,
     type PropertyManager as PropertyManager,
-    type PropertyManagersPropertyManagersPage as PropertyManagersPropertyManagersPage,
+    type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
@@ -796,7 +776,7 @@ export declare namespace Beagle {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantsTenantsPage as TenantsTenantsPage,
+    type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
@@ -805,7 +785,7 @@ export declare namespace Beagle {
   export {
     Enrollments as Enrollments,
     type Enrollment as Enrollment,
-    type EnrollmentsEnrollmentsPage as EnrollmentsEnrollmentsPage,
+    type EnrollmentListResponse as EnrollmentListResponse,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };
