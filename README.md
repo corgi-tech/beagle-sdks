@@ -30,11 +30,7 @@ const client = new Beagle({
   environment: 'staging', // defaults to 'production'
 });
 
-async function main() {
-  const plans = await client.plans.list();
-}
-
-main();
+const plans = await client.plans.list();
 ```
 
 ### Request & Response types
@@ -50,11 +46,7 @@ const client = new Beagle({
   environment: 'staging', // defaults to 'production'
 });
 
-async function main() {
-  const plans: Beagle.PlanListResponse = await client.plans.list();
-}
-
-main();
+const plans: Beagle.PlanListResponse = await client.plans.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -67,19 +59,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const plans = await client.plans.list().catch(async (err) => {
-    if (err instanceof Beagle.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const plans = await client.plans.list().catch(async (err) => {
+  if (err instanceof Beagle.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
