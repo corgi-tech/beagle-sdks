@@ -1,5 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { asTextContentResult } from 'beagle-mcp/tools/types';
+
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import type { Metadata } from '../';
 import Beagle from 'beagle';
@@ -23,8 +25,8 @@ export const tool: Tool = {
   },
 };
 
-export const handler = (client: Beagle, args: Record<string, unknown> | undefined) => {
-  return client.plans.list();
+export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
+  return asTextContentResult(await client.plans.list());
 };
 
 export default { metadata, tool, handler };

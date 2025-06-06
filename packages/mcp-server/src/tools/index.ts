@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { Metadata, Endpoint, HandlerFunction } from './types';
+
+export { Metadata, Endpoint, HandlerFunction };
 
 import retrieve_plans from './plans/retrieve-plans';
 import list_plans from './plans/list-plans';
@@ -19,24 +20,6 @@ import create_enrollments from './enrollments/create-enrollments';
 import retrieve_enrollments from './enrollments/retrieve-enrollments';
 import list_enrollments from './enrollments/list-enrollments';
 import lapse_enrollments from './enrollments/lapse-enrollments';
-
-export type HandlerFunction = (client: Beagle, args: Record<string, unknown> | undefined) => Promise<any>;
-
-export type Metadata = {
-  resource: string;
-  operation: 'read' | 'write';
-  tags: string[];
-
-  httpMethod?: string;
-  httpPath?: string;
-  operationId?: string;
-};
-
-export type Endpoint = {
-  metadata: Metadata;
-  tool: Tool;
-  handler: HandlerFunction;
-};
 
 export const endpoints: Endpoint[] = [];
 
