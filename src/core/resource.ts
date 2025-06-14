@@ -2,7 +2,7 @@
 
 import type { Beagle } from '../client';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Beagle;
 
   constructor(client: Beagle) {
