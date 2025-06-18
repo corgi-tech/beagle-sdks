@@ -1,6 +1,6 @@
 # Beagle TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/beagle.svg)](https://npmjs.org/package/beagle) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/beagle)
+[![NPM version](<https://img.shields.io/npm/v/beagle.svg?label=npm%20(stable)>)](https://npmjs.org/package/beagle) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/beagle)
 
 This library provides convenient access to the Beagle REST API from server-side TypeScript or JavaScript.
 
