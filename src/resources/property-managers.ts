@@ -37,7 +37,10 @@ export class PropertyManagers extends APIResource {
   /**
    * list all property managers, note this endpoint is paginated.
    */
-  list(query: PropertyManagerListParams, options?: RequestOptions): APIPromise<PropertyManagerListResponse> {
+  list(
+    query: PropertyManagerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PropertyManagerListResponse> {
     return this._client.get('/api/property-managers', { query, ...options });
   }
 
@@ -149,12 +152,12 @@ export interface PropertyManagerListParams {
   /**
    * Page number to fetch.
    */
-  page: number;
+  page?: number;
 
   /**
    * Number of items per page.
    */
-  size: number;
+  size?: number;
 }
 
 export declare namespace PropertyManagers {
