@@ -26,12 +26,12 @@ export const tool: Tool = {
         type: 'number',
         description: 'Page number to fetch.',
       },
+      propertyManagerId: {
+        type: 'number',
+      },
       size: {
         type: 'number',
         description: 'Number of items per page.',
-      },
-      propertyManagerId: {
-        type: 'number',
       },
     },
   },

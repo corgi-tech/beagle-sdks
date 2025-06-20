@@ -33,7 +33,10 @@ export class Tenants extends APIResource {
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(query: TenantListParams, options?: RequestOptions): APIPromise<TenantListResponse> {
+  list(
+    query: TenantListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TenantListResponse> {
     return this._client.get('/api/tenants', { query, ...options });
   }
 
@@ -114,14 +117,14 @@ export interface TenantListParams {
   /**
    * Page number to fetch.
    */
-  page: number;
+  page?: number;
+
+  propertyManagerId?: number;
 
   /**
    * Number of items per page.
    */
-  size: number;
-
-  propertyManagerId?: number;
+  size?: number;
 }
 
 export declare namespace Tenants {

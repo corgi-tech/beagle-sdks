@@ -26,7 +26,10 @@ export class Enrollments extends APIResource {
    * list all enrollments, this endpoint is paginated and allows for queries by
    * individual property manager.
    */
-  list(query: EnrollmentListParams, options?: RequestOptions): APIPromise<EnrollmentListResponse> {
+  list(
+    query: EnrollmentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EnrollmentListResponse> {
     return this._client.get('/api/enrollments', { query, ...options });
   }
 
@@ -98,14 +101,14 @@ export interface EnrollmentListParams {
   /**
    * Page number to fetch.
    */
-  page: number;
+  page?: number;
+
+  propertyManagerId?: number;
 
   /**
    * Number of items per page.
    */
-  size: number;
-
-  propertyManagerId?: number;
+  size?: number;
 }
 
 export declare namespace Enrollments {
