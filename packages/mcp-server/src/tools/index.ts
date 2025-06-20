@@ -20,6 +20,12 @@ import create_enrollments from './enrollments/create-enrollments';
 import retrieve_enrollments from './enrollments/retrieve-enrollments';
 import list_enrollments from './enrollments/list-enrollments';
 import lapse_enrollments from './enrollments/lapse-enrollments';
+import verify_insurance_verification from './insurance-verification/verify-insurance-verification';
+import create_webhook_endpoints from './webhook/endpoints/create-webhook-endpoints';
+import retrieve_webhook_endpoints from './webhook/endpoints/retrieve-webhook-endpoints';
+import update_webhook_endpoints from './webhook/endpoints/update-webhook-endpoints';
+import list_webhook_endpoints from './webhook/endpoints/list-webhook-endpoints';
+import delete_webhook_endpoints from './webhook/endpoints/delete-webhook-endpoints';
 
 export const endpoints: Endpoint[] = [];
 
@@ -43,6 +49,12 @@ addEndpoint(create_enrollments);
 addEndpoint(retrieve_enrollments);
 addEndpoint(list_enrollments);
 addEndpoint(lapse_enrollments);
+addEndpoint(verify_insurance_verification);
+addEndpoint(create_webhook_endpoints);
+addEndpoint(retrieve_webhook_endpoints);
+addEndpoint(update_webhook_endpoints);
+addEndpoint(list_webhook_endpoints);
+addEndpoint(delete_webhook_endpoints);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

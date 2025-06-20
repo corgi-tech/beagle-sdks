@@ -7,6 +7,11 @@ export {
   type EnrollmentCreateParams,
   type EnrollmentListParams,
 } from './enrollments';
+export {
+  InsuranceVerification,
+  type InsuranceVerificationVerifyResponse,
+  type InsuranceVerificationVerifyParams,
+} from './insurance-verification';
 export { Plans, type Plan, type PlanListResponse } from './plans';
 export {
   PropertyManagers,
@@ -27,3 +32,4 @@ export {
   type TenantUpdateParams,
   type TenantListParams,
 } from './tenants';
+export { Webhook } from './webhook/webhook';

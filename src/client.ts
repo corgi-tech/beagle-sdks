@@ -23,6 +23,11 @@ import {
   EnrollmentListResponse,
   Enrollments,
 } from './resources/enrollments';
+import {
+  InsuranceVerification,
+  InsuranceVerificationVerifyParams,
+  InsuranceVerificationVerifyResponse,
+} from './resources/insurance-verification';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
   Pagination,
@@ -43,6 +48,7 @@ import {
   TenantUpdateParams,
   Tenants,
 } from './resources/tenants';
+import { Webhook } from './resources/webhook/webhook';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -762,11 +768,15 @@ export class Beagle {
   propertyManagers: API.PropertyManagers = new API.PropertyManagers(this);
   tenants: API.Tenants = new API.Tenants(this);
   enrollments: API.Enrollments = new API.Enrollments(this);
+  insuranceVerification: API.InsuranceVerification = new API.InsuranceVerification(this);
+  webhook: API.Webhook = new API.Webhook(this);
 }
 Beagle.Plans = Plans;
 Beagle.PropertyManagers = PropertyManagers;
 Beagle.Tenants = Tenants;
 Beagle.Enrollments = Enrollments;
+Beagle.InsuranceVerification = InsuranceVerification;
+Beagle.Webhook = Webhook;
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -800,4 +810,12 @@ export declare namespace Beagle {
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };
+
+  export {
+    InsuranceVerification as InsuranceVerification,
+    type InsuranceVerificationVerifyResponse as InsuranceVerificationVerifyResponse,
+    type InsuranceVerificationVerifyParams as InsuranceVerificationVerifyParams,
+  };
+
+  export { Webhook as Webhook };
 }

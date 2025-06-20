@@ -41,7 +41,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "beagle_api": {
       "command": "node",
-      "args": ["/path/to/local/beagle-typescript/packages/mcp-server", "--client=claude", "--tools=all"],
+      "args": ["/path/to/local/beagle-typescript/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
         "BEAGLE_API_KEY": "My API Key",
         "BEAGLE_ENVIRONMENT": "production"
@@ -209,3 +209,15 @@ The following tools are available in this MCP server.
 - `retrieve_enrollments` (`read`): get a specific enrollment by its id.
 - `list_enrollments` (`read`): list all enrollments, this endpoint is paginated and allows for queries by individual property manager.
 - `lapse_enrollments` (`write`): lapses a specific enrollment for a tenant, note that if a tenant has multiple enrollments (e.g., SDR and TLL), each must be lapsed individually
+
+### Resource `insurance_verification`:
+
+- `verify_insurance_verification` (`write`): trigger a job to parse a tenants insurance document(s)
+
+### Resource `webhook.endpoints`:
+
+- `create_webhook_endpoints` (`write`): creates a new webhook target.
+- `retrieve_webhook_endpoints` (`read`): retrieve a single webhook endpoint by its id.
+- `update_webhook_endpoints` (`write`): update an existing webhook endpoint by its id.
+- `list_webhook_endpoints` (`read`): list all webhook endpoints, this endpoint is paginated and allows for queries by individual property manager.
+- `delete_webhook_endpoints` (`write`): delete an existing webhook endpoint by its id.
