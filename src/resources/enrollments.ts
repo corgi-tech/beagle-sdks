@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
+import { EnrollmentsPagination, type EnrollmentsPaginationParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -29,8 +29,11 @@ export class Enrollments extends APIResource {
   list(
     query: EnrollmentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EnrollmentListResponse> {
-    return this._client.get('/api/enrollments', { query, ...options });
+  ): PagePromise<EnrollmentsEnrollmentsPagination, Enrollment> {
+    return this._client.getAPIList('/api/enrollments', EnrollmentsPagination<Enrollment>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -44,6 +47,8 @@ export class Enrollments extends APIResource {
     });
   }
 }
+
+export type EnrollmentsEnrollmentsPagination = EnrollmentsPagination<Enrollment>;
 
 export interface Enrollment {
   id: number;
@@ -69,12 +74,6 @@ export interface Enrollment {
   note?: string;
 }
 
-export interface EnrollmentListResponse {
-  enrollments: Array<Enrollment>;
-
-  pagination: PropertyManagersAPI.Pagination;
-}
-
 export interface EnrollmentCreateParams {
   /**
    * the date the enrollment will begin, note enrollments cannot begin in the past
@@ -97,24 +96,14 @@ export interface EnrollmentCreateParams {
   note?: string;
 }
 
-export interface EnrollmentListParams {
-  /**
-   * Page number to fetch.
-   */
-  page?: number;
-
+export interface EnrollmentListParams extends EnrollmentsPaginationParams {
   propertyManagerId?: number;
-
-  /**
-   * Number of items per page.
-   */
-  size?: number;
 }
 
 export declare namespace Enrollments {
   export {
     type Enrollment as Enrollment,
-    type EnrollmentListResponse as EnrollmentListResponse,
+    type EnrollmentsEnrollmentsPagination as EnrollmentsEnrollmentsPagination,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };

@@ -3,6 +3,11 @@
 import { APIResource } from '../core/resource';
 import * as TenantsAPI from './tenants';
 import { APIPromise } from '../core/api-promise';
+import {
+  PagePromise,
+  PropertyManagersPagination,
+  type PropertyManagersPaginationParams,
+} from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -40,8 +45,11 @@ export class PropertyManagers extends APIResource {
   list(
     query: PropertyManagerListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<PropertyManagerListResponse> {
-    return this._client.get('/api/property-managers', { query, ...options });
+  ): PagePromise<PropertyManagersPropertyManagersPagination, PropertyManager> {
+    return this._client.getAPIList('/api/property-managers', PropertyManagersPagination<PropertyManager>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -54,6 +62,8 @@ export class PropertyManagers extends APIResource {
     });
   }
 }
+
+export type PropertyManagersPropertyManagersPagination = PropertyManagersPagination<PropertyManager>;
 
 export interface Pagination {
   /**
@@ -100,12 +110,6 @@ export namespace PropertyManager {
   }
 }
 
-export interface PropertyManagerListResponse {
-  pagination: Pagination;
-
-  propertyManagers: Array<PropertyManager>;
-}
-
 export interface PropertyManagerCreateParams {
   addresses: Array<PropertyManagerCreateParams.Address>;
 
@@ -148,23 +152,13 @@ export namespace PropertyManagerUpdateParams {
   }
 }
 
-export interface PropertyManagerListParams {
-  /**
-   * Page number to fetch.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  size?: number;
-}
+export interface PropertyManagerListParams extends PropertyManagersPaginationParams {}
 
 export declare namespace PropertyManagers {
   export {
     type Pagination as Pagination,
     type PropertyManager as PropertyManager,
-    type PropertyManagerListResponse as PropertyManagerListResponse,
+    type PropertyManagersPropertyManagersPagination as PropertyManagersPropertyManagersPagination,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
+import { PagePromise, TenantsPagination, type TenantsPaginationParams } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -36,8 +36,8 @@ export class Tenants extends APIResource {
   list(
     query: TenantListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<TenantListResponse> {
-    return this._client.get('/api/tenants', { query, ...options });
+  ): PagePromise<TenantsTenantsPagination, Tenant> {
+    return this._client.getAPIList('/api/tenants', TenantsPagination<Tenant>, { query, ...options });
   }
 
   /**
@@ -50,6 +50,8 @@ export class Tenants extends APIResource {
     });
   }
 }
+
+export type TenantsTenantsPagination = TenantsPagination<Tenant>;
 
 export interface Address {
   city: string;
@@ -93,12 +95,6 @@ export interface Tenant {
   contact: Contact;
 }
 
-export interface TenantListResponse {
-  pagination: PropertyManagersAPI.Pagination;
-
-  tenants: Array<Tenant>;
-}
-
 export interface TenantCreateParams {
   address: Address;
 
@@ -113,18 +109,8 @@ export interface TenantUpdateParams {
   contact?: Contact;
 }
 
-export interface TenantListParams {
-  /**
-   * Page number to fetch.
-   */
-  page?: number;
-
+export interface TenantListParams extends TenantsPaginationParams {
   propertyManagerId?: number;
-
-  /**
-   * Number of items per page.
-   */
-  size?: number;
 }
 
 export declare namespace Tenants {
@@ -132,7 +118,7 @@ export declare namespace Tenants {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantListResponse as TenantListResponse,
+    type TenantsTenantsPagination as TenantsTenantsPagination,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,

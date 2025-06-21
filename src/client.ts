@@ -13,6 +13,18 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import {
+  AbstractPage,
+  type EnrollmentsPaginationParams,
+  EnrollmentsPaginationResponse,
+  type PropertyManagersPaginationParams,
+  PropertyManagersPaginationResponse,
+  type TenantsPaginationParams,
+  TenantsPaginationResponse,
+  type WebhookEndpointsPaginationParams,
+  WebhookEndpointsPaginationResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -20,8 +32,8 @@ import {
   Enrollment,
   EnrollmentCreateParams,
   EnrollmentListParams,
-  EnrollmentListResponse,
   Enrollments,
+  EnrollmentsEnrollmentsPagination,
 } from './resources/enrollments';
 import {
   InsuranceVerification,
@@ -30,13 +42,13 @@ import {
 } from './resources/insurance-verification';
 import { Plan, PlanListResponse, Plans } from './resources/plans';
 import {
-  Pagination,
+  Pagination as PropertyManagersAPIPagination,
   PropertyManager,
   PropertyManagerCreateParams,
   PropertyManagerListParams,
-  PropertyManagerListResponse,
   PropertyManagerUpdateParams,
   PropertyManagers,
+  PropertyManagersPropertyManagersPagination,
 } from './resources/property-managers';
 import {
   Address,
@@ -44,9 +56,9 @@ import {
   Tenant,
   TenantCreateParams,
   TenantListParams,
-  TenantListResponse,
   TenantUpdateParams,
   Tenants,
+  TenantsTenantsPagination,
 } from './resources/tenants';
 import { Webhook } from './resources/webhook/webhook';
 import { type Fetch } from './internal/builtin-types';
@@ -533,6 +545,25 @@ export class Beagle {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Beagle, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -781,13 +812,37 @@ Beagle.Webhook = Webhook;
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import PropertyManagersPagination = Pagination.PropertyManagersPagination;
+  export {
+    type PropertyManagersPaginationParams as PropertyManagersPaginationParams,
+    type PropertyManagersPaginationResponse as PropertyManagersPaginationResponse,
+  };
+
+  export import TenantsPagination = Pagination.TenantsPagination;
+  export {
+    type TenantsPaginationParams as TenantsPaginationParams,
+    type TenantsPaginationResponse as TenantsPaginationResponse,
+  };
+
+  export import EnrollmentsPagination = Pagination.EnrollmentsPagination;
+  export {
+    type EnrollmentsPaginationParams as EnrollmentsPaginationParams,
+    type EnrollmentsPaginationResponse as EnrollmentsPaginationResponse,
+  };
+
+  export import WebhookEndpointsPagination = Pagination.WebhookEndpointsPagination;
+  export {
+    type WebhookEndpointsPaginationParams as WebhookEndpointsPaginationParams,
+    type WebhookEndpointsPaginationResponse as WebhookEndpointsPaginationResponse,
+  };
+
   export { Plans as Plans, type Plan as Plan, type PlanListResponse as PlanListResponse };
 
   export {
     PropertyManagers as PropertyManagers,
-    type Pagination as Pagination,
+    type PropertyManagersAPIPagination as Pagination,
     type PropertyManager as PropertyManager,
-    type PropertyManagerListResponse as PropertyManagerListResponse,
+    type PropertyManagersPropertyManagersPagination as PropertyManagersPropertyManagersPagination,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
@@ -798,7 +853,7 @@ export declare namespace Beagle {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantListResponse as TenantListResponse,
+    type TenantsTenantsPagination as TenantsTenantsPagination,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
@@ -807,7 +862,7 @@ export declare namespace Beagle {
   export {
     Enrollments as Enrollments,
     type Enrollment as Enrollment,
-    type EnrollmentListResponse as EnrollmentListResponse,
+    type EnrollmentsEnrollmentsPagination as EnrollmentsEnrollmentsPagination,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };
