@@ -24,14 +24,14 @@ export const tool: Tool = {
       id: {
         type: 'number',
       },
-      active: {
-        type: 'boolean',
-      },
       secret: {
         type: 'string',
       },
       url: {
         type: 'string',
+      },
+      active: {
+        type: 'boolean',
       },
     },
   },

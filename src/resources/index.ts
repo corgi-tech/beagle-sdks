@@ -3,9 +3,9 @@
 export {
   Enrollments,
   type Enrollment,
-  type EnrollmentListResponse,
   type EnrollmentCreateParams,
   type EnrollmentListParams,
+  type EnrollmentsEnrollmentsPagination,
 } from './enrollments';
 export {
   InsuranceVerification,
@@ -17,19 +17,19 @@ export {
   PropertyManagers,
   type Pagination,
   type PropertyManager,
-  type PropertyManagerListResponse,
   type PropertyManagerCreateParams,
   type PropertyManagerUpdateParams,
   type PropertyManagerListParams,
+  type PropertyManagersPropertyManagersPagination,
 } from './property-managers';
 export {
   Tenants,
   type Address,
   type Contact,
   type Tenant,
-  type TenantListResponse,
   type TenantCreateParams,
   type TenantUpdateParams,
   type TenantListParams,
+  type TenantsTenantsPagination,
 } from './tenants';
 export { Webhook } from './webhook/webhook';

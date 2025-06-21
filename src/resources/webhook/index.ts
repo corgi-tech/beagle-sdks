@@ -9,5 +9,6 @@ export {
   type EndpointCreateParams,
   type EndpointUpdateParams,
   type EndpointListParams,
+  type EndpointListResponsesWebhookEndpointsPagination,
 } from './endpoints';
 export { Webhook } from './webhook';

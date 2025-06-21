@@ -1,8 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as PropertyManagersAPI from '../property-managers';
 import { APIPromise } from '../../core/api-promise';
+import {
+  PagePromise,
+  WebhookEndpointsPagination,
+  type WebhookEndpointsPaginationParams,
+} from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -40,8 +44,12 @@ export class Endpoints extends APIResource {
   list(
     query: EndpointListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<EndpointListResponse> {
-    return this._client.get('/api/webhook/endpoints', { query, ...options });
+  ): PagePromise<EndpointListResponsesWebhookEndpointsPagination, EndpointListResponse> {
+    return this._client.getAPIList(
+      '/api/webhook/endpoints',
+      WebhookEndpointsPagination<EndpointListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -54,6 +62,9 @@ export class Endpoints extends APIResource {
     });
   }
 }
+
+export type EndpointListResponsesWebhookEndpointsPagination =
+  WebhookEndpointsPagination<EndpointListResponse>;
 
 export interface EndpointCreateResponse {
   id: number;
@@ -98,25 +109,17 @@ export interface EndpointUpdateResponse {
 }
 
 export interface EndpointListResponse {
-  endpoints: Array<EndpointListResponse.Endpoint>;
+  id: number;
 
-  pagination: PropertyManagersAPI.Pagination;
-}
+  active: boolean;
 
-export namespace EndpointListResponse {
-  export interface Endpoint {
-    id: number;
+  companyId: number;
 
-    active: boolean;
+  createdAt: string;
 
-    companyId: number;
+  updatedAt: string;
 
-    createdAt: string;
-
-    updatedAt: string;
-
-    url: string;
-  }
+  url: string;
 }
 
 export interface EndpointCreateParams {
@@ -128,24 +131,14 @@ export interface EndpointCreateParams {
 }
 
 export interface EndpointUpdateParams {
+  secret: string;
+
+  url: string;
+
   active?: boolean;
-
-  secret?: string;
-
-  url?: string;
 }
 
-export interface EndpointListParams {
-  /**
-   * Page number to fetch.
-   */
-  page?: number;
-
-  /**
-   * Number of items per page.
-   */
-  size?: number;
-}
+export interface EndpointListParams extends WebhookEndpointsPaginationParams {}
 
 export declare namespace Endpoints {
   export {
@@ -153,6 +146,7 @@ export declare namespace Endpoints {
     type EndpointRetrieveResponse as EndpointRetrieveResponse,
     type EndpointUpdateResponse as EndpointUpdateResponse,
     type EndpointListResponse as EndpointListResponse,
+    type EndpointListResponsesWebhookEndpointsPagination as EndpointListResponsesWebhookEndpointsPagination,
     type EndpointCreateParams as EndpointCreateParams,
     type EndpointUpdateParams as EndpointUpdateParams,
     type EndpointListParams as EndpointListParams,
