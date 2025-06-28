@@ -30,8 +30,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
   const { id, ...body } = args as any;
-  await client.webhook.endpoints.delete(id);
-  return asTextContentResult('Successful tool call');
+  const response = await client.webhook.endpoints.delete(id).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };
