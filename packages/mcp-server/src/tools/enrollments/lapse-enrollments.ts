@@ -31,8 +31,8 @@ export const tool: Tool = {
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
   const { id, ...body } = args as any;
-  await client.enrollments.lapse(id);
-  return asTextContentResult('Successful tool call');
+  const response = await client.enrollments.lapse(id).asResponse();
+  return asTextContentResult(await response.text());
 };
 
 export default { metadata, tool, handler };
