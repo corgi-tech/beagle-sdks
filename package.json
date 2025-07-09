@@ -1,5 +1,5 @@
 {
-  "name": "beagle",
+  "name": "@corgi-tech/beagle",
   "version": "0.0.1-alpha.0",
   "description": "The official TypeScript library for the Beagle API",
   "author": "Beagle <>",
@@ -47,8 +47,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "beagle": ".",
-    "beagle/*": "./src/*"
+    "@corgi-tech/beagle": ".",
+    "@corgi-tech/beagle/*": "./src/*"
   },
   "exports": {
     ".": {

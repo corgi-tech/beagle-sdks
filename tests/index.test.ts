@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'beagle/core/api-promise';
+import { APIPromise } from '@corgi-tech/beagle/core/api-promise';
 
 import util from 'node:util';
-import Beagle from 'beagle';
-import { APIUserAbortError } from 'beagle';
+import Beagle from '@corgi-tech/beagle';
+import { APIUserAbortError } from '@corgi-tech/beagle';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

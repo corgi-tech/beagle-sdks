@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'beagle/internal/uploads';
-import { toFile } from 'beagle/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@corgi-tech/beagle/internal/uploads';
+import { toFile } from '@corgi-tech/beagle/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

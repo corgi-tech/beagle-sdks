@@ -4,7 +4,7 @@ import { asTextContentResult } from 'beagle-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import type { Metadata } from '../';
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 export const metadata: Metadata = {
   resource: 'plans',

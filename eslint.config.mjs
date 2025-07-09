@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^beagle(/.*)?',
+              regex: '^@corgi-tech/beagle(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

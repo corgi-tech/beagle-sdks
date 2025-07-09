@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: 'My API Key',
