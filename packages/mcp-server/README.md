@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/beagle-typescript.git
-cd beagle-typescript
+git clone git@github.com:corgi-tech/beagle-sdks.git
+cd beagle-sdks
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -41,7 +41,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "beagle_api": {
       "command": "node",
-      "args": ["/path/to/local/beagle-typescript/packages/mcp-server", "--client=claude", "--tools=dynamic"],
+      "args": ["/path/to/local/beagle-sdks/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
         "BEAGLE_API_KEY": "My API Key",
         "BEAGLE_ENVIRONMENT": "production"
