@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "beagle/*": ["dist/src/*"],
-      "beagle": ["dist/src/index.ts"]
+      "@corgi-tech/beagle/*": ["dist/src/*"],
+      "@corgi-tech/beagle": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
