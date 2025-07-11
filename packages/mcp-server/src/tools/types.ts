@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 
 type TextContentBlock = {
@@ -47,7 +47,7 @@ export type HandlerFunction = (
   args: Record<string, unknown> | undefined,
 ) => Promise<ToolCallResult>;
 
-export function asTextContentResult(result: Object): ToolCallResult {
+export function asTextContentResult(result: unknown): ToolCallResult {
   return {
     content: [
       {

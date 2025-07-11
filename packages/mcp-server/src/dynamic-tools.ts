@@ -1,4 +1,4 @@
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 import { Endpoint, asTextContentResult, ToolCallResult } from './tools/types';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 import { z } from 'zod';

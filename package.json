@@ -1,12 +1,12 @@
 {
-  "name": "beagle",
-  "version": "0.0.1-alpha.0",
+  "name": "@corgi-tech/beagle",
+  "version": "2.0.0",
   "description": "The official TypeScript library for the Beagle API",
   "author": "Beagle <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/beagle-typescript",
+  "repository": "github:corgi-tech/beagle-sdks",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
@@ -47,8 +47,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "beagle": ".",
-    "beagle/*": "./src/*"
+    "@corgi-tech/beagle": ".",
+    "@corgi-tech/beagle/*": "./src/*"
   },
   "exports": {
     ".": {
