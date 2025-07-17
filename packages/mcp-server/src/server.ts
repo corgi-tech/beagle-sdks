@@ -28,11 +28,7 @@ export const server = new McpServer(
     name: 'corgi_tech_beagle_api',
     version: '0.0.1-alpha.0',
   },
-  {
-    capabilities: {
-      tools: {},
-    },
-  },
+  { capabilities: { tools: {} } },
 );
 
 /**
