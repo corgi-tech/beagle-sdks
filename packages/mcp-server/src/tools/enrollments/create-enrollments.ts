@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_enrollments',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ncreate a new enrollment for a tenant.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/enrollment',\n  $defs: {\n    enrollment: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'number'\n        },\n        effectiveDate: {\n          type: 'string',\n          description: 'the date the enrollment will begin, note enrollments cannot begin in the past'\n        },\n        plan: {\n          type: 'string',\n          description: 'the plan name/code'\n        },\n        propertyManagerId: {\n          type: 'number'\n        },\n        tenantId: {\n          type: 'number'\n        },\n        note: {\n          type: 'string',\n          description: 'an optional note field, this can be used for easily appending metadata to enrollments'\n        }\n      },\n      required: [        'id',\n        'effectiveDate',\n        'plan',\n        'propertyManagerId',\n        'tenantId'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ncreate a new enrollment for a tenant.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/enrollment',\n  $defs: {\n    enrollment: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'number'\n        },\n        effectiveDate: {\n          type: 'string',\n          description: 'the date the enrollment will begin, note enrollments cannot begin in the past'\n        },\n        plan: {\n          type: 'string',\n          description: 'the plan name/code'\n        },\n        propertyManagerId: {\n          type: 'number'\n        },\n        status: {\n          type: 'string',\n          enum: [            'Premium Paying',\n            'Issued, Not Paid',\n            'Expired',\n            'Lapsed',\n            'Suspended',\n            'Cancelled',\n            'Not taken',\n            'Declined'\n          ]\n        },\n        tenantId: {\n          type: 'number'\n        },\n        note: {\n          type: 'string',\n          description: 'an optional note field, this can be used for easily appending metadata to enrollments'\n        }\n      },\n      required: [        'id',\n        'effectiveDate',\n        'plan',\n        'propertyManagerId',\n        'status',\n        'tenantId'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
@@ -32,6 +32,19 @@ export const tool: Tool = {
       },
       propertyManagerId: {
         type: 'number',
+      },
+      status: {
+        type: 'string',
+        enum: [
+          'Premium Paying',
+          'Issued, Not Paid',
+          'Expired',
+          'Lapsed',
+          'Suspended',
+          'Cancelled',
+          'Not taken',
+          'Declined',
+        ],
       },
       tenantId: {
         type: 'number',
@@ -47,7 +60,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['effectiveDate', 'plan', 'propertyManagerId', 'tenantId'],
+    required: ['effectiveDate', 'plan', 'propertyManagerId', 'status', 'tenantId'],
   },
 };
 
