@@ -1,4 +1,4 @@
 configured_endpoints: 22
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/corgi%2Fbeagle-55e2c475fba1a969f73f7679e68a776e962352dc584f6ee83368947d35d3c96d.yml
-openapi_spec_hash: f3b4f7afe0ef02a9054be3c705f75ab3
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/corgi%2Fbeagle-2edadee34a317889c9d854eb566c42649fb0f53ce572927a42cd873421d86486.yml
+openapi_spec_hash: ebc55666c40434190b539cd87761635b
 config_hash: d63f662e216ecc51eccc05b8a4b5198e
