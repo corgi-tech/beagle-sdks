@@ -43,6 +43,7 @@ export const tool: Tool = {
     },
     required: ['id', 'secret', 'url'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
