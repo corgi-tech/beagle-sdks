@@ -62,6 +62,7 @@ export const tool: Tool = {
     },
     required: ['effectiveDate', 'plan', 'propertyManagerId', 'status', 'tenantId'],
   },
+  annotations: {},
 };
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
