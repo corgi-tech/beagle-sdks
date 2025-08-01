@@ -40,8 +40,8 @@ export const tool: Tool = {
 };
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
-  const { code, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(args, await client.plans.retrieve(code)));
+  const { code, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.plans.retrieve(code)));
 };
 
 export default { metadata, tool, handler };
