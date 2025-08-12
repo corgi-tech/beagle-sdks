@@ -8,7 +8,7 @@ const client = new Beagle({
 });
 
 describe('resource enrollments', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.enrollments.create({
       effectiveDate: 'effectiveDate',
@@ -26,7 +26,7 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.enrollments.create({
       effectiveDate: 'effectiveDate',
@@ -38,7 +38,7 @@ describe('resource enrollments', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.enrollments.retrieve(42);
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +50,7 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.enrollments.list();
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -73,7 +73,7 @@ describe('resource enrollments', () => {
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('lapse', async () => {
     const responsePromise = client.enrollments.lapse(42);
     const rawResponse = await responsePromise.asResponse();
