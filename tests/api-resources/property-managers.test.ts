@@ -8,7 +8,7 @@ const client = new Beagle({
 });
 
 describe('resource propertyManagers', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.propertyManagers.create({
       addresses: [{ city: 'city', state: 'xx', street1: 'street1', zip: '60513', kind: 'billing' }],
@@ -24,7 +24,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.propertyManagers.create({
       addresses: [
@@ -42,7 +42,7 @@ describe('resource propertyManagers', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.propertyManagers.retrieve(42);
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.propertyManagers.update(42, {});
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.propertyManagers.list();
     const rawResponse = await responsePromise.asResponse();
@@ -78,7 +78,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -86,7 +86,7 @@ describe('resource propertyManagers', () => {
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.propertyManagers.delete(42);
     const rawResponse = await responsePromise.asResponse();
