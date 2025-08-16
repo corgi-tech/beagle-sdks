@@ -808,12 +808,14 @@ export class Beagle {
   insuranceVerification: API.InsuranceVerification = new API.InsuranceVerification(this);
   webhook: API.Webhook = new API.Webhook(this);
 }
+
 Beagle.Plans = Plans;
 Beagle.PropertyManagers = PropertyManagers;
 Beagle.Tenants = Tenants;
 Beagle.Enrollments = Enrollments;
 Beagle.InsuranceVerification = InsuranceVerification;
 Beagle.Webhook = Webhook;
+
 export declare namespace Beagle {
   export type RequestOptions = Opts.RequestOptions;
 
