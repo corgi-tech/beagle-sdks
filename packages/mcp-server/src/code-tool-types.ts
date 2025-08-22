@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type ClientOptions } from '@corgi-tech/beagle/client';
+import { ClientOptions } from '@corgi-tech/beagle';
 
 export type WorkerInput = {
   opts: ClientOptions;
