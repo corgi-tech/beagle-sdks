@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from 'beagle-mcp/tools/types';
+import { Metadata, asTextContentResult } from '@corgi-tech/beagle-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Beagle from '@corgi-tech/beagle';

@@ -9,8 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "beagle-mcp/*": ["src/*"],
-      "beagle-mcp": ["src/index.ts"]
+      "@corgi-tech/beagle-mcp/*": ["src/*"],
+      "@corgi-tech/beagle-mcp": ["src/index.ts"]
     },
     "noEmit": true,
 
