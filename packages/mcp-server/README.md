@@ -11,7 +11,7 @@ You can run the MCP Server directly via `npx`:
 ```sh
 export BEAGLE_API_KEY="My API Key"
 export BEAGLE_ENVIRONMENT="production"
-npx -y beagle-mcp@latest
+npx -y @corgi-tech/beagle-mcp@latest
 ```
 
 ### Via MCP Client
@@ -26,7 +26,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "corgi_tech_beagle_api": {
       "command": "npx",
-      "args": ["-y", "beagle-mcp", "--client=claude", "--tools=dynamic"],
+      "args": ["-y", "@corgi-tech/beagle-mcp", "--client=claude", "--tools=dynamic"],
       "env": {
         "BEAGLE_API_KEY": "My API Key",
         "BEAGLE_ENVIRONMENT": "production"
@@ -169,10 +169,10 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "beagle-mcp/server";
+import { server, endpoints, init } from "@corgi-tech/beagle-mcp/server";
 
 // import a specific tool
-import retrievePlans from "beagle-mcp/tools/plans/retrieve-plans";
+import retrievePlans from "@corgi-tech/beagle-mcp/tools/plans/retrieve-plans";
 
 // initialize the server and all endpoints
 init({ server, endpoints });

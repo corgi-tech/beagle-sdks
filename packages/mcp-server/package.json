@@ -1,5 +1,5 @@
 {
-  "name": "beagle-mcp",
+  "name": "@corgi-tech/beagle-mcp",
   "version": "0.0.1-alpha.0",
   "description": "The official MCP Server for the Beagle API",
   "author": "Beagle <>",
@@ -67,8 +67,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "beagle-mcp": ".",
-    "beagle-mcp/*": "./src/*"
+    "@corgi-tech/beagle-mcp": ".",
+    "@corgi-tech/beagle-mcp/*": "./src/*"
   },
   "exports": {
     ".": {

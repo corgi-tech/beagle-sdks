@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^beagle-mcp$': '<rootDir>/src/index.ts',
-    '^beagle-mcp/(.*)$': '<rootDir>/src/$1',
+    '^@corgi-tech/beagle-mcp$': '<rootDir>/src/index.ts',
+    '^@corgi-tech/beagle-mcp/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],
