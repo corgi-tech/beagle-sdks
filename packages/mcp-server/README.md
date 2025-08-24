@@ -231,6 +231,7 @@ The following tools are available in this MCP server.
 - `retrieve_enrollments` (`read`): get a specific enrollment by its id.
 - `list_enrollments` (`read`): list all enrollments, this endpoint is paginated and allows for queries by individual property manager.
 - `lapse_enrollments` (`write`): lapses a specific enrollment for a tenant, note that if a tenant has multiple enrollments (e.g., SDR and TLL), each must be lapsed individually
+- `retrieve_certificate_enrollments` (`read`): get the certificate of enrollment for a given enrollment
 
 ### Resource `insurance_verification`:
 

@@ -46,6 +46,17 @@ export class Enrollments extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+
+  /**
+   * get the certificate of enrollment for a given enrollment
+   */
+  retrieveCertificate(id: number | null, options?: RequestOptions): APIPromise<Response> {
+    return this._client.get(path`/api/enrollments/${id}/certificate`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/pdf' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
 }
 
 export type EnrollmentsEnrollmentsPagination = EnrollmentsPagination<Enrollment>;

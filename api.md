@@ -53,6 +53,7 @@ Methods:
 - <code title="get /api/enrollments/{id}">client.enrollments.<a href="./src/resources/enrollments.ts">retrieve</a>(id) -> Enrollment</code>
 - <code title="get /api/enrollments">client.enrollments.<a href="./src/resources/enrollments.ts">list</a>({ ...params }) -> EnrollmentsEnrollmentsPagination</code>
 - <code title="delete /api/enrollments/{id}">client.enrollments.<a href="./src/resources/enrollments.ts">lapse</a>(id) -> void</code>
+- <code title="get /api/enrollments/{id}/certificate">client.enrollments.<a href="./src/resources/enrollments.ts">retrieveCertificate</a>(id) -> Response</code>
 
 # InsuranceVerification
 
