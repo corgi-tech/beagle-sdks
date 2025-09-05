@@ -14,7 +14,6 @@ describe('resource enrollments', () => {
       effectiveDate: 'effectiveDate',
       plan: 'plan',
       propertyManagerId: 0,
-      status: 'Premium Paying',
       tenantId: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +31,6 @@ describe('resource enrollments', () => {
       effectiveDate: 'effectiveDate',
       plan: 'plan',
       propertyManagerId: 0,
-      status: 'Premium Paying',
       tenantId: 0,
       note: 'note',
     });
