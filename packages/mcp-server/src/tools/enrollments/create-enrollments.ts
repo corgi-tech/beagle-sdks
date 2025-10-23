@@ -33,6 +33,19 @@ export const tool: Tool = {
       propertyManagerId: {
         type: 'number',
       },
+      status: {
+        type: 'string',
+        enum: [
+          'Premium Paying',
+          'Issued, Not Paid',
+          'Expired',
+          'Lapsed',
+          'Suspended',
+          'Cancelled',
+          'Not taken',
+          'Declined',
+        ],
+      },
       tenantId: {
         type: 'number',
       },
@@ -47,7 +60,7 @@ export const tool: Tool = {
           'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
       },
     },
-    required: ['effectiveDate', 'plan', 'propertyManagerId', 'tenantId'],
+    required: ['effectiveDate', 'plan', 'propertyManagerId', 'status', 'tenantId'],
   },
   annotations: {},
 };

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'verify_insurance_verification',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ntrigger a job to parse a tenants insurance document(s)\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    message: {\n      type: 'string',\n      enum: [        'insurance verification job scheduled'\n      ]\n    }\n  },\n  required: [    'message'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ntrigger a job to parse a tenants insurance document(s)\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/insurance_verification_verify_response',\n  $defs: {\n    insurance_verification_verify_response: {\n      type: 'object',\n      properties: {\n        message: {\n          type: 'string',\n          enum: [            'insurance verification job scheduled'\n          ]\n        }\n      },\n      required: [        'message'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

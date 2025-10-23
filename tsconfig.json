@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@corgi-tech/beagle/*": ["src/*"],
-      "@corgi-tech/beagle": ["src/index.ts"]
+      "@corgi-tech/beagle/*": ["./src/*"],
+      "@corgi-tech/beagle": ["./src/index.ts"]
     },
     "noEmit": true,
 

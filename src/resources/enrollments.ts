@@ -108,6 +108,16 @@ export interface EnrollmentCreateParams {
 
   propertyManagerId: number;
 
+  status:
+    | 'Premium Paying'
+    | 'Issued, Not Paid'
+    | 'Expired'
+    | 'Lapsed'
+    | 'Suspended'
+    | 'Cancelled'
+    | 'Not taken'
+    | 'Declined';
+
   tenantId: number;
 
   /**
