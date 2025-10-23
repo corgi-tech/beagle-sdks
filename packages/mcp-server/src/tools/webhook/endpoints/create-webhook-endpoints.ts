@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_webhook_endpoints',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ncreates a new webhook target.\n\n# Response Schema\n```json\n{\n  type: 'object',\n  properties: {\n    id: {\n      type: 'number'\n    },\n    active: {\n      type: 'boolean'\n    },\n    companyId: {\n      type: 'number'\n    },\n    createdAt: {\n      type: 'string'\n    },\n    updatedAt: {\n      type: 'string'\n    },\n    url: {\n      type: 'string'\n    }\n  },\n  required: [    'id',\n    'active',\n    'companyId',\n    'createdAt',\n    'updatedAt',\n    'url'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\ncreates a new webhook target.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/endpoint_create_response',\n  $defs: {\n    endpoint_create_response: {\n      type: 'object',\n      properties: {\n        id: {\n          type: 'number'\n        },\n        active: {\n          type: 'boolean'\n        },\n        companyId: {\n          type: 'number'\n        },\n        createdAt: {\n          type: 'string'\n        },\n        updatedAt: {\n          type: 'string'\n        },\n        url: {\n          type: 'string'\n        }\n      },\n      required: [        'id',\n        'active',\n        'companyId',\n        'createdAt',\n        'updatedAt',\n        'url'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
