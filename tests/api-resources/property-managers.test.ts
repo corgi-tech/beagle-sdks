@@ -39,6 +39,7 @@ describe('resource propertyManagers', () => {
         },
       ],
       name: 'name',
+      clickWrapAt: 0,
     });
   });
 
