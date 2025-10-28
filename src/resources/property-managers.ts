@@ -98,6 +98,8 @@ export interface PropertyManager {
    * name of the property manager
    */
   name: string;
+
+  clickWrapAt?: number;
 }
 
 export namespace PropertyManager {
@@ -119,6 +121,8 @@ export interface PropertyManagerCreateParams {
    * name of the property manager
    */
   name: string;
+
+  clickWrapAt?: number;
 }
 
 export namespace PropertyManagerCreateParams {
@@ -133,6 +137,8 @@ export namespace PropertyManagerCreateParams {
 
 export interface PropertyManagerUpdateParams {
   addresses?: Array<PropertyManagerUpdateParams.Address>;
+
+  clickWrapAt?: number;
 
   contacts?: Array<PropertyManagerUpdateParams.Contact>;
 
