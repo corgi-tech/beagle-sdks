@@ -15,6 +15,30 @@ import { path } from '../internal/utils/path';
 export class PropertyManagers extends APIResource {
   /**
    * create a new property manager.
+   *
+   * @example
+   * ```ts
+   * const propertyManager =
+   *   await client.propertyManagers.create({
+   *     addresses: [
+   *       {
+   *         city: 'city',
+   *         state: 'xx',
+   *         street1: 'street1',
+   *         zip: '60513',
+   *         kind: 'billing',
+   *       },
+   *     ],
+   *     contacts: [
+   *       {
+   *         email: 'dev@stainless.com',
+   *         name: { first: 'first', last: 'last' },
+   *         kind: 'agreements',
+   *       },
+   *     ],
+   *     name: 'name',
+   *   });
+   * ```
    */
   create(body: PropertyManagerCreateParams, options?: RequestOptions): APIPromise<PropertyManager> {
     return this._client.post('/api/property-managers', { body, ...options });
@@ -22,6 +46,12 @@ export class PropertyManagers extends APIResource {
 
   /**
    * get a property manager by id.
+   *
+   * @example
+   * ```ts
+   * const propertyManager =
+   *   await client.propertyManagers.retrieve(123);
+   * ```
    */
   retrieve(id: number | null, options?: RequestOptions): APIPromise<PropertyManager> {
     return this._client.get(path`/api/property-managers/${id}`, options);
@@ -30,6 +60,12 @@ export class PropertyManagers extends APIResource {
   /**
    * update an existing property manager by id, note that when updating contacts or
    * addresses you need to send the whole array you want to replace them with.
+   *
+   * @example
+   * ```ts
+   * const propertyManager =
+   *   await client.propertyManagers.update(123);
+   * ```
    */
   update(
     id: number | null,
@@ -41,6 +77,14 @@ export class PropertyManagers extends APIResource {
 
   /**
    * list all property managers, note this endpoint is paginated.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const propertyManager of client.propertyManagers.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: PropertyManagerListParams | null | undefined = {},
@@ -54,6 +98,11 @@ export class PropertyManagers extends APIResource {
 
   /**
    * delete a property manager by id.
+   *
+   * @example
+   * ```ts
+   * await client.propertyManagers.delete(123);
+   * ```
    */
   delete(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/property-managers/${id}`, {

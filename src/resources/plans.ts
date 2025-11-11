@@ -8,6 +8,11 @@ import { path } from '../internal/utils/path';
 export class Plans extends APIResource {
   /**
    * retrieve a specific plans details by its code.
+   *
+   * @example
+   * ```ts
+   * const plan = await client.plans.retrieve('code');
+   * ```
    */
   retrieve(code: string, options?: RequestOptions): APIPromise<Plan> {
     return this._client.get(path`/api/plans/${code}`, options);
@@ -16,6 +21,11 @@ export class Plans extends APIResource {
   /**
    * list all available plans, note this endpoint is currently unpaginated unlike all
    * other list endpoints.
+   *
+   * @example
+   * ```ts
+   * const plans = await client.plans.list();
+   * ```
    */
   list(options?: RequestOptions): APIPromise<PlanListResponse> {
     return this._client.get('/api/plans', options);
