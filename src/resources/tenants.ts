@@ -10,6 +10,23 @@ import { path } from '../internal/utils/path';
 export class Tenants extends APIResource {
   /**
    * create a new tenant.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.create({
+   *   address: {
+   *     city: 'city',
+   *     state: 'xx',
+   *     street1: 'street1',
+   *     zip: '60513',
+   *   },
+   *   contact: {
+   *     email: 'dev@stainless.com',
+   *     name: { first: 'first', last: 'last' },
+   *   },
+   *   propertyManagerId: 0,
+   * });
+   * ```
    */
   create(body: TenantCreateParams, options?: RequestOptions): APIPromise<Tenant> {
     return this._client.post('/api/tenants', { body, ...options });
@@ -17,6 +34,11 @@ export class Tenants extends APIResource {
 
   /**
    * retrieve a single tenant by their id.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.retrieve(123);
+   * ```
    */
   retrieve(id: number | null, options?: RequestOptions): APIPromise<Tenant> {
     return this._client.get(path`/api/tenants/${id}`, options);
@@ -24,6 +46,11 @@ export class Tenants extends APIResource {
 
   /**
    * update an existing tenant by their id.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.update(123);
+   * ```
    */
   update(id: number | null, body: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
     return this._client.patch(path`/api/tenants/${id}`, { body, ...options });
@@ -32,6 +59,14 @@ export class Tenants extends APIResource {
   /**
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const tenant of client.tenants.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: TenantListParams | null | undefined = {},
@@ -42,6 +77,11 @@ export class Tenants extends APIResource {
 
   /**
    * delete an existing tenant by their id.
+   *
+   * @example
+   * ```ts
+   * await client.tenants.delete(123);
+   * ```
    */
   delete(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/tenants/${id}`, {

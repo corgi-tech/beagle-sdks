@@ -10,6 +10,17 @@ import { path } from '../internal/utils/path';
 export class Enrollments extends APIResource {
   /**
    * create a new enrollment for a tenant.
+   *
+   * @example
+   * ```ts
+   * const enrollment = await client.enrollments.create({
+   *   effectiveDate: 'effectiveDate',
+   *   plan: 'plan',
+   *   propertyManagerId: 0,
+   *   status: 'Premium Paying',
+   *   tenantId: 0,
+   * });
+   * ```
    */
   create(body: EnrollmentCreateParams, options?: RequestOptions): APIPromise<Enrollment> {
     return this._client.post('/api/enrollments', { body, ...options });
@@ -17,6 +28,11 @@ export class Enrollments extends APIResource {
 
   /**
    * get a specific enrollment by its id.
+   *
+   * @example
+   * ```ts
+   * const enrollment = await client.enrollments.retrieve(123);
+   * ```
    */
   retrieve(id: number | null, options?: RequestOptions): APIPromise<Enrollment> {
     return this._client.get(path`/api/enrollments/${id}`, options);
@@ -25,6 +41,14 @@ export class Enrollments extends APIResource {
   /**
    * list all enrollments, this endpoint is paginated and allows for queries by
    * individual property manager.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const enrollment of client.enrollments.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: EnrollmentListParams | null | undefined = {},
@@ -39,6 +63,11 @@ export class Enrollments extends APIResource {
   /**
    * lapses a specific enrollment for a tenant, note that if a tenant has multiple
    * enrollments (e.g., SDR and TLL), each must be lapsed individually
+   *
+   * @example
+   * ```ts
+   * await client.enrollments.lapse(123);
+   * ```
    */
   lapse(id: number | null, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/enrollments/${id}`, {
@@ -49,6 +78,15 @@ export class Enrollments extends APIResource {
 
   /**
    * get the certificate of enrollment for a given enrollment
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.enrollments.retrieveCertificate(123);
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   retrieveCertificate(id: number | null, options?: RequestOptions): APIPromise<Response> {
     return this._client.get(path`/api/enrollments/${id}/certificate`, {

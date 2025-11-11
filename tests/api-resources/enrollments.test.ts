@@ -40,7 +40,7 @@ describe('resource enrollments', () => {
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.enrollments.retrieve(42);
+    const responsePromise = client.enrollments.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,7 +75,7 @@ describe('resource enrollments', () => {
 
   // Prism tests are disabled
   test.skip('lapse', async () => {
-    const responsePromise = client.enrollments.lapse(42);
+    const responsePromise = client.enrollments.lapse(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

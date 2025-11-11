@@ -45,7 +45,7 @@ describe('resource propertyManagers', () => {
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.propertyManagers.retrieve(42);
+    const responsePromise = client.propertyManagers.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,7 +57,7 @@ describe('resource propertyManagers', () => {
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.propertyManagers.update(42, {});
+    const responsePromise = client.propertyManagers.update(123, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,7 +89,7 @@ describe('resource propertyManagers', () => {
 
   // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.propertyManagers.delete(42);
+    const responsePromise = client.propertyManagers.delete(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
