@@ -33,7 +33,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Beagle, args: Record<string, unknown> | undefined) => {
   const { id, ...body } = args as any;
-  return asBinaryContentResult(await client.enrollments.retrieveCertificate(id));
+  return asBinaryContentResult(await client.enrollments.retrieveCertificate(id).asResponse());
 };
 
 export default { metadata, tool, handler };
