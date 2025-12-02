@@ -50,7 +50,7 @@ export const handler = async (client: Beagle, args: Record<string, unknown> | un
   try {
     return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Beagle.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;
