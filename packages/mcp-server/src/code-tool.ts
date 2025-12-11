@@ -39,6 +39,7 @@ export async function codeTool() {
       },
       body: JSON.stringify({
         project_name: 'beagle',
+        client_opts: { environment: (readEnv('BEAGLE_ENVIRONMENT') || undefined) as any },
         code,
       }),
     });
