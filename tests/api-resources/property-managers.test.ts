@@ -11,8 +11,22 @@ describe('resource propertyManagers', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.propertyManagers.create({
-      addresses: [{ city: 'city', state: 'xx', street1: 'street1', zip: '60513', kind: 'billing' }],
-      contacts: [{ email: 'dev@stainless.com', name: { first: 'first', last: 'last' }, kind: 'agreements' }],
+      addresses: [
+        {
+          city: 'city',
+          state: 'xx',
+          street1: 'street1',
+          zip: '60513',
+          kind: 'billing',
+        },
+      ],
+      contacts: [
+        {
+          email: 'dev@stainless.com',
+          name: { first: 'first', last: 'last' },
+          kind: 'agreements',
+        },
+      ],
       name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +42,14 @@ describe('resource propertyManagers', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.propertyManagers.create({
       addresses: [
-        { city: 'city', state: 'xx', street1: 'street1', zip: '60513', street2: 'street2', kind: 'billing' },
+        {
+          city: 'city',
+          state: 'xx',
+          street1: 'street1',
+          zip: '60513',
+          street2: 'street2',
+          kind: 'billing',
+        },
       ],
       contacts: [
         {

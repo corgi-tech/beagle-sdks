@@ -11,8 +11,16 @@ describe('resource tenants', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.tenants.create({
-      address: { city: 'city', state: 'xx', street1: 'street1', zip: '60513' },
-      contact: { email: 'dev@stainless.com', name: { first: 'first', last: 'last' } },
+      address: {
+        city: 'city',
+        state: 'xx',
+        street1: 'street1',
+        zip: '60513',
+      },
+      contact: {
+        email: 'dev@stainless.com',
+        name: { first: 'first', last: 'last' },
+      },
       propertyManagerId: 0,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +35,18 @@ describe('resource tenants', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.tenants.create({
-      address: { city: 'city', state: 'xx', street1: 'street1', zip: '60513', street2: 'street2' },
-      contact: { email: 'dev@stainless.com', name: { first: 'first', last: 'last' }, phone: 'phone' },
+      address: {
+        city: 'city',
+        state: 'xx',
+        street1: 'street1',
+        zip: '60513',
+        street2: 'street2',
+      },
+      contact: {
+        email: 'dev@stainless.com',
+        name: { first: 'first', last: 'last' },
+        phone: 'phone',
+      },
       propertyManagerId: 0,
     });
   });
@@ -73,7 +91,14 @@ describe('resource tenants', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.tenants.list({ page: 1, propertyManagerId: 1, size: 1 }, { path: '/_stainless_unknown_path' }),
+      client.tenants.list(
+        {
+          page: 1,
+          propertyManagerId: 1,
+          size: 1,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 

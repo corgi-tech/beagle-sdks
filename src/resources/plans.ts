@@ -19,8 +19,7 @@ export class Plans extends APIResource {
   }
 
   /**
-   * list all available plans, note this endpoint is currently unpaginated unlike all
-   * other list endpoints.
+   * List all available insurance plans that tenants can be enrolled in.
    *
    * @example
    * ```ts
@@ -36,7 +35,7 @@ export interface Plan {
   description: string;
 
   /**
-   * the plans name/code, this is used when creating enrollments.
+   * the plan's name/code, this is used when creating enrollments.
    */
   name: string;
 
