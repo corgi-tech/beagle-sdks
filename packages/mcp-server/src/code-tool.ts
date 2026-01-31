@@ -73,7 +73,10 @@ export function codeTool(): McpTool {
             readEnv('BEAGLE_API_KEY') ?? client.apiKey,
             'set BEAGLE_API_KEY environment variable or provide apiKey client option',
           ),
-          BEAGLE_BASE_URL: readEnv('BEAGLE_BASE_URL') ?? client.baseURL ?? undefined,
+          BEAGLE_BASE_URL:
+            readEnv('BEAGLE_BASE_URL') ?? readEnv('BEAGLE_ENVIRONMENT') ?
+              undefined
+            : client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
