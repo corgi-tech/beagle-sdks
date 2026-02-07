@@ -1,12 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as PropertyManagersAPI from '../property-managers';
 import { APIPromise } from '../../core/api-promise';
-import {
-  PagePromise,
-  WebhookEndpointsPagination,
-  type WebhookEndpointsPaginationParams,
-} from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -44,12 +40,8 @@ export class Endpoints extends APIResource {
   list(
     query: EndpointListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<EndpointListResponsesWebhookEndpointsPagination, EndpointListResponse> {
-    return this._client.getAPIList(
-      '/api/webhook/endpoints',
-      WebhookEndpointsPagination<EndpointListResponse>,
-      { query, ...options },
-    );
+  ): APIPromise<EndpointListResponse> {
+    return this._client.get('/api/webhook/endpoints', { query, ...options });
   }
 
   /**
@@ -63,63 +55,100 @@ export class Endpoints extends APIResource {
   }
 }
 
-export type EndpointListResponsesWebhookEndpointsPagination =
-  WebhookEndpointsPagination<EndpointListResponse>;
-
 export interface EndpointCreateResponse {
-  id: number;
+  data: EndpointCreateResponse.Data;
 
-  active: boolean;
+  success: true;
+}
 
-  companyId: number;
+export namespace EndpointCreateResponse {
+  export interface Data {
+    id: number;
 
-  createdAt: string;
+    active: boolean;
 
-  updatedAt: string;
+    companyId: number;
 
-  url: string;
+    createdAt: string;
+
+    updatedAt: string;
+
+    url: string;
+  }
 }
 
 export interface EndpointRetrieveResponse {
-  id: number;
+  data: EndpointRetrieveResponse.Data;
 
-  active: boolean;
+  success: true;
+}
 
-  companyId: number;
+export namespace EndpointRetrieveResponse {
+  export interface Data {
+    id: number;
 
-  createdAt: string;
+    active: boolean;
 
-  updatedAt: string;
+    companyId: number;
 
-  url: string;
+    createdAt: string;
+
+    updatedAt: string;
+
+    url: string;
+  }
 }
 
 export interface EndpointUpdateResponse {
-  id: number;
+  data: EndpointUpdateResponse.Data;
 
-  active: boolean;
+  success: true;
+}
 
-  companyId: number;
+export namespace EndpointUpdateResponse {
+  export interface Data {
+    id: number;
 
-  createdAt: string;
+    active: boolean;
 
-  updatedAt: string;
+    companyId: number;
 
-  url: string;
+    createdAt: string;
+
+    updatedAt: string;
+
+    url: string;
+  }
 }
 
 export interface EndpointListResponse {
-  id: number;
+  data: EndpointListResponse.Data;
 
-  active: boolean;
+  success: true;
+}
 
-  companyId: number;
+export namespace EndpointListResponse {
+  export interface Data {
+    items: Array<Data.Item>;
 
-  createdAt: string;
+    pagination: PropertyManagersAPI.Pagination;
+  }
 
-  updatedAt: string;
+  export namespace Data {
+    export interface Item {
+      id: number;
 
-  url: string;
+      active: boolean;
+
+      companyId: number;
+
+      createdAt: string;
+
+      updatedAt: string;
+
+      url: string;
+    }
+  }
 }
 
 export interface EndpointCreateParams {
@@ -138,7 +167,17 @@ export interface EndpointUpdateParams {
   active?: boolean;
 }
 
-export interface EndpointListParams extends WebhookEndpointsPaginationParams {}
+export interface EndpointListParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
+}
 
 export declare namespace Endpoints {
   export {
@@ -146,7 +185,6 @@ export declare namespace Endpoints {
     type EndpointRetrieveResponse as EndpointRetrieveResponse,
     type EndpointUpdateResponse as EndpointUpdateResponse,
     type EndpointListResponse as EndpointListResponse,
-    type EndpointListResponsesWebhookEndpointsPagination as EndpointListResponsesWebhookEndpointsPagination,
     type EndpointCreateParams as EndpointCreateParams,
     type EndpointUpdateParams as EndpointUpdateParams,
     type EndpointListParams as EndpointListParams,

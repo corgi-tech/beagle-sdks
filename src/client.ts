@@ -31,34 +31,42 @@ import { APIPromise } from './core/api-promise';
 import {
   Enrollment,
   EnrollmentCreateParams,
+  EnrollmentCreateResponse,
   EnrollmentListParams,
+  EnrollmentListResponse,
+  EnrollmentRetrieveResponse,
   Enrollments,
-  EnrollmentsEnrollmentsPagination,
 } from './resources/enrollments';
 import {
   InsuranceVerification,
   InsuranceVerificationVerifyParams,
   InsuranceVerificationVerifyResponse,
 } from './resources/insurance-verification';
-import { Plan, PlanListResponse, Plans } from './resources/plans';
+import { Plan, PlanListResponse, PlanRetrieveResponse, Plans } from './resources/plans';
 import {
   Pagination as PropertyManagersAPIPagination,
   PropertyManager,
   PropertyManagerCreateParams,
+  PropertyManagerCreateResponse,
   PropertyManagerListParams,
+  PropertyManagerListResponse,
+  PropertyManagerRetrieveResponse,
   PropertyManagerUpdateParams,
+  PropertyManagerUpdateResponse,
   PropertyManagers,
-  PropertyManagersPropertyManagersPagination,
 } from './resources/property-managers';
 import {
   Address,
   Contact,
   Tenant,
   TenantCreateParams,
+  TenantCreateResponse,
   TenantListParams,
+  TenantListResponse,
+  TenantRetrieveResponse,
   TenantUpdateParams,
+  TenantUpdateResponse,
   Tenants,
-  TenantsTenantsPagination,
 } from './resources/tenants';
 import { Webhook } from './resources/webhook/webhook';
 import { type Fetch } from './internal/builtin-types';
@@ -855,13 +863,21 @@ export declare namespace Beagle {
     type WebhookEndpointsPaginationResponse as WebhookEndpointsPaginationResponse,
   };
 
-  export { Plans as Plans, type Plan as Plan, type PlanListResponse as PlanListResponse };
+  export {
+    Plans as Plans,
+    type Plan as Plan,
+    type PlanRetrieveResponse as PlanRetrieveResponse,
+    type PlanListResponse as PlanListResponse,
+  };
 
   export {
     PropertyManagers as PropertyManagers,
     type PropertyManagersAPIPagination as Pagination,
     type PropertyManager as PropertyManager,
-    type PropertyManagersPropertyManagersPagination as PropertyManagersPropertyManagersPagination,
+    type PropertyManagerCreateResponse as PropertyManagerCreateResponse,
+    type PropertyManagerRetrieveResponse as PropertyManagerRetrieveResponse,
+    type PropertyManagerUpdateResponse as PropertyManagerUpdateResponse,
+    type PropertyManagerListResponse as PropertyManagerListResponse,
     type PropertyManagerCreateParams as PropertyManagerCreateParams,
     type PropertyManagerUpdateParams as PropertyManagerUpdateParams,
     type PropertyManagerListParams as PropertyManagerListParams,
@@ -872,7 +888,10 @@ export declare namespace Beagle {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantsTenantsPagination as TenantsTenantsPagination,
+    type TenantCreateResponse as TenantCreateResponse,
+    type TenantRetrieveResponse as TenantRetrieveResponse,
+    type TenantUpdateResponse as TenantUpdateResponse,
+    type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,
@@ -881,7 +900,9 @@ export declare namespace Beagle {
   export {
     Enrollments as Enrollments,
     type Enrollment as Enrollment,
-    type EnrollmentsEnrollmentsPagination as EnrollmentsEnrollmentsPagination,
+    type EnrollmentCreateResponse as EnrollmentCreateResponse,
+    type EnrollmentRetrieveResponse as EnrollmentRetrieveResponse,
+    type EnrollmentListResponse as EnrollmentListResponse,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };

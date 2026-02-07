@@ -8,23 +8,13 @@ import { path } from '../internal/utils/path';
 export class Plans extends APIResource {
   /**
    * retrieve a specific plans details by its code.
-   *
-   * @example
-   * ```ts
-   * const plan = await client.plans.retrieve('code');
-   * ```
    */
-  retrieve(code: string, options?: RequestOptions): APIPromise<Plan> {
+  retrieve(code: string, options?: RequestOptions): APIPromise<PlanRetrieveResponse> {
     return this._client.get(path`/api/plans/${code}`, options);
   }
 
   /**
    * List all available insurance plans that tenants can be enrolled in.
-   *
-   * @example
-   * ```ts
-   * const plans = await client.plans.list();
-   * ```
    */
   list(options?: RequestOptions): APIPromise<PlanListResponse> {
     return this._client.get('/api/plans', options);
@@ -61,8 +51,22 @@ export interface Plan {
   value?: number;
 }
 
-export type PlanListResponse = Array<Plan>;
+export interface PlanRetrieveResponse {
+  data: Plan;
+
+  success: true;
+}
+
+export interface PlanListResponse {
+  data: Array<Plan>;
+
+  success: true;
+}
 
 export declare namespace Plans {
-  export { type Plan as Plan, type PlanListResponse as PlanListResponse };
+  export {
+    type Plan as Plan,
+    type PlanRetrieveResponse as PlanRetrieveResponse,
+    type PlanListResponse as PlanListResponse,
+  };
 }

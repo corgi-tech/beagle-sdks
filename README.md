@@ -37,6 +37,8 @@ const client = new Beagle({
 });
 
 const plans = await client.plans.list();
+
+console.log(plans.data);
 ```
 
 ### Request & Response types
@@ -131,37 +133,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
-## Auto-pagination
-
-List methods in the Beagle API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllTenants(params) {
-  const allTenants = [];
-  // Automatically fetches more pages as needed.
-  for await (const tenant of client.tenants.list()) {
-    allTenants.push(tenant);
-  }
-  return allTenants;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.tenants.list();
-for (const tenant of page.tenants) {
-  console.log(tenant);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
-
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
@@ -182,7 +153,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: plans, response: raw } = await client.plans.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(plans);
+console.log(plans.data);
 ```
 
 ### Logging
