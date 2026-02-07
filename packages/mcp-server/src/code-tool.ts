@@ -15,6 +15,8 @@ For example:
 \`\`\`
 async function run(client) {
   const plans = await client.plans.list();
+
+  console.log(plans.data);
 }
 \`\`\`
 

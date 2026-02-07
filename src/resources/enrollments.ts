@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as EnrollmentsAPI from './enrollments';
+import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
-import { EnrollmentsPagination, type EnrollmentsPaginationParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -22,7 +23,7 @@ export class Enrollments extends APIResource {
    * });
    * ```
    */
-  create(body: EnrollmentCreateParams, options?: RequestOptions): APIPromise<Enrollment> {
+  create(body: EnrollmentCreateParams, options?: RequestOptions): APIPromise<EnrollmentCreateResponse> {
     return this._client.post('/api/enrollments', { body, ...options });
   }
 
@@ -34,7 +35,7 @@ export class Enrollments extends APIResource {
    * const enrollment = await client.enrollments.retrieve(123);
    * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<Enrollment> {
+  retrieve(id: number | null, options?: RequestOptions): APIPromise<EnrollmentRetrieveResponse> {
     return this._client.get(path`/api/enrollments/${id}`, options);
   }
 
@@ -44,20 +45,14 @@ export class Enrollments extends APIResource {
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const enrollment of client.enrollments.list()) {
-   *   // ...
-   * }
+   * const enrollments = await client.enrollments.list();
    * ```
    */
   list(
     query: EnrollmentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<EnrollmentsEnrollmentsPagination, Enrollment> {
-    return this._client.getAPIList('/api/enrollments', EnrollmentsPagination<Enrollment>, {
-      query,
-      ...options,
-    });
+  ): APIPromise<EnrollmentListResponse> {
+    return this._client.get('/api/enrollments', { query, ...options });
   }
 
   /**
@@ -97,8 +92,6 @@ export class Enrollments extends APIResource {
   }
 }
 
-export type EnrollmentsEnrollmentsPagination = EnrollmentsPagination<Enrollment>;
-
 export interface Enrollment {
   id: number;
 
@@ -133,6 +126,32 @@ export interface Enrollment {
   note?: string;
 }
 
+export interface EnrollmentCreateResponse {
+  data: Enrollment;
+
+  success: true;
+}
+
+export interface EnrollmentRetrieveResponse {
+  data: Enrollment;
+
+  success: true;
+}
+
+export interface EnrollmentListResponse {
+  data: EnrollmentListResponse.Data;
+
+  success: true;
+}
+
+export namespace EnrollmentListResponse {
+  export interface Data {
+    items: Array<EnrollmentsAPI.Enrollment>;
+
+    pagination: PropertyManagersAPI.Pagination;
+  }
+}
+
 export interface EnrollmentCreateParams {
   /**
    * the date the enrollment will begin, note enrollments cannot begin in the past
@@ -165,14 +184,26 @@ export interface EnrollmentCreateParams {
   note?: string;
 }
 
-export interface EnrollmentListParams extends EnrollmentsPaginationParams {
+export interface EnrollmentListParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
   propertyManagerId?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
 }
 
 export declare namespace Enrollments {
   export {
     type Enrollment as Enrollment,
-    type EnrollmentsEnrollmentsPagination as EnrollmentsEnrollmentsPagination,
+    type EnrollmentCreateResponse as EnrollmentCreateResponse,
+    type EnrollmentRetrieveResponse as EnrollmentRetrieveResponse,
+    type EnrollmentListResponse as EnrollmentListResponse,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };
