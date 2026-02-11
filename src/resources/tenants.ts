@@ -41,7 +41,7 @@ export class Tenants extends APIResource {
    * const tenant = await client.tenants.retrieve(123);
    * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<TenantRetrieveResponse> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<TenantRetrieveResponse> {
     return this._client.get(path`/api/tenants/${id}`, options);
   }
 
@@ -53,11 +53,7 @@ export class Tenants extends APIResource {
    * const tenant = await client.tenants.update(123);
    * ```
    */
-  update(
-    id: number | null,
-    body: TenantUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<TenantUpdateResponse> {
+  update(id: number, body: TenantUpdateParams, options?: RequestOptions): APIPromise<TenantUpdateResponse> {
     return this._client.patch(path`/api/tenants/${id}`, { body, ...options });
   }
 
@@ -85,7 +81,7 @@ export class Tenants extends APIResource {
    * await client.tenants.delete(123);
    * ```
    */
-  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/tenants/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
