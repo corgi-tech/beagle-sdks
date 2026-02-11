@@ -18,7 +18,7 @@ export class Endpoints extends APIResource {
   /**
    * retrieve a single webhook endpoint by its id.
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<EndpointRetrieveResponse> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<EndpointRetrieveResponse> {
     return this._client.get(path`/api/webhook/endpoints/${id}`, options);
   }
 
@@ -26,7 +26,7 @@ export class Endpoints extends APIResource {
    * update an existing webhook endpoint by its id.
    */
   update(
-    id: number | null,
+    id: number,
     body: EndpointUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EndpointUpdateResponse> {
@@ -47,7 +47,7 @@ export class Endpoints extends APIResource {
   /**
    * delete an existing webhook endpoint by its id.
    */
-  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/webhook/endpoints/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

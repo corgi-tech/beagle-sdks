@@ -52,7 +52,7 @@ export class PropertyManagers extends APIResource {
    *   await client.propertyManagers.retrieve(123);
    * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<PropertyManagerRetrieveResponse> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<PropertyManagerRetrieveResponse> {
     return this._client.get(path`/api/property-managers/${id}`, options);
   }
 
@@ -67,7 +67,7 @@ export class PropertyManagers extends APIResource {
    * ```
    */
   update(
-    id: number | null,
+    id: number,
     body: PropertyManagerUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PropertyManagerUpdateResponse> {
@@ -98,7 +98,7 @@ export class PropertyManagers extends APIResource {
    * await client.propertyManagers.delete(123);
    * ```
    */
-  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/property-managers/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),

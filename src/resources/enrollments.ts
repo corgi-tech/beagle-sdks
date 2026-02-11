@@ -35,7 +35,7 @@ export class Enrollments extends APIResource {
    * const enrollment = await client.enrollments.retrieve(123);
    * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<EnrollmentRetrieveResponse> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<EnrollmentRetrieveResponse> {
     return this._client.get(path`/api/enrollments/${id}`, options);
   }
 
@@ -64,7 +64,7 @@ export class Enrollments extends APIResource {
    * await client.enrollments.lapse(123);
    * ```
    */
-  lapse(id: number | null, options?: RequestOptions): APIPromise<void> {
+  lapse(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/enrollments/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -83,7 +83,7 @@ export class Enrollments extends APIResource {
    * console.log(content);
    * ```
    */
-  retrieveCertificate(id: number | null, options?: RequestOptions): APIPromise<Response> {
+  retrieveCertificate(id: number, options?: RequestOptions): APIPromise<Response> {
     return this._client.get(path`/api/enrollments/${id}/certificate`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/pdf' }, options?.headers]),
