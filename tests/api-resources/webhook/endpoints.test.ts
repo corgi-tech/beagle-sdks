@@ -8,7 +8,7 @@ const client = new Beagle({
 });
 
 describe('resource endpoints', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.webhook.endpoints.create({ secret: 'secret', url: 'https://example.com' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource endpoints', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.webhook.endpoints.create({
       secret: 'secret',
@@ -29,7 +29,7 @@ describe('resource endpoints', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.webhook.endpoints.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
@@ -41,7 +41,7 @@ describe('resource endpoints', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.webhook.endpoints.update(123, {
       secret: 'secret',
@@ -56,7 +56,7 @@ describe('resource endpoints', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.webhook.endpoints.update(123, {
       secret: 'secret',
@@ -65,7 +65,7 @@ describe('resource endpoints', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.webhook.endpoints.list();
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ describe('resource endpoints', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -85,7 +85,7 @@ describe('resource endpoints', () => {
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.webhook.endpoints.delete(123);
     const rawResponse = await responsePromise.asResponse();

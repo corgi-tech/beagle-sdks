@@ -8,7 +8,7 @@ const client = new Beagle({
 });
 
 describe('resource plans', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.plans.retrieve('code');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource plans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.plans.list();
     const rawResponse = await responsePromise.asResponse();
