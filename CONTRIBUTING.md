@@ -60,7 +60,7 @@ $ yarn link @corgi-tech/beagle
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @corgi-tech/beagle
+$ pnpm link --global @corgi-tech/beagle
 ```
 
 ## Running tests
