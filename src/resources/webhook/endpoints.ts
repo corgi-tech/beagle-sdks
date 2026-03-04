@@ -7,6 +7,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Receive real-time notifications about tenant coverage changes and lapses. Webhooks deliver responses when tenants with third-party insurance modify their coverage or when coverage lapses, enabling you to stay informed about critical insurance status changes that may affect your properties and tenants.
+ */
 export class Endpoints extends APIResource {
   /**
    * creates a new webhook target.

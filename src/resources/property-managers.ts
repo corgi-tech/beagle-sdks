@@ -8,6 +8,9 @@ import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Track and update your property managers. Create, list, retrieve, update, or delete property manager profiles. Each profile aggregates addresses and contact channels for billing, legal, and support.
+ */
 export class PropertyManagers extends APIResource {
   /**
    * create a new property manager.

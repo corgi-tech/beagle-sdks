@@ -5,6 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Retrieve a list of all plans or look up details by plan code. Each plan defines its name, description, rate, and any coverage values.
+ */
 export class Plans extends APIResource {
   /**
    * retrieve a specific plans details by its code.

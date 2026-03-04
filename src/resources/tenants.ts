@@ -8,6 +8,9 @@ import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Maintain your tenant directory and their primary contact and address. You can create, update, retrieve, list, or delete tenant records. Listings support pagination and filtering by property manager.
+ */
 export class Tenants extends APIResource {
   /**
    * create a new tenant.
