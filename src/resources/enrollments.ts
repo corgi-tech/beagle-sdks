@@ -8,6 +8,9 @@ import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Handle the connections of tenants to plans over time. Create, list, retrieve, or lapse an enrollment records. Enrollments record the chosen plan, effective date, and optional notes.
+ */
 export class Enrollments extends APIResource {
   /**
    * create a new enrollment for a tenant.

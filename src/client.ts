@@ -817,10 +817,25 @@ export class Beagle {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Retrieve a list of all plans or look up details by plan code. Each plan defines its name, description, rate, and any coverage values.
+   */
   plans: API.Plans = new API.Plans(this);
+  /**
+   * Track and update your property managers. Create, list, retrieve, update, or delete property manager profiles. Each profile aggregates addresses and contact channels for billing, legal, and support.
+   */
   propertyManagers: API.PropertyManagers = new API.PropertyManagers(this);
+  /**
+   * Maintain your tenant directory and their primary contact and address. You can create, update, retrieve, list, or delete tenant records. Listings support pagination and filtering by property manager.
+   */
   tenants: API.Tenants = new API.Tenants(this);
+  /**
+   * Handle the connections of tenants to plans over time. Create, list, retrieve, or lapse an enrollment records. Enrollments record the chosen plan, effective date, and optional notes.
+   */
   enrollments: API.Enrollments = new API.Enrollments(this);
+  /**
+   * Trigger insurance document parsing and verifications on demand. This is currently under development please reach out for support integrating.
+   */
   insuranceVerification: API.InsuranceVerification = new API.InsuranceVerification(this);
   webhook: API.Webhook = new API.Webhook(this);
 }
