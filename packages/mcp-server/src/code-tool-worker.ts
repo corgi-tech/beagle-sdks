@@ -122,11 +122,6 @@ const fuse = new Fuse(
     'client.enrollments.retrieve',
     'client.enrollments.retrieveCertificate',
     'client.insuranceVerification.verify',
-    'client.webhook.endpoints.create',
-    'client.webhook.endpoints.delete',
-    'client.webhook.endpoints.list',
-    'client.webhook.endpoints.retrieve',
-    'client.webhook.endpoints.update',
   ],
   { threshold: 1, shouldSort: true },
 );
