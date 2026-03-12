@@ -80,18 +80,3 @@ Methods:
 # Webhook
 
 ## Endpoints
-
-Types:
-
-- <code><a href="./src/resources/webhook/endpoints.ts">EndpointCreateResponse</a></code>
-- <code><a href="./src/resources/webhook/endpoints.ts">EndpointRetrieveResponse</a></code>
-- <code><a href="./src/resources/webhook/endpoints.ts">EndpointUpdateResponse</a></code>
-- <code><a href="./src/resources/webhook/endpoints.ts">EndpointListResponse</a></code>
-
-Methods:
-
-- <code title="post /api/webhook/endpoints">client.webhook.endpoints.<a href="./src/resources/webhook/endpoints.ts">create</a>({ ...params }) -> EndpointCreateResponse</code>
-- <code title="get /api/webhook/endpoints/{id}">client.webhook.endpoints.<a href="./src/resources/webhook/endpoints.ts">retrieve</a>(id) -> EndpointRetrieveResponse</code>
-- <code title="patch /api/webhook/endpoints/{id}">client.webhook.endpoints.<a href="./src/resources/webhook/endpoints.ts">update</a>(id, { ...params }) -> EndpointUpdateResponse</code>
-- <code title="get /api/webhook/endpoints">client.webhook.endpoints.<a href="./src/resources/webhook/endpoints.ts">list</a>({ ...params }) -> EndpointListResponse</code>
-- <code title="delete /api/webhook/endpoints/{id}">client.webhook.endpoints.<a href="./src/resources/webhook/endpoints.ts">delete</a>(id) -> void</code>

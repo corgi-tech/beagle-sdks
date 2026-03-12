@@ -118,36 +118,6 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'post',
     httpPath: '/api/insurance-verification',
   },
-  {
-    clientCallName: 'client.webhook.endpoints.create',
-    fullyQualifiedName: 'webhook.endpoints.create',
-    httpMethod: 'post',
-    httpPath: '/api/webhook/endpoints',
-  },
-  {
-    clientCallName: 'client.webhook.endpoints.retrieve',
-    fullyQualifiedName: 'webhook.endpoints.retrieve',
-    httpMethod: 'get',
-    httpPath: '/api/webhook/endpoints/{id}',
-  },
-  {
-    clientCallName: 'client.webhook.endpoints.update',
-    fullyQualifiedName: 'webhook.endpoints.update',
-    httpMethod: 'patch',
-    httpPath: '/api/webhook/endpoints/{id}',
-  },
-  {
-    clientCallName: 'client.webhook.endpoints.list',
-    fullyQualifiedName: 'webhook.endpoints.list',
-    httpMethod: 'get',
-    httpPath: '/api/webhook/endpoints',
-  },
-  {
-    clientCallName: 'client.webhook.endpoints.delete',
-    fullyQualifiedName: 'webhook.endpoints.delete',
-    httpMethod: 'delete',
-    httpPath: '/api/webhook/endpoints/{id}',
-  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {
