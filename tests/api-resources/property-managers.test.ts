@@ -60,7 +60,7 @@ describe('resource propertyManagers', () => {
         },
       ],
       name: 'name',
-      clickWrapAt: 0,
+      clickWrapAt: 946684800000,
     });
   });
 

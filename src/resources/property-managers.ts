@@ -143,6 +143,9 @@ export interface PropertyManager {
    */
   name: string;
 
+  /**
+   * unix timestamp (ms) of clickwrap agreement signature
+   */
   clickWrapAt?: number;
 }
 
@@ -198,6 +201,9 @@ export interface PropertyManagerCreateParams {
    */
   name: string;
 
+  /**
+   * unix timestamp (ms) of clickwrap agreement signature
+   */
   clickWrapAt?: number;
 }
 
@@ -214,6 +220,9 @@ export namespace PropertyManagerCreateParams {
 export interface PropertyManagerUpdateParams {
   addresses?: Array<PropertyManagerUpdateParams.Address>;
 
+  /**
+   * unix timestamp (ms) of clickwrap agreement signature
+   */
   clickWrapAt?: number;
 
   contacts?: Array<PropertyManagerUpdateParams.Contact>;
