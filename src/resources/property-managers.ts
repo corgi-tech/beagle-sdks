@@ -60,8 +60,10 @@ export class PropertyManagers extends APIResource {
   }
 
   /**
-   * update an existing property manager by id, note that when updating contacts or
-   * addresses you need to send the whole array you want to replace them with.
+   * update an existing property manager by ID
+   *
+   * (Note that when updating **contacts** or **addresses** you need to send the
+   * whole array you want to replace them with)
    *
    * @example
    * ```ts
@@ -94,7 +96,7 @@ export class PropertyManagers extends APIResource {
   }
 
   /**
-   * delete a property manager by id.
+   * delete a property manager by ID.
    *
    * @example
    * ```ts
@@ -134,12 +136,18 @@ export interface Pagination {
 export interface PropertyManager {
   id: number;
 
+  /**
+   * street addresses for each Property
+   */
   addresses: Array<PropertyManager.Address>;
 
+  /**
+   * contact information for each Property Manager
+   */
   contacts: Array<PropertyManager.Contact>;
 
   /**
-   * name of the property manager
+   * name of the Property Management Company
    */
   name: string;
 
@@ -192,12 +200,18 @@ export namespace PropertyManagerListResponse {
 }
 
 export interface PropertyManagerCreateParams {
+  /**
+   * street addresses for each Property
+   */
   addresses: Array<PropertyManagerCreateParams.Address>;
 
+  /**
+   * contact information for each Property Manager
+   */
   contacts: Array<PropertyManagerCreateParams.Contact>;
 
   /**
-   * name of the property manager
+   * name of the Property Management Company
    */
   name: string;
 
@@ -218,6 +232,9 @@ export namespace PropertyManagerCreateParams {
 }
 
 export interface PropertyManagerUpdateParams {
+  /**
+   * street addresses for each Property
+   */
   addresses?: Array<PropertyManagerUpdateParams.Address>;
 
   /**
@@ -225,10 +242,13 @@ export interface PropertyManagerUpdateParams {
    */
   clickWrapAt?: number;
 
+  /**
+   * contact information for each Property Manager
+   */
   contacts?: Array<PropertyManagerUpdateParams.Contact>;
 
   /**
-   * name of the property manager
+   * name of the Property Management Company
    */
   name?: string;
 }
