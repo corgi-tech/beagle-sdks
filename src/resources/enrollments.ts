@@ -21,7 +21,6 @@ export class Enrollments extends APIResource {
    *   effectiveDate: 'effectiveDate',
    *   plan: 'plan',
    *   propertyManagerId: 0,
-   *   status: 'Premium Paying',
    *   tenantId: 0,
    * });
    * ```
@@ -168,16 +167,6 @@ export interface EnrollmentCreateParams {
 
   propertyManagerId: number;
 
-  status:
-    | 'Premium Paying'
-    | 'Issued, Not Paid'
-    | 'Expired'
-    | 'Lapsed'
-    | 'Suspended'
-    | 'Cancelled'
-    | 'Not taken'
-    | 'Declined';
-
   tenantId: number;
 
   /**
@@ -185,6 +174,11 @@ export interface EnrollmentCreateParams {
    * enrollments
    */
   note?: string;
+
+  /**
+   * the enrollment status — defaults to 'Issued, Not Paid' if not provided
+   */
+  status?: 'Premium Paying' | 'Issued, Not Paid';
 }
 
 export interface EnrollmentListParams {

@@ -820,48 +820,48 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'effectiveDate: string;',
       'plan: string;',
       'propertyManagerId: number;',
-      'status: string;',
       'tenantId: number;',
       'note?: string;',
+      "status?: 'Premium Paying' | 'Issued, Not Paid';",
     ],
     response:
       '{ data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }; success: true; }',
     markdown:
-      "## create\n\n`client.enrollments.create(effectiveDate: string, plan: string, propertyManagerId: number, status: string, tenantId: number, note?: string): { data: enrollment; success: true; }`\n\n**post** `/api/enrollments`\n\ncreate a new enrollment for a tenant.\n\n### Parameters\n\n- `effectiveDate: string`\n  the date the enrollment will begin, note enrollments cannot begin in the past\n\n- `plan: string`\n  the plan name/code\n\n- `propertyManagerId: number`\n\n- `status: string`\n\n- `tenantId: number`\n\n- `note?: string`\n  an optional note field, this can be used for easily appending metadata to enrollments\n\n### Returns\n\n- `{ data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }; success: true; }`\n\n  - `data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: 'effectiveDate',\n  plan: 'plan',\n  propertyManagerId: 0,\n  status: 'Premium Paying',\n  tenantId: 0,\n});\n\nconsole.log(enrollment);\n```",
+      "## create\n\n`client.enrollments.create(effectiveDate: string, plan: string, propertyManagerId: number, tenantId: number, note?: string, status?: 'Premium Paying' | 'Issued, Not Paid'): { data: enrollment; success: true; }`\n\n**post** `/api/enrollments`\n\ncreate a new enrollment for a tenant.\n\n### Parameters\n\n- `effectiveDate: string`\n  the date the enrollment will begin, note enrollments cannot begin in the past\n\n- `plan: string`\n  the plan name/code\n\n- `propertyManagerId: number`\n\n- `tenantId: number`\n\n- `note?: string`\n  an optional note field, this can be used for easily appending metadata to enrollments\n\n- `status?: 'Premium Paying' | 'Issued, Not Paid'`\n  the enrollment status — defaults to 'Issued, Not Paid' if not provided\n\n### Returns\n\n- `{ data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }; success: true; }`\n\n  - `data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: 'effectiveDate',\n  plan: 'plan',\n  propertyManagerId: 0,\n  tenantId: 0,\n});\n\nconsole.log(enrollment);\n```",
     perLanguage: {
       csharp: {
         method: 'Enrollments.Create',
         example:
-          'EnrollmentCreateParams parameters = new()\n{\n    EffectiveDate = "effectiveDate",\n    Plan = "plan",\n    PropertyManagerID = 0,\n    Status = Status.PremiumPaying,\n    TenantID = 0,\n};\n\nvar enrollment = await client.Enrollments.Create(parameters);\n\nConsole.WriteLine(enrollment);',
+          'EnrollmentCreateParams parameters = new()\n{\n    EffectiveDate = "effectiveDate",\n    Plan = "plan",\n    PropertyManagerID = 0,\n    TenantID = 0,\n};\n\nvar enrollment = await client.Enrollments.Create(parameters);\n\nConsole.WriteLine(enrollment);',
       },
       go: {
         method: 'client.Enrollments.New',
         example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.New(context.TODO(), beagle.EnrollmentNewParams{\n\t\tEffectiveDate:     "effectiveDate",\n\t\tPlan:              "plan",\n\t\tPropertyManagerID: 0,\n\t\tStatus:            beagle.EnrollmentNewParamsStatusPremiumPaying,\n\t\tTenantID:          0,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.New(context.TODO(), beagle.EnrollmentNewParams{\n\t\tEffectiveDate:     "effectiveDate",\n\t\tPlan:              "plan",\n\t\tPropertyManagerID: 0,\n\t\tTenantID:          0,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
       },
       http: {
         example:
-          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "effectiveDate": "effectiveDate",\n          "plan": "plan",\n          "propertyManagerId": 0,\n          "status": "Premium Paying",\n          "tenantId": 0\n        }\'',
+          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "effectiveDate": "effectiveDate",\n          "plan": "plan",\n          "propertyManagerId": 0,\n          "tenantId": 0\n        }\'',
       },
       java: {
         method: 'enrollments().create',
         example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentCreateParams;\nimport com.beagle.api.models.enrollments.EnrollmentCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentCreateParams params = EnrollmentCreateParams.builder()\n            .effectiveDate("2025-11-10T19:50:20.638Z")\n            .plan("TLL_100K_CONTENTS_5K_ACV")\n            .propertyManagerId(123.0)\n            .status(EnrollmentCreateParams.Status.ISSUED_NOT_PAID)\n            .tenantId(123.0)\n            .build();\n        EnrollmentCreateResponse enrollment = client.enrollments().create(params);\n    }\n}',
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentCreateParams;\nimport com.beagle.api.models.enrollments.EnrollmentCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentCreateParams params = EnrollmentCreateParams.builder()\n            .effectiveDate("2025-11-10T19:50:20.638Z")\n            .plan("TLL_100K_CONTENTS_5K_ACV")\n            .propertyManagerId(123.0)\n            .tenantId(123.0)\n            .build();\n        EnrollmentCreateResponse enrollment = client.enrollments().create(params);\n    }\n}',
       },
       python: {
         method: 'enrollments.create',
         example:
-          'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nenrollment = client.enrollments.create(\n    effective_date="effectiveDate",\n    plan="plan",\n    property_manager_id=0,\n    status="Premium Paying",\n    tenant_id=0,\n)\nprint(enrollment.data)',
+          'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nenrollment = client.enrollments.create(\n    effective_date="effectiveDate",\n    plan="plan",\n    property_manager_id=0,\n    tenant_id=0,\n)\nprint(enrollment.data)',
       },
       ruby: {
         method: 'enrollments.create',
         example:
-          'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nenrollment = beagle.enrollments.create(\n  effective_date: "effectiveDate",\n  plan: "plan",\n  property_manager_id: 0,\n  status: :"Premium Paying",\n  tenant_id: 0\n)\n\nputs(enrollment)',
+          'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nenrollment = beagle.enrollments.create(\n  effective_date: "effectiveDate",\n  plan: "plan",\n  property_manager_id: 0,\n  tenant_id: 0\n)\n\nputs(enrollment)',
       },
       typescript: {
         method: 'client.enrollments.create',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: 'effectiveDate',\n  plan: 'plan',\n  propertyManagerId: 0,\n  status: 'Premium Paying',\n  tenantId: 0,\n});\n\nconsole.log(enrollment.data);",
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: 'effectiveDate',\n  plan: 'plan',\n  propertyManagerId: 0,\n  tenantId: 0,\n});\n\nconsole.log(enrollment.data);",
       },
     },
   },
