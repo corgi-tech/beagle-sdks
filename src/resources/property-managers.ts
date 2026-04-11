@@ -21,21 +21,21 @@ export class PropertyManagers extends APIResource {
    *   await client.propertyManagers.create({
    *     addresses: [
    *       {
-   *         city: 'city',
-   *         state: 'xx',
-   *         street1: 'street1',
-   *         zip: '60513',
-   *         kind: 'billing',
+   *         city: 'South Salt Lake',
+   *         state: 'UT',
+   *         street1: '123 Electric Ave.',
+   *         zip: '84115',
+   *         kind: 'place of business',
    *       },
    *     ],
    *     contacts: [
    *       {
-   *         email: 'dev@stainless.com',
-   *         name: { first: 'first', last: 'last' },
-   *         kind: 'agreements',
+   *         email: 'mr.milchick@example.com',
+   *         name: { first: 'Seth', last: 'Milchick' },
+   *         kind: 'reporting',
    *       },
    *     ],
-   *     name: 'name',
+   *     name: 'Lumon Apartments',
    *   });
    * ```
    */

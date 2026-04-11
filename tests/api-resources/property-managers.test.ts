@@ -13,21 +13,21 @@ describe('resource propertyManagers', () => {
     const responsePromise = client.propertyManagers.create({
       addresses: [
         {
-          city: 'city',
-          state: 'xx',
-          street1: 'street1',
-          zip: '60513',
-          kind: 'billing',
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Electric Ave.',
+          zip: '84115',
+          kind: 'place of business',
         },
       ],
       contacts: [
         {
-          email: 'dev@stainless.com',
-          name: { first: 'first', last: 'last' },
-          kind: 'agreements',
+          email: 'mr.milchick@example.com',
+          name: { first: 'Seth', last: 'Milchick' },
+          kind: 'reporting',
         },
       ],
-      name: 'name',
+      name: 'Lumon Apartments',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,24 +43,24 @@ describe('resource propertyManagers', () => {
     const response = await client.propertyManagers.create({
       addresses: [
         {
-          city: 'city',
-          state: 'xx',
-          street1: 'street1',
-          zip: '60513',
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Electric Ave.',
+          zip: '84115',
           street2: 'street2',
-          kind: 'billing',
+          kind: 'place of business',
         },
       ],
       contacts: [
         {
-          email: 'dev@stainless.com',
-          name: { first: 'first', last: 'last' },
-          phone: 'phone',
-          kind: 'agreements',
+          email: 'mr.milchick@example.com',
+          name: { first: 'Seth', last: 'Milchick' },
+          phone: '(123) 456-7890',
+          kind: 'reporting',
         },
       ],
-      name: 'name',
-      clickWrapAt: 946684800000,
+      name: 'Lumon Apartments',
+      clickWrapAt: 1773359774000,
     });
   });
 

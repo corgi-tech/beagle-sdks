@@ -12,16 +12,16 @@ describe('resource tenants', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.tenants.create({
       address: {
-        city: 'city',
-        state: 'xx',
-        street1: 'street1',
-        zip: '60513',
+        city: 'South Salt Lake',
+        state: 'UT',
+        street1: '123 Main St.',
+        zip: '84115',
       },
       contact: {
-        email: 'dev@stainless.com',
-        name: { first: 'first', last: 'last' },
+        email: 'mark.s@example.com',
+        name: { first: 'Mark', last: 'Scout' },
       },
-      propertyManagerId: 0,
+      propertyManagerId: 123,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -36,18 +36,18 @@ describe('resource tenants', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.tenants.create({
       address: {
-        city: 'city',
-        state: 'xx',
-        street1: 'street1',
-        zip: '60513',
-        street2: 'street2',
+        city: 'South Salt Lake',
+        state: 'UT',
+        street1: '123 Main St.',
+        zip: '84115',
+        street2: 'Unit 3',
       },
       contact: {
-        email: 'dev@stainless.com',
-        name: { first: 'first', last: 'last' },
-        phone: 'phone',
+        email: 'mark.s@example.com',
+        name: { first: 'Mark', last: 'Scout' },
+        phone: '(123) 456-7890',
       },
-      propertyManagerId: 0,
+      propertyManagerId: 123,
     });
   });
 
