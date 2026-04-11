@@ -19,16 +19,16 @@ export class Tenants extends APIResource {
    * ```ts
    * const tenant = await client.tenants.create({
    *   address: {
-   *     city: 'city',
-   *     state: 'xx',
-   *     street1: 'street1',
-   *     zip: '60513',
+   *     city: 'South Salt Lake',
+   *     state: 'UT',
+   *     street1: '123 Main St.',
+   *     zip: '84115',
    *   },
    *   contact: {
-   *     email: 'dev@stainless.com',
-   *     name: { first: 'first', last: 'last' },
+   *     email: 'mark.s@example.com',
+   *     name: { first: 'Mark', last: 'Scout' },
    *   },
-   *   propertyManagerId: 0,
+   *   propertyManagerId: 123,
    * });
    * ```
    */

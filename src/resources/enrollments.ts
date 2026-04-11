@@ -18,10 +18,10 @@ export class Enrollments extends APIResource {
    * @example
    * ```ts
    * const enrollment = await client.enrollments.create({
-   *   effectiveDate: 'effectiveDate',
-   *   plan: 'plan',
-   *   propertyManagerId: 0,
-   *   tenantId: 0,
+   *   effectiveDate: '2025-11-10T19:50:20.638Z',
+   *   plan: 'TLL_100K_CONTENTS_5K_ACV',
+   *   propertyManagerId: 123,
+   *   tenantId: 123,
    * });
    * ```
    */

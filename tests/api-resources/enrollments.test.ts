@@ -11,10 +11,10 @@ describe('resource enrollments', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.enrollments.create({
-      effectiveDate: 'effectiveDate',
-      plan: 'plan',
-      propertyManagerId: 0,
-      tenantId: 0,
+      effectiveDate: '2025-11-10T19:50:20.638Z',
+      plan: 'TLL_100K_CONTENTS_5K_ACV',
+      propertyManagerId: 123,
+      tenantId: 123,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,12 +28,12 @@ describe('resource enrollments', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.enrollments.create({
-      effectiveDate: 'effectiveDate',
-      plan: 'plan',
-      propertyManagerId: 0,
-      tenantId: 0,
+      effectiveDate: '2025-11-10T19:50:20.638Z',
+      plan: 'TLL_100K_CONTENTS_5K_ACV',
+      propertyManagerId: 123,
+      tenantId: 123,
       note: 'note',
-      status: 'Premium Paying',
+      status: 'Issued, Not Paid',
     });
   });
 
