@@ -155,6 +155,11 @@ export interface PropertyManager {
    * unix timestamp (ms) of clickwrap agreement signature
    */
   clickWrapAt?: number;
+
+  /**
+   * total number of units managed by this property manager
+   */
+  totalUnits?: number;
 }
 
 export namespace PropertyManager {
@@ -219,6 +224,11 @@ export interface PropertyManagerCreateParams {
    * unix timestamp (ms) of clickwrap agreement signature
    */
   clickWrapAt?: number;
+
+  /**
+   * total number of units managed by this property manager
+   */
+  totalUnits?: number;
 }
 
 export namespace PropertyManagerCreateParams {
@@ -251,6 +261,11 @@ export interface PropertyManagerUpdateParams {
    * name of the Property Management Company
    */
   name?: string;
+
+  /**
+   * total number of units managed by this property manager
+   */
+  totalUnits?: number;
 }
 
 export namespace PropertyManagerUpdateParams {

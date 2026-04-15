@@ -61,6 +61,7 @@ describe('resource propertyManagers', () => {
       ],
       name: 'Lumon Apartments',
       clickWrapAt: 1773359774000,
+      totalUnits: 0,
     });
   });
 
