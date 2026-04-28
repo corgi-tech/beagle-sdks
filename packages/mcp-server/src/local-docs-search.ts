@@ -63,38 +63,38 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.plans.list(): { data: plan[]; success: true; }`\n\n**get** `/api/plans`\n\nList all available insurance plans that tenants can be enrolled in.\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }[]; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }[]`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plans = await client.plans.list();\n\nconsole.log(plans);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Plans.List',
+      typescript: {
+        method: 'client.plans.list',
         example:
-          'PlanListParams parameters = new();\n\nvar plans = await client.Plans.List(parameters);\n\nConsole.WriteLine(plans);',
-      },
-      go: {
-        method: 'client.Plans.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplans, err := client.Plans.List(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plans.Data)\n}\n',
-      },
-      http: {
-        example: 'curl https://developer.beagleforpm.com/api/plans \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'plans().list',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.plans.PlanListParams;\nimport com.beagle.api.models.plans.PlanListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PlanListResponse plans = client.plans().list();\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst plans = await client.plans.list();\n\nconsole.log(plans.data);",
       },
       python: {
         method: 'plans.list',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nplans = client.plans.list()\nprint(plans.data)',
       },
+      java: {
+        method: 'plans().list',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.plans.PlanListParams;\nimport com.beagle.api.models.plans.PlanListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PlanListResponse plans = client.plans().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.Plans.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplans, err := client.Plans.List(context.TODO())\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plans.Data)\n}\n',
+      },
       ruby: {
         method: 'plans.list',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nplans = beagle.plans.list\n\nputs(plans)',
       },
-      typescript: {
-        method: 'client.plans.list',
+      csharp: {
+        method: 'Plans.List',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst plans = await client.plans.list();\n\nconsole.log(plans.data);",
+          'PlanListParams parameters = new();\n\nvar plans = await client.Plans.List(parameters);\n\nConsole.WriteLine(plans);',
+      },
+      http: {
+        example: 'curl https://developer.beagleforpm.com/api/plans \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -112,39 +112,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.plans.retrieve(code: string): { data: plan; success: true; }`\n\n**get** `/api/plans/{code}`\n\nretrieve a specific plans details by its code.\n\n### Parameters\n\n- `code: string`\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Plans.Retrieve',
+      typescript: {
+        method: 'client.plans.retrieve',
         example:
-          'PlanRetrieveParams parameters = new() { Code = "code" };\n\nvar plan = await client.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
-      },
-      go: {
-        method: 'client.Plans.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.Plans.Get(context.TODO(), "code")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/plans/$CODE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'plans().retrieve',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.plans.PlanRetrieveParams;\nimport com.beagle.api.models.plans.PlanRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PlanRetrieveResponse plan = client.plans().retrieve("code");\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan.data);",
       },
       python: {
         method: 'plans.retrieve',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.plans.retrieve(\n    "code",\n)\nprint(plan.data)',
       },
+      java: {
+        method: 'plans().retrieve',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.plans.PlanRetrieveParams;\nimport com.beagle.api.models.plans.PlanRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PlanRetrieveResponse plan = client.plans().retrieve("code");\n    }\n}',
+      },
+      go: {
+        method: 'client.Plans.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tplan, err := client.Plans.Get(context.TODO(), "code")\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", plan.Data)\n}\n',
+      },
       ruby: {
         method: 'plans.retrieve',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nplan = beagle.plans.retrieve("code")\n\nputs(plan)',
       },
-      typescript: {
-        method: 'client.plans.retrieve',
+      csharp: {
+        method: 'Plans.Retrieve',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan.data);",
+          'PlanRetrieveParams parameters = new() { Code = "code" };\n\nvar plan = await client.Plans.Retrieve(parameters);\n\nConsole.WriteLine(plan);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/plans/$CODE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -162,39 +162,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.propertyManagers.retrieve(id: number): { data: property_manager; success: true; }`\n\n**get** `/api/property-managers/{id}`\n\nget a property manager by id.\n\n### Parameters\n\n- `id: number`\n\n### Returns\n\n- `{ data: { id: number; addresses: address[]; contacts: contact[]; name: string; clickWrapAt?: number; totalUnits?: number; }; success: true; }`\n\n  - `data: { id: number; addresses: { city: string; state: string; street1: string; zip: string; street2?: string; }[]; contacts: { email: string; name: object; phone?: string; }[]; name: string; clickWrapAt?: number; totalUnits?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst propertyManager = await client.propertyManagers.retrieve(123);\n\nconsole.log(propertyManager);\n```",
     perLanguage: {
-      csharp: {
-        method: 'PropertyManagers.Retrieve',
+      typescript: {
+        method: 'client.propertyManagers.retrieve',
         example:
-          'PropertyManagerRetrieveParams parameters = new() { ID = 123 };\n\nvar propertyManager = await client.PropertyManagers.Retrieve(parameters);\n\nConsole.WriteLine(propertyManager);',
-      },
-      go: {
-        method: 'client.PropertyManagers.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'propertyManagers().retrieve',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerRetrieveParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerRetrieveResponse propertyManager = client.propertyManagers().retrieve(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.retrieve(123);\n\nconsole.log(propertyManager.data);",
       },
       python: {
         method: 'property_managers.retrieve',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nproperty_manager = client.property_managers.retrieve(\n    123,\n)\nprint(property_manager.data)',
       },
+      java: {
+        method: 'propertyManagers().retrieve',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerRetrieveParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerRetrieveResponse propertyManager = client.propertyManagers().retrieve(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.PropertyManagers.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
+      },
       ruby: {
         method: 'property_managers.retrieve',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nproperty_manager = beagle.property_managers.retrieve(123)\n\nputs(property_manager)',
       },
-      typescript: {
-        method: 'client.propertyManagers.retrieve',
+      csharp: {
+        method: 'PropertyManagers.Retrieve',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.retrieve(123);\n\nconsole.log(propertyManager.data);",
+          'PropertyManagerRetrieveParams parameters = new() { ID = 123 };\n\nvar propertyManager = await client.PropertyManagers.Retrieve(parameters);\n\nConsole.WriteLine(propertyManager);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -220,39 +220,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.propertyManagers.update(id: number, addresses?: { city: string; state: string; street1: string; zip: string; street2?: string; }[], clickWrapAt?: number, contacts?: { email: string; name: object; phone?: string; }[], name?: string, totalUnits?: number): { data: property_manager; success: true; }`\n\n**patch** `/api/property-managers/{id}`\n\nupdate an existing property manager by ID\n\n(Note that when updating **contacts** or **addresses** you need to send the whole array you want to replace them with)\n\n### Parameters\n\n- `id: number`\n\n- `addresses?: { city: string; state: string; street1: string; zip: string; street2?: string; }[]`\n  street addresses for each Property\n\n- `clickWrapAt?: number`\n  unix timestamp (ms) of clickwrap agreement signature\n\n- `contacts?: { email: string; name: { first: string; last: string; }; phone?: string; }[]`\n  contact information for each Property Manager\n\n- `name?: string`\n  name of the Property Management Company\n\n- `totalUnits?: number`\n  total number of units managed by this property manager\n\n### Returns\n\n- `{ data: { id: number; addresses: address[]; contacts: contact[]; name: string; clickWrapAt?: number; totalUnits?: number; }; success: true; }`\n\n  - `data: { id: number; addresses: { city: string; state: string; street1: string; zip: string; street2?: string; }[]; contacts: { email: string; name: object; phone?: string; }[]; name: string; clickWrapAt?: number; totalUnits?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst propertyManager = await client.propertyManagers.update(123);\n\nconsole.log(propertyManager);\n```",
     perLanguage: {
-      csharp: {
-        method: 'PropertyManagers.Update',
+      typescript: {
+        method: 'client.propertyManagers.update',
         example:
-          'PropertyManagerUpdateParams parameters = new() { ID = 123 };\n\nvar propertyManager = await client.PropertyManagers.Update(parameters);\n\nConsole.WriteLine(propertyManager);',
-      },
-      go: {
-        method: 'client.PropertyManagers.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.Update(\n\t\tcontext.TODO(),\n\t\t123,\n\t\tbeagle.PropertyManagerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
-      },
-      http: {
-        example:
-          "curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"x-api-key: $BEAGLE_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'propertyManagers().update',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerUpdateParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerUpdateResponse propertyManager = client.propertyManagers().update(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.update(123);\n\nconsole.log(propertyManager.data);",
       },
       python: {
         method: 'property_managers.update',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nproperty_manager = client.property_managers.update(\n    id=123,\n)\nprint(property_manager.data)',
       },
+      java: {
+        method: 'propertyManagers().update',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerUpdateParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerUpdateResponse propertyManager = client.propertyManagers().update(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.PropertyManagers.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.Update(\n\t\tcontext.TODO(),\n\t\t123,\n\t\tbeagle.PropertyManagerUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
+      },
       ruby: {
         method: 'property_managers.update',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nproperty_manager = beagle.property_managers.update(123)\n\nputs(property_manager)',
       },
-      typescript: {
-        method: 'client.propertyManagers.update',
+      csharp: {
+        method: 'PropertyManagers.Update',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.update(123);\n\nconsole.log(propertyManager.data);",
+          'PropertyManagerUpdateParams parameters = new() { ID = 123 };\n\nvar propertyManager = await client.PropertyManagers.Update(parameters);\n\nConsole.WriteLine(propertyManager);',
+      },
+      http: {
+        example:
+          "curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"x-api-key: $BEAGLE_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -268,39 +268,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.propertyManagers.delete(id: number): void`\n\n**delete** `/api/property-managers/{id}`\n\ndelete a property manager by ID.\n\n### Parameters\n\n- `id: number`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nawait client.propertyManagers.delete(123)\n```",
     perLanguage: {
-      csharp: {
-        method: 'PropertyManagers.Delete',
+      typescript: {
+        method: 'client.propertyManagers.delete',
         example:
-          'PropertyManagerDeleteParams parameters = new() { ID = 123 };\n\nawait client.PropertyManagers.Delete(parameters);',
-      },
-      go: {
-        method: 'client.PropertyManagers.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.PropertyManagers.Delete(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'propertyManagers().delete',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.propertyManagers().delete(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.propertyManagers.delete(123);",
       },
       python: {
         method: 'property_managers.delete',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nclient.property_managers.delete(\n    123,\n)',
       },
+      java: {
+        method: 'propertyManagers().delete',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.propertyManagers().delete(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.PropertyManagers.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.PropertyManagers.Delete(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
+      },
       ruby: {
         method: 'property_managers.delete',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nresult = beagle.property_managers.delete(123)\n\nputs(result)',
       },
-      typescript: {
-        method: 'client.propertyManagers.delete',
+      csharp: {
+        method: 'PropertyManagers.Delete',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.propertyManagers.delete(123);",
+          'PropertyManagerDeleteParams parameters = new() { ID = 123 };\n\nawait client.PropertyManagers.Delete(parameters);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/property-managers/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -317,39 +317,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.propertyManagers.list(page?: number, size?: number): { data: object; success: true; }`\n\n**get** `/api/property-managers`\n\nlist all property managers, note this endpoint is paginated.\n\n### Parameters\n\n- `page?: number`\n  Page number to fetch.\n\n- `size?: number`\n  Number of items per page.\n\n### Returns\n\n- `{ data: { items: object[]; pagination: object; }; success: true; }`\n\n  - `data: { items: { id: number; addresses: object[]; contacts: object[]; name: string; clickWrapAt?: number; totalUnits?: number; }[]; pagination: { page: number; pages: number; records: number; size: number; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst propertyManagers = await client.propertyManagers.list();\n\nconsole.log(propertyManagers);\n```",
     perLanguage: {
-      csharp: {
-        method: 'PropertyManagers.List',
+      typescript: {
+        method: 'client.propertyManagers.list',
         example:
-          'PropertyManagerListParams parameters = new();\n\nvar propertyManagers = await client.PropertyManagers.List(parameters);\n\nConsole.WriteLine(propertyManagers);',
-      },
-      go: {
-        method: 'client.PropertyManagers.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManagers, err := client.PropertyManagers.List(context.TODO(), beagle.PropertyManagerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManagers.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/property-managers \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'propertyManagers().list',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerListParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerListResponse propertyManagers = client.propertyManagers().list();\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManagers = await client.propertyManagers.list();\n\nconsole.log(propertyManagers.data);",
       },
       python: {
         method: 'property_managers.list',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nproperty_managers = client.property_managers.list()\nprint(property_managers.data)',
       },
+      java: {
+        method: 'propertyManagers().list',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerListParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerListResponse propertyManagers = client.propertyManagers().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.PropertyManagers.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManagers, err := client.PropertyManagers.List(context.TODO(), beagle.PropertyManagerListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManagers.Data)\n}\n',
+      },
       ruby: {
         method: 'property_managers.list',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nproperty_managers = beagle.property_managers.list\n\nputs(property_managers)',
       },
-      typescript: {
-        method: 'client.propertyManagers.list',
+      csharp: {
+        method: 'PropertyManagers.List',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManagers = await client.propertyManagers.list();\n\nconsole.log(propertyManagers.data);",
+          'PropertyManagerListParams parameters = new();\n\nvar propertyManagers = await client.PropertyManagers.List(parameters);\n\nConsole.WriteLine(propertyManagers);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/property-managers \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -373,39 +373,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.propertyManagers.create(addresses: { city: string; state: string; street1: string; zip: string; street2?: string; }[], contacts: { email: string; name: object; phone?: string; }[], name: string, clickWrapAt?: number, totalUnits?: number): { data: property_manager; success: true; }`\n\n**post** `/api/property-managers`\n\ncreate a new property manager.\n\n### Parameters\n\n- `addresses: { city: string; state: string; street1: string; zip: string; street2?: string; }[]`\n  street addresses for each Property\n\n- `contacts: { email: string; name: { first: string; last: string; }; phone?: string; }[]`\n  contact information for each Property Manager\n\n- `name: string`\n  name of the Property Management Company\n\n- `clickWrapAt?: number`\n  unix timestamp (ms) of clickwrap agreement signature\n\n- `totalUnits?: number`\n  total number of units managed by this property manager\n\n### Returns\n\n- `{ data: { id: number; addresses: address[]; contacts: contact[]; name: string; clickWrapAt?: number; totalUnits?: number; }; success: true; }`\n\n  - `data: { id: number; addresses: { city: string; state: string; street1: string; zip: string; street2?: string; }[]; contacts: { email: string; name: object; phone?: string; }[]; name: string; clickWrapAt?: number; totalUnits?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst propertyManager = await client.propertyManagers.create({\n  addresses: [{\n  city: 'South Salt Lake',\n  state: 'UT',\n  street1: '123 Electric Ave.',\n  zip: '84115',\n  kind: 'place of business',\n}],\n  contacts: [{\n  email: 'mr.milchick@example.com',\n  name: { first: 'Seth', last: 'Milchick' },\n  kind: 'reporting',\n}],\n  name: 'Lumon Apartments',\n});\n\nconsole.log(propertyManager);\n```",
     perLanguage: {
-      csharp: {
-        method: 'PropertyManagers.Create',
+      typescript: {
+        method: 'client.propertyManagers.create',
         example:
-          'PropertyManagerCreateParams parameters = new()\n{\n    Addresses =\n    [\n        new()\n        {\n            City = "South Salt Lake",\n            State = "UT",\n            Street1 = "123 Electric Ave.",\n            Zip = "84115",\n            Street2 = "street2",\n            Kind = Kind.PlaceOfBusiness,\n        },\n    ],\n    Contacts =\n    [\n        new()\n        {\n            Email = "mr.milchick@example.com",\n            Name = new()\n            {\n                First = "Seth",\n                Last = "Milchick",\n            },\n            Phone = "(123) 456-7890",\n            Kind = Kind.Reporting,\n        },\n    ],\n    Name = "Lumon Apartments",\n};\n\nvar propertyManager = await client.PropertyManagers.Create(parameters);\n\nConsole.WriteLine(propertyManager);',
-      },
-      go: {
-        method: 'client.PropertyManagers.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.New(context.TODO(), beagle.PropertyManagerNewParams{\n\t\tAddresses: []beagle.PropertyManagerNewParamsAddress{{\n\t\t\tAddressParam: beagle.AddressParam{\n\t\t\t\tCity:    "South Salt Lake",\n\t\t\t\tState:   "UT",\n\t\t\t\tStreet1: "123 Electric Ave.",\n\t\t\t\tZip:     "84115",\n\t\t\t},\n\t\t\tKind: "place of business",\n\t\t}},\n\t\tContacts: []beagle.PropertyManagerNewParamsContact{{\n\t\t\tContactParam: beagle.ContactParam{\n\t\t\t\tEmail: "mr.milchick@example.com",\n\t\t\t\tName: beagle.ContactNameParam{\n\t\t\t\t\tFirst: "Seth",\n\t\t\t\t\tLast:  "Milchick",\n\t\t\t\t},\n\t\t\t},\n\t\t\tKind: "reporting",\n\t\t}},\n\t\tName: "Lumon Apartments",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/property-managers \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "addresses": [\n            {\n              "city": "South Salt Lake",\n              "state": "UT",\n              "street1": "123 Electric Ave.",\n              "zip": "84115",\n              "kind": "place of business"\n            }\n          ],\n          "contacts": [\n            {\n              "email": "mr.milchick@example.com",\n              "name": {\n                "first": "Seth",\n                "last": "Milchick"\n              },\n              "phone": "(123) 456-7890",\n              "kind": "reporting"\n            }\n          ],\n          "name": "Lumon Apartments"\n        }\'',
-      },
-      java: {
-        method: 'propertyManagers().create',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerCreateParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerCreateResponse;\nimport com.beagle.api.models.tenants.Contact;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerCreateParams params = PropertyManagerCreateParams.builder()\n            .addAddress(PropertyManagerCreateParams.Address.builder()\n                .city("South Salt Lake")\n                .state("UT")\n                .street1("123 Electric Ave.")\n                .zip("84115")\n                .kind(PropertyManagerCreateParams.Address.Kind.PLACE_OF_BUSINESS)\n                .build())\n            .addContact(PropertyManagerCreateParams.Contact.builder()\n                .email("mr.milchick@example.com")\n                .name(Contact.Name.builder()\n                    .first("Seth")\n                    .last("Milchick")\n                    .build())\n                .kind(PropertyManagerCreateParams.Contact.Kind.REPORTING)\n                .build())\n            .name("Lumon Apartments")\n            .build();\n        PropertyManagerCreateResponse propertyManager = client.propertyManagers().create(params);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.create({\n  addresses: [\n    {\n      city: 'South Salt Lake',\n      state: 'UT',\n      street1: '123 Electric Ave.',\n      zip: '84115',\n      kind: 'place of business',\n    },\n  ],\n  contacts: [\n    {\n      email: 'mr.milchick@example.com',\n      name: { first: 'Seth', last: 'Milchick' },\n      kind: 'reporting',\n    },\n  ],\n  name: 'Lumon Apartments',\n});\n\nconsole.log(propertyManager.data);",
       },
       python: {
         method: 'property_managers.create',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nproperty_manager = client.property_managers.create(\n    addresses=[{\n        "city": "South Salt Lake",\n        "state": "UT",\n        "street1": "123 Electric Ave.",\n        "zip": "84115",\n        "kind": "place of business",\n    }],\n    contacts=[{\n        "email": "mr.milchick@example.com",\n        "name": {\n            "first": "Seth",\n            "last": "Milchick",\n        },\n        "kind": "reporting",\n    }],\n    name="Lumon Apartments",\n)\nprint(property_manager.data)',
       },
+      java: {
+        method: 'propertyManagers().create',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.propertymanagers.PropertyManagerCreateParams;\nimport com.beagle.api.models.propertymanagers.PropertyManagerCreateResponse;\nimport com.beagle.api.models.tenants.Contact;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        PropertyManagerCreateParams params = PropertyManagerCreateParams.builder()\n            .addAddress(PropertyManagerCreateParams.Address.builder()\n                .city("South Salt Lake")\n                .state("UT")\n                .street1("123 Electric Ave.")\n                .zip("84115")\n                .kind(PropertyManagerCreateParams.Address.Kind.PLACE_OF_BUSINESS)\n                .build())\n            .addContact(PropertyManagerCreateParams.Contact.builder()\n                .email("mr.milchick@example.com")\n                .name(Contact.Name.builder()\n                    .first("Seth")\n                    .last("Milchick")\n                    .build())\n                .kind(PropertyManagerCreateParams.Contact.Kind.REPORTING)\n                .build())\n            .name("Lumon Apartments")\n            .build();\n        PropertyManagerCreateResponse propertyManager = client.propertyManagers().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.PropertyManagers.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tpropertyManager, err := client.PropertyManagers.New(context.TODO(), beagle.PropertyManagerNewParams{\n\t\tAddresses: []beagle.PropertyManagerNewParamsAddress{{\n\t\t\tAddressParam: beagle.AddressParam{\n\t\t\t\tCity:    "South Salt Lake",\n\t\t\t\tState:   "UT",\n\t\t\t\tStreet1: "123 Electric Ave.",\n\t\t\t\tZip:     "84115",\n\t\t\t},\n\t\t\tKind: "place of business",\n\t\t}},\n\t\tContacts: []beagle.PropertyManagerNewParamsContact{{\n\t\t\tContactParam: beagle.ContactParam{\n\t\t\t\tEmail: "mr.milchick@example.com",\n\t\t\t\tName: beagle.ContactNameParam{\n\t\t\t\t\tFirst: "Seth",\n\t\t\t\t\tLast:  "Milchick",\n\t\t\t\t},\n\t\t\t},\n\t\t\tKind: "reporting",\n\t\t}},\n\t\tName: "Lumon Apartments",\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", propertyManager.Data)\n}\n',
+      },
       ruby: {
         method: 'property_managers.create',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nproperty_manager = beagle.property_managers.create(\n  addresses: [\n    {city: "South Salt Lake", state: "UT", street1: "123 Electric Ave.", zip: "84115", kind: :"place of business"}\n  ],\n  contacts: [{email: "mr.milchick@example.com", name: {first: "Seth", last: "Milchick"}, kind: :reporting}],\n  name: "Lumon Apartments"\n)\n\nputs(property_manager)',
       },
-      typescript: {
-        method: 'client.propertyManagers.create',
+      csharp: {
+        method: 'PropertyManagers.Create',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst propertyManager = await client.propertyManagers.create({\n  addresses: [\n    {\n      city: 'South Salt Lake',\n      state: 'UT',\n      street1: '123 Electric Ave.',\n      zip: '84115',\n      kind: 'place of business',\n    },\n  ],\n  contacts: [\n    {\n      email: 'mr.milchick@example.com',\n      name: { first: 'Seth', last: 'Milchick' },\n      kind: 'reporting',\n    },\n  ],\n  name: 'Lumon Apartments',\n});\n\nconsole.log(propertyManager.data);",
+          'PropertyManagerCreateParams parameters = new()\n{\n    Addresses =\n    [\n        new()\n        {\n            City = "South Salt Lake",\n            State = "UT",\n            Street1 = "123 Electric Ave.",\n            Zip = "84115",\n            Street2 = "street2",\n            Kind = Kind.PlaceOfBusiness,\n        },\n    ],\n    Contacts =\n    [\n        new()\n        {\n            Email = "mr.milchick@example.com",\n            Name = new()\n            {\n                First = "Seth",\n                Last = "Milchick",\n            },\n            Phone = "(123) 456-7890",\n            Kind = Kind.Reporting,\n        },\n    ],\n    Name = "Lumon Apartments",\n};\n\nvar propertyManager = await client.PropertyManagers.Create(parameters);\n\nConsole.WriteLine(propertyManager);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/property-managers \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "addresses": [\n            {\n              "city": "South Salt Lake",\n              "state": "UT",\n              "street1": "123 Electric Ave.",\n              "zip": "84115",\n              "kind": "place of business"\n            }\n          ],\n          "contacts": [\n            {\n              "email": "mr.milchick@example.com",\n              "name": {\n                "first": "Seth",\n                "last": "Milchick"\n              },\n              "phone": "(123) 456-7890",\n              "kind": "reporting"\n            }\n          ],\n          "name": "Lumon Apartments"\n        }\'',
       },
     },
   },
@@ -422,39 +422,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.tenants.retrieve(id: number): { data: tenant; success: true; }`\n\n**get** `/api/tenants/{id}`\n\nretrieve a single tenant by their id.\n\n### Parameters\n\n- `id: number`\n\n### Returns\n\n- `{ data: { id: number; address: address; contact: contact; }; success: true; }`\n\n  - `data: { id: number; address: { city: string; state: string; street1: string; zip: string; street2?: string; }; contact: { email: string; name: object; phone?: string; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst tenant = await client.tenants.retrieve(123);\n\nconsole.log(tenant);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Tenants.Retrieve',
+      typescript: {
+        method: 'client.tenants.retrieve',
         example:
-          'TenantRetrieveParams parameters = new() { ID = 123 };\n\nvar tenant = await client.Tenants.Retrieve(parameters);\n\nConsole.WriteLine(tenant);',
-      },
-      go: {
-        method: 'client.Tenants.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'tenants().retrieve',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantRetrieveParams;\nimport com.beagle.api.models.tenants.TenantRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantRetrieveResponse tenant = client.tenants().retrieve(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.retrieve(123);\n\nconsole.log(tenant.data);",
       },
       python: {
         method: 'tenants.retrieve',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\ntenant = client.tenants.retrieve(\n    123,\n)\nprint(tenant.data)',
       },
+      java: {
+        method: 'tenants().retrieve',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantRetrieveParams;\nimport com.beagle.api.models.tenants.TenantRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantRetrieveResponse tenant = client.tenants().retrieve(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Tenants.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
+      },
       ruby: {
         method: 'tenants.retrieve',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\ntenant = beagle.tenants.retrieve(123)\n\nputs(tenant)',
       },
-      typescript: {
-        method: 'client.tenants.retrieve',
+      csharp: {
+        method: 'Tenants.Retrieve',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.retrieve(123);\n\nconsole.log(tenant.data);",
+          'TenantRetrieveParams parameters = new() { ID = 123 };\n\nvar tenant = await client.Tenants.Retrieve(parameters);\n\nConsole.WriteLine(tenant);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -475,39 +475,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## update\n\n`client.tenants.update(id: number, address?: { city: string; state: string; street1: string; zip: string; street2?: string; }, contact?: { email: string; name: object; phone?: string; }): { data: tenant; success: true; }`\n\n**patch** `/api/tenants/{id}`\n\nupdate an existing tenant by their id.\n\n### Parameters\n\n- `id: number`\n\n- `address?: { city: string; state: string; street1: string; zip: string; street2?: string; }`\n  - `city: string`\n  - `state: string`\n    two letter state code, ie CA\n  - `street1: string`\n  - `zip: string`\n    5 digit US zip code, ie 94104\n  - `street2?: string`\n\n- `contact?: { email: string; name: { first: string; last: string; }; phone?: string; }`\n  - `email: string`\n  - `name: { first: string; last: string; }`\n  - `phone?: string`\n\n### Returns\n\n- `{ data: { id: number; address: address; contact: contact; }; success: true; }`\n\n  - `data: { id: number; address: { city: string; state: string; street1: string; zip: string; street2?: string; }; contact: { email: string; name: object; phone?: string; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst tenant = await client.tenants.update(123);\n\nconsole.log(tenant);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Tenants.Update',
+      typescript: {
+        method: 'client.tenants.update',
         example:
-          'TenantUpdateParams parameters = new() { ID = 123 };\n\nvar tenant = await client.Tenants.Update(parameters);\n\nConsole.WriteLine(tenant);',
-      },
-      go: {
-        method: 'client.Tenants.Update',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.Update(\n\t\tcontext.TODO(),\n\t\t123,\n\t\tbeagle.TenantUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
-      },
-      http: {
-        example:
-          "curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"x-api-key: $BEAGLE_API_KEY\" \\\n    -d '{}'",
-      },
-      java: {
-        method: 'tenants().update',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantUpdateParams;\nimport com.beagle.api.models.tenants.TenantUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantUpdateResponse tenant = client.tenants().update(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.update(123);\n\nconsole.log(tenant.data);",
       },
       python: {
         method: 'tenants.update',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\ntenant = client.tenants.update(\n    id=123,\n)\nprint(tenant.data)',
       },
+      java: {
+        method: 'tenants().update',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantUpdateParams;\nimport com.beagle.api.models.tenants.TenantUpdateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantUpdateResponse tenant = client.tenants().update(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Tenants.Update',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.Update(\n\t\tcontext.TODO(),\n\t\t123,\n\t\tbeagle.TenantUpdateParams{},\n\t)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
+      },
       ruby: {
         method: 'tenants.update',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\ntenant = beagle.tenants.update(123)\n\nputs(tenant)',
       },
-      typescript: {
-        method: 'client.tenants.update',
+      csharp: {
+        method: 'Tenants.Update',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.update(123);\n\nconsole.log(tenant.data);",
+          'TenantUpdateParams parameters = new() { ID = 123 };\n\nvar tenant = await client.Tenants.Update(parameters);\n\nConsole.WriteLine(tenant);',
+      },
+      http: {
+        example:
+          "curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"x-api-key: $BEAGLE_API_KEY\" \\\n    -d '{}'",
       },
     },
   },
@@ -523,39 +523,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## delete\n\n`client.tenants.delete(id: number): void`\n\n**delete** `/api/tenants/{id}`\n\ndelete an existing tenant by their id.\n\n### Parameters\n\n- `id: number`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nawait client.tenants.delete(123)\n```",
     perLanguage: {
-      csharp: {
-        method: 'Tenants.Delete',
+      typescript: {
+        method: 'client.tenants.delete',
         example:
-          'TenantDeleteParams parameters = new() { ID = 123 };\n\nawait client.Tenants.Delete(parameters);',
-      },
-      go: {
-        method: 'client.Tenants.Delete',
-        example:
-          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.Tenants.Delete(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'tenants().delete',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.tenants().delete(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.tenants.delete(123);",
       },
       python: {
         method: 'tenants.delete',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nclient.tenants.delete(\n    123,\n)',
       },
+      java: {
+        method: 'tenants().delete',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantDeleteParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.tenants().delete(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Tenants.Delete',
+        example:
+          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.Tenants.Delete(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
+      },
       ruby: {
         method: 'tenants.delete',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nresult = beagle.tenants.delete(123)\n\nputs(result)',
       },
-      typescript: {
-        method: 'client.tenants.delete',
+      csharp: {
+        method: 'Tenants.Delete',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.tenants.delete(123);",
+          'TenantDeleteParams parameters = new() { ID = 123 };\n\nawait client.Tenants.Delete(parameters);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/tenants/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -573,38 +573,38 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.tenants.list(page?: number, propertyManagerId?: number, size?: number): { data: object; success: true; }`\n\n**get** `/api/tenants`\n\nlist all tenants, this endpoint is paginated and allows for queries by individual property manager.\n\n### Parameters\n\n- `page?: number`\n  Page number to fetch.\n\n- `propertyManagerId?: number`\n\n- `size?: number`\n  Number of items per page.\n\n### Returns\n\n- `{ data: { items: object[]; pagination: object; }; success: true; }`\n\n  - `data: { items: { id: number; address: object; contact: object; }[]; pagination: { page: number; pages: number; records: number; size: number; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst tenants = await client.tenants.list();\n\nconsole.log(tenants);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Tenants.List',
+      typescript: {
+        method: 'client.tenants.list',
         example:
-          'TenantListParams parameters = new();\n\nvar tenants = await client.Tenants.List(parameters);\n\nConsole.WriteLine(tenants);',
-      },
-      go: {
-        method: 'client.Tenants.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenants, err := client.Tenants.List(context.TODO(), beagle.TenantListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenants.Data)\n}\n',
-      },
-      http: {
-        example: 'curl https://developer.beagleforpm.com/api/tenants \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'tenants().list',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantListParams;\nimport com.beagle.api.models.tenants.TenantListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantListResponse tenants = client.tenants().list();\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenants = await client.tenants.list();\n\nconsole.log(tenants.data);",
       },
       python: {
         method: 'tenants.list',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\ntenants = client.tenants.list()\nprint(tenants.data)',
       },
+      java: {
+        method: 'tenants().list',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.TenantListParams;\nimport com.beagle.api.models.tenants.TenantListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantListResponse tenants = client.tenants().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.Tenants.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenants, err := client.Tenants.List(context.TODO(), beagle.TenantListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenants.Data)\n}\n',
+      },
       ruby: {
         method: 'tenants.list',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\ntenants = beagle.tenants.list\n\nputs(tenants)',
       },
-      typescript: {
-        method: 'client.tenants.list',
+      csharp: {
+        method: 'Tenants.List',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenants = await client.tenants.list();\n\nconsole.log(tenants.data);",
+          'TenantListParams parameters = new();\n\nvar tenants = await client.Tenants.List(parameters);\n\nConsole.WriteLine(tenants);',
+      },
+      http: {
+        example: 'curl https://developer.beagleforpm.com/api/tenants \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -625,39 +625,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.tenants.create(address: { city: string; state: string; street1: string; zip: string; street2?: string; }, contact: { email: string; name: object; phone?: string; }, propertyManagerId: number): { data: tenant; success: true; }`\n\n**post** `/api/tenants`\n\ncreate a new tenant.\n\n### Parameters\n\n- `address: { city: string; state: string; street1: string; zip: string; street2?: string; }`\n  - `city: string`\n  - `state: string`\n    two letter state code, ie CA\n  - `street1: string`\n  - `zip: string`\n    5 digit US zip code, ie 94104\n  - `street2?: string`\n\n- `contact: { email: string; name: { first: string; last: string; }; phone?: string; }`\n  - `email: string`\n  - `name: { first: string; last: string; }`\n  - `phone?: string`\n\n- `propertyManagerId: number`\n\n### Returns\n\n- `{ data: { id: number; address: address; contact: contact; }; success: true; }`\n\n  - `data: { id: number; address: { city: string; state: string; street1: string; zip: string; street2?: string; }; contact: { email: string; name: object; phone?: string; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst tenant = await client.tenants.create({\n  address: {\n  city: 'South Salt Lake',\n  state: 'UT',\n  street1: '123 Main St.',\n  zip: '84115',\n},\n  contact: {\n  email: 'mark.s@example.com',\n  name: { first: 'Mark', last: 'Scout' },\n},\n  propertyManagerId: 123,\n});\n\nconsole.log(tenant);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Tenants.Create',
+      typescript: {
+        method: 'client.tenants.create',
         example:
-          'TenantCreateParams parameters = new()\n{\n    Address = new()\n    {\n        City = "South Salt Lake",\n        State = "UT",\n        Street1 = "123 Main St.",\n        Zip = "84115",\n        Street2 = "Unit 3",\n    },\n    Contact = new()\n    {\n        Email = "mark.s@example.com",\n        Name = new()\n        {\n            First = "Mark",\n            Last = "Scout",\n        },\n        Phone = "(123) 456-7890",\n    },\n    PropertyManagerID = 123,\n};\n\nvar tenant = await client.Tenants.Create(parameters);\n\nConsole.WriteLine(tenant);',
-      },
-      go: {
-        method: 'client.Tenants.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.New(context.TODO(), beagle.TenantNewParams{\n\t\tAddress: beagle.AddressParam{\n\t\t\tCity:    "South Salt Lake",\n\t\t\tState:   "UT",\n\t\t\tStreet1: "123 Main St.",\n\t\t\tZip:     "84115",\n\t\t},\n\t\tContact: beagle.ContactParam{\n\t\t\tEmail: "mark.s@example.com",\n\t\t\tName: beagle.ContactNameParam{\n\t\t\t\tFirst: "Mark",\n\t\t\t\tLast:  "Scout",\n\t\t\t},\n\t\t},\n\t\tPropertyManagerID: 123,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/tenants \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "address": {\n            "city": "South Salt Lake",\n            "state": "UT",\n            "street1": "123 Main St.",\n            "zip": "84115",\n            "street2": "Unit 3"\n          },\n          "contact": {\n            "email": "mark.s@example.com",\n            "name": {\n              "first": "Mark",\n              "last": "Scout"\n            },\n            "phone": "(123) 456-7890"\n          },\n          "propertyManagerId": 123\n        }\'',
-      },
-      java: {
-        method: 'tenants().create',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.Address;\nimport com.beagle.api.models.tenants.Contact;\nimport com.beagle.api.models.tenants.TenantCreateParams;\nimport com.beagle.api.models.tenants.TenantCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantCreateParams params = TenantCreateParams.builder()\n            .address(Address.builder()\n                .city("South Salt Lake")\n                .state("UT")\n                .street1("123 Main St.")\n                .zip("84115")\n                .build())\n            .contact(Contact.builder()\n                .email("mark.s@example.com")\n                .name(Contact.Name.builder()\n                    .first("Mark")\n                    .last("Scout")\n                    .build())\n                .build())\n            .propertyManagerId(123.0)\n            .build();\n        TenantCreateResponse tenant = client.tenants().create(params);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.create({\n  address: {\n    city: 'South Salt Lake',\n    state: 'UT',\n    street1: '123 Main St.',\n    zip: '84115',\n  },\n  contact: {\n    email: 'mark.s@example.com',\n    name: { first: 'Mark', last: 'Scout' },\n  },\n  propertyManagerId: 123,\n});\n\nconsole.log(tenant.data);",
       },
       python: {
         method: 'tenants.create',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\ntenant = client.tenants.create(\n    address={\n        "city": "South Salt Lake",\n        "state": "UT",\n        "street1": "123 Main St.",\n        "zip": "84115",\n    },\n    contact={\n        "email": "mark.s@example.com",\n        "name": {\n            "first": "Mark",\n            "last": "Scout",\n        },\n    },\n    property_manager_id=123,\n)\nprint(tenant.data)',
       },
+      java: {
+        method: 'tenants().create',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.tenants.Address;\nimport com.beagle.api.models.tenants.Contact;\nimport com.beagle.api.models.tenants.TenantCreateParams;\nimport com.beagle.api.models.tenants.TenantCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        TenantCreateParams params = TenantCreateParams.builder()\n            .address(Address.builder()\n                .city("South Salt Lake")\n                .state("UT")\n                .street1("123 Main St.")\n                .zip("84115")\n                .build())\n            .contact(Contact.builder()\n                .email("mark.s@example.com")\n                .name(Contact.Name.builder()\n                    .first("Mark")\n                    .last("Scout")\n                    .build())\n                .build())\n            .propertyManagerId(123.0)\n            .build();\n        TenantCreateResponse tenant = client.tenants().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.Tenants.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\ttenant, err := client.Tenants.New(context.TODO(), beagle.TenantNewParams{\n\t\tAddress: beagle.AddressParam{\n\t\t\tCity:    "South Salt Lake",\n\t\t\tState:   "UT",\n\t\t\tStreet1: "123 Main St.",\n\t\t\tZip:     "84115",\n\t\t},\n\t\tContact: beagle.ContactParam{\n\t\t\tEmail: "mark.s@example.com",\n\t\t\tName: beagle.ContactNameParam{\n\t\t\t\tFirst: "Mark",\n\t\t\t\tLast:  "Scout",\n\t\t\t},\n\t\t},\n\t\tPropertyManagerID: 123,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", tenant.Data)\n}\n',
+      },
       ruby: {
         method: 'tenants.create',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\ntenant = beagle.tenants.create(\n  address: {city: "South Salt Lake", state: "UT", street1: "123 Main St.", zip: "84115"},\n  contact: {email: "mark.s@example.com", name: {first: "Mark", last: "Scout"}},\n  property_manager_id: 123\n)\n\nputs(tenant)',
       },
-      typescript: {
-        method: 'client.tenants.create',
+      csharp: {
+        method: 'Tenants.Create',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst tenant = await client.tenants.create({\n  address: {\n    city: 'South Salt Lake',\n    state: 'UT',\n    street1: '123 Main St.',\n    zip: '84115',\n  },\n  contact: {\n    email: 'mark.s@example.com',\n    name: { first: 'Mark', last: 'Scout' },\n  },\n  propertyManagerId: 123,\n});\n\nconsole.log(tenant.data);",
+          'TenantCreateParams parameters = new()\n{\n    Address = new()\n    {\n        City = "South Salt Lake",\n        State = "UT",\n        Street1 = "123 Main St.",\n        Zip = "84115",\n        Street2 = "Unit 3",\n    },\n    Contact = new()\n    {\n        Email = "mark.s@example.com",\n        Name = new()\n        {\n            First = "Mark",\n            Last = "Scout",\n        },\n        Phone = "(123) 456-7890",\n    },\n    PropertyManagerID = 123,\n};\n\nvar tenant = await client.Tenants.Create(parameters);\n\nConsole.WriteLine(tenant);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/tenants \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "address": {\n            "city": "South Salt Lake",\n            "state": "UT",\n            "street1": "123 Main St.",\n            "zip": "84115",\n            "street2": "Unit 3"\n          },\n          "contact": {\n            "email": "mark.s@example.com",\n            "name": {\n              "first": "Mark",\n              "last": "Scout"\n            },\n            "phone": "(123) 456-7890"\n          },\n          "propertyManagerId": 123\n        }\'',
       },
     },
   },
@@ -675,39 +675,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve\n\n`client.enrollments.retrieve(id: number): { data: enrollment; success: true; }`\n\n**get** `/api/enrollments/{id}`\n\nget a specific enrollment by its id.\n\n### Parameters\n\n- `id: number`\n\n### Returns\n\n- `{ data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }; success: true; }`\n\n  - `data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst enrollment = await client.enrollments.retrieve(123);\n\nconsole.log(enrollment);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Enrollments.Retrieve',
+      typescript: {
+        method: 'client.enrollments.retrieve',
         example:
-          'EnrollmentRetrieveParams parameters = new() { ID = 123 };\n\nvar enrollment = await client.Enrollments.Retrieve(parameters);\n\nConsole.WriteLine(enrollment);',
-      },
-      go: {
-        method: 'client.Enrollments.Get',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/enrollments/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'enrollments().retrieve',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveParams;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentRetrieveResponse enrollment = client.enrollments().retrieve(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.retrieve(123);\n\nconsole.log(enrollment.data);",
       },
       python: {
         method: 'enrollments.retrieve',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nenrollment = client.enrollments.retrieve(\n    123,\n)\nprint(enrollment.data)',
       },
+      java: {
+        method: 'enrollments().retrieve',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveParams;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentRetrieveResponse enrollment = client.enrollments().retrieve(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Enrollments.Get',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.Get(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
+      },
       ruby: {
         method: 'enrollments.retrieve',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nenrollment = beagle.enrollments.retrieve(123)\n\nputs(enrollment)',
       },
-      typescript: {
-        method: 'client.enrollments.retrieve',
+      csharp: {
+        method: 'Enrollments.Retrieve',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.retrieve(123);\n\nconsole.log(enrollment.data);",
+          'EnrollmentRetrieveParams parameters = new() { ID = 123 };\n\nvar enrollment = await client.Enrollments.Retrieve(parameters);\n\nConsole.WriteLine(enrollment);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/enrollments/$ID \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -724,39 +724,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## lapse\n\n`client.enrollments.lapse(id: number): void`\n\n**delete** `/api/enrollments/{id}`\n\nlapses a specific enrollment for a tenant, note that if a tenant has multiple enrollments (e.g., SDR and TLL), each must be lapsed individually\n\n### Parameters\n\n- `id: number`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nawait client.enrollments.lapse(123)\n```",
     perLanguage: {
-      csharp: {
-        method: 'Enrollments.Lapse',
+      typescript: {
+        method: 'client.enrollments.lapse',
         example:
-          'EnrollmentLapseParams parameters = new() { ID = 123 };\n\nawait client.Enrollments.Lapse(parameters);',
-      },
-      go: {
-        method: 'client.Enrollments.Lapse',
-        example:
-          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.Enrollments.Lapse(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/enrollments/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'enrollments().lapse',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentLapseParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.enrollments().lapse(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.enrollments.lapse(123);",
       },
       python: {
         method: 'enrollments.lapse',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nclient.enrollments.lapse(\n    123,\n)',
       },
+      java: {
+        method: 'enrollments().lapse',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentLapseParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        client.enrollments().lapse(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Enrollments.Lapse',
+        example:
+          'package main\n\nimport (\n\t"context"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\terr := client.Enrollments.Lapse(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n}\n',
+      },
       ruby: {
         method: 'enrollments.lapse',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nresult = beagle.enrollments.lapse(123)\n\nputs(result)',
       },
-      typescript: {
-        method: 'client.enrollments.lapse',
+      csharp: {
+        method: 'Enrollments.Lapse',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.enrollments.lapse(123);",
+          'EnrollmentLapseParams parameters = new() { ID = 123 };\n\nawait client.Enrollments.Lapse(parameters);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/enrollments/$ID \\\n    -X DELETE \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -774,39 +774,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## list\n\n`client.enrollments.list(page?: number, propertyManagerId?: number, size?: number): { data: object; success: true; }`\n\n**get** `/api/enrollments`\n\nlist all enrollments, this endpoint is paginated and allows for queries by individual property manager.\n\n### Parameters\n\n- `page?: number`\n  Page number to fetch.\n\n- `propertyManagerId?: number`\n\n- `size?: number`\n  Number of items per page.\n\n### Returns\n\n- `{ data: { items: object[]; pagination: object; }; success: true; }`\n\n  - `data: { items: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }[]; pagination: { page: number; pages: number; records: number; size: number; }; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst enrollments = await client.enrollments.list();\n\nconsole.log(enrollments);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Enrollments.List',
+      typescript: {
+        method: 'client.enrollments.list',
         example:
-          'EnrollmentListParams parameters = new();\n\nvar enrollments = await client.Enrollments.List(parameters);\n\nConsole.WriteLine(enrollments);',
-      },
-      go: {
-        method: 'client.Enrollments.List',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollments, err := client.Enrollments.List(context.TODO(), beagle.EnrollmentListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollments.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'enrollments().list',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentListParams;\nimport com.beagle.api.models.enrollments.EnrollmentListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentListResponse enrollments = client.enrollments().list();\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollments = await client.enrollments.list();\n\nconsole.log(enrollments.data);",
       },
       python: {
         method: 'enrollments.list',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nenrollments = client.enrollments.list()\nprint(enrollments.data)',
       },
+      java: {
+        method: 'enrollments().list',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentListParams;\nimport com.beagle.api.models.enrollments.EnrollmentListResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentListResponse enrollments = client.enrollments().list();\n    }\n}',
+      },
+      go: {
+        method: 'client.Enrollments.List',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollments, err := client.Enrollments.List(context.TODO(), beagle.EnrollmentListParams{})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollments.Data)\n}\n',
+      },
       ruby: {
         method: 'enrollments.list',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nenrollments = beagle.enrollments.list\n\nputs(enrollments)',
       },
-      typescript: {
-        method: 'client.enrollments.list',
+      csharp: {
+        method: 'Enrollments.List',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollments = await client.enrollments.list();\n\nconsole.log(enrollments.data);",
+          'EnrollmentListParams parameters = new();\n\nvar enrollments = await client.Enrollments.List(parameters);\n\nConsole.WriteLine(enrollments);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -831,39 +831,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## create\n\n`client.enrollments.create(effectiveDate: string, plan: string, propertyManagerId: number, tenantId: number, note?: string, status?: 'Premium Paying' | 'Issued, Not Paid'): { data: enrollment; success: true; }`\n\n**post** `/api/enrollments`\n\ncreate a new enrollment for a tenant.\n\n### Parameters\n\n- `effectiveDate: string`\n  the date the enrollment will begin, note enrollments cannot begin in the past\n\n- `plan: string`\n  the plan name/code\n\n- `propertyManagerId: number`\n\n- `tenantId: number`\n\n- `note?: string`\n  an optional note field, this can be used for easily appending metadata to enrollments\n\n- `status?: 'Premium Paying' | 'Issued, Not Paid'`\n  the enrollment status — defaults to 'Issued, Not Paid' if not provided\n\n### Returns\n\n- `{ data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }; success: true; }`\n\n  - `data: { id: number; effectiveDate: string; plan: string; propertyManagerId: number; status: string; tenantId: number; note?: string; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: '2025-11-10T19:50:20.638Z',\n  plan: 'TLL_100K_CONTENTS_5K_ACV',\n  propertyManagerId: 123,\n  tenantId: 123,\n});\n\nconsole.log(enrollment);\n```",
     perLanguage: {
-      csharp: {
-        method: 'Enrollments.Create',
+      typescript: {
+        method: 'client.enrollments.create',
         example:
-          'EnrollmentCreateParams parameters = new()\n{\n    EffectiveDate = "2025-11-10T19:50:20.638Z",\n    Plan = "TLL_100K_CONTENTS_5K_ACV",\n    PropertyManagerID = 123,\n    TenantID = 123,\n};\n\nvar enrollment = await client.Enrollments.Create(parameters);\n\nConsole.WriteLine(enrollment);',
-      },
-      go: {
-        method: 'client.Enrollments.New',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.New(context.TODO(), beagle.EnrollmentNewParams{\n\t\tEffectiveDate:     "2025-11-10T19:50:20.638Z",\n\t\tPlan:              "TLL_100K_CONTENTS_5K_ACV",\n\t\tPropertyManagerID: 123,\n\t\tTenantID:          123,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "effectiveDate": "2025-11-10T19:50:20.638Z",\n          "plan": "TLL_100K_CONTENTS_5K_ACV",\n          "propertyManagerId": 123,\n          "tenantId": 123\n        }\'',
-      },
-      java: {
-        method: 'enrollments().create',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentCreateParams;\nimport com.beagle.api.models.enrollments.EnrollmentCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentCreateParams params = EnrollmentCreateParams.builder()\n            .effectiveDate("2025-11-10T19:50:20.638Z")\n            .plan("TLL_100K_CONTENTS_5K_ACV")\n            .propertyManagerId(123.0)\n            .tenantId(123.0)\n            .build();\n        EnrollmentCreateResponse enrollment = client.enrollments().create(params);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: '2025-11-10T19:50:20.638Z',\n  plan: 'TLL_100K_CONTENTS_5K_ACV',\n  propertyManagerId: 123,\n  tenantId: 123,\n});\n\nconsole.log(enrollment.data);",
       },
       python: {
         method: 'enrollments.create',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nenrollment = client.enrollments.create(\n    effective_date="2025-11-10T19:50:20.638Z",\n    plan="TLL_100K_CONTENTS_5K_ACV",\n    property_manager_id=123,\n    tenant_id=123,\n)\nprint(enrollment.data)',
       },
+      java: {
+        method: 'enrollments().create',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.enrollments.EnrollmentCreateParams;\nimport com.beagle.api.models.enrollments.EnrollmentCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        EnrollmentCreateParams params = EnrollmentCreateParams.builder()\n            .effectiveDate("2025-11-10T19:50:20.638Z")\n            .plan("TLL_100K_CONTENTS_5K_ACV")\n            .propertyManagerId(123.0)\n            .tenantId(123.0)\n            .build();\n        EnrollmentCreateResponse enrollment = client.enrollments().create(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.Enrollments.New',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tenrollment, err := client.Enrollments.New(context.TODO(), beagle.EnrollmentNewParams{\n\t\tEffectiveDate:     "2025-11-10T19:50:20.638Z",\n\t\tPlan:              "TLL_100K_CONTENTS_5K_ACV",\n\t\tPropertyManagerID: 123,\n\t\tTenantID:          123,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", enrollment.Data)\n}\n',
+      },
       ruby: {
         method: 'enrollments.create',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nenrollment = beagle.enrollments.create(\n  effective_date: "2025-11-10T19:50:20.638Z",\n  plan: "TLL_100K_CONTENTS_5K_ACV",\n  property_manager_id: 123,\n  tenant_id: 123\n)\n\nputs(enrollment)',
       },
-      typescript: {
-        method: 'client.enrollments.create',
+      csharp: {
+        method: 'Enrollments.Create',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst enrollment = await client.enrollments.create({\n  effectiveDate: '2025-11-10T19:50:20.638Z',\n  plan: 'TLL_100K_CONTENTS_5K_ACV',\n  propertyManagerId: 123,\n  tenantId: 123,\n});\n\nconsole.log(enrollment.data);",
+          'EnrollmentCreateParams parameters = new()\n{\n    EffectiveDate = "2025-11-10T19:50:20.638Z",\n    Plan = "TLL_100K_CONTENTS_5K_ACV",\n    PropertyManagerID = 123,\n    TenantID = 123,\n};\n\nvar enrollment = await client.Enrollments.Create(parameters);\n\nConsole.WriteLine(enrollment);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/enrollments \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "effectiveDate": "2025-11-10T19:50:20.638Z",\n          "plan": "TLL_100K_CONTENTS_5K_ACV",\n          "propertyManagerId": 123,\n          "tenantId": 123\n        }\'',
       },
     },
   },
@@ -880,39 +880,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## retrieve_certificate\n\n`client.enrollments.retrieveCertificate(id: number): string`\n\n**get** `/api/enrollments/{id}/certificate`\n\nget the certificate of enrollment for a given enrollment\n\n### Parameters\n\n- `id: number`\n\n### Returns\n\n- `string`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst response = await client.enrollments.retrieveCertificate(123);\n\nconsole.log(response);\n\nconst content = await response.blob()\nconsole.log(content)\n```",
     perLanguage: {
-      csharp: {
-        method: 'Enrollments.RetrieveCertificate',
+      typescript: {
+        method: 'client.enrollments.retrieveCertificate',
         example:
-          'EnrollmentRetrieveCertificateParams parameters = new() { ID = 123 };\n\nvar response = await client.Enrollments.RetrieveCertificate(parameters);\n\nConsole.WriteLine(response);',
-      },
-      go: {
-        method: 'client.Enrollments.GetCertificate',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.Enrollments.GetCertificate(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/enrollments/$ID/certificate \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
-      },
-      java: {
-        method: 'enrollments().retrieveCertificate',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.core.http.HttpResponse;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveCertificateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        HttpResponse response = client.enrollments().retrieveCertificate(123.0);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.enrollments.retrieveCertificate(123);\n\nconsole.log(response);\n\nconst content = await response.blob();\nconsole.log(content);",
       },
       python: {
         method: 'enrollments.retrieve_certificate',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.enrollments.retrieve_certificate(\n    123,\n)\nprint(response)\ncontent = response.read()\nprint(content)',
       },
+      java: {
+        method: 'enrollments().retrieveCertificate',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.core.http.HttpResponse;\nimport com.beagle.api.models.enrollments.EnrollmentRetrieveCertificateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        HttpResponse response = client.enrollments().retrieveCertificate(123.0);\n    }\n}',
+      },
+      go: {
+        method: 'client.Enrollments.GetCertificate',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.Enrollments.GetCertificate(context.TODO(), 123)\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response)\n}\n',
+      },
       ruby: {
         method: 'enrollments.retrieve_certificate',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nresponse = beagle.enrollments.retrieve_certificate(123)\n\nputs(response)',
       },
-      typescript: {
-        method: 'client.enrollments.retrieveCertificate',
+      csharp: {
+        method: 'Enrollments.RetrieveCertificate',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.enrollments.retrieveCertificate(123);\n\nconsole.log(response);\n\nconst content = await response.blob();\nconsole.log(content);",
+          'EnrollmentRetrieveCertificateParams parameters = new() { ID = 123 };\n\nvar response = await client.Enrollments.RetrieveCertificate(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/enrollments/$ID/certificate \\\n    -H "x-api-key: $BEAGLE_API_KEY"',
       },
     },
   },
@@ -929,39 +929,39 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     markdown:
       "## verify\n\n`client.insuranceVerification.verify(propertyManagerId: number, tenantId: number, urls: string[]): { message: 'insurance verification job scheduled'; }`\n\n**post** `/api/insurance-verification`\n\ntrigger a job to parse a tenants insurance document(s)\n\n### Parameters\n\n- `propertyManagerId: number`\n\n- `tenantId: number`\n\n- `urls: string[]`\n  an array of presigned pdf urls for the tenants policy document(s)\n\n### Returns\n\n- `{ message: 'insurance verification job scheduled'; }`\n\n  - `message: 'insurance verification job scheduled'`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst response = await client.insuranceVerification.verify({\n  propertyManagerId: 0,\n  tenantId: 0,\n  urls: ['string'],\n});\n\nconsole.log(response);\n```",
     perLanguage: {
-      csharp: {
-        method: 'InsuranceVerification.Verify',
+      typescript: {
+        method: 'client.insuranceVerification.verify',
         example:
-          'InsuranceVerificationVerifyParams parameters = new()\n{\n    PropertyManagerID = 0,\n    TenantID = 0,\n    Urls =\n    [\n        "string"\n    ],\n};\n\nvar response = await client.InsuranceVerification.Verify(parameters);\n\nConsole.WriteLine(response);',
-      },
-      go: {
-        method: 'client.InsuranceVerification.Verify',
-        example:
-          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.InsuranceVerification.Verify(context.TODO(), beagle.InsuranceVerificationVerifyParams{\n\t\tPropertyManagerID: 0,\n\t\tTenantID:          0,\n\t\tURLs:              []string{"string"},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Message)\n}\n',
-      },
-      http: {
-        example:
-          'curl https://developer.beagleforpm.com/api/insurance-verification \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "propertyManagerId": 0,\n          "tenantId": 0,\n          "urls": [\n            "string"\n          ]\n        }\'',
-      },
-      java: {
-        method: 'insuranceVerification().verify',
-        example:
-          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.insuranceverification.InsuranceVerificationVerifyParams;\nimport com.beagle.api.models.insuranceverification.InsuranceVerificationVerifyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        InsuranceVerificationVerifyParams params = InsuranceVerificationVerifyParams.builder()\n            .propertyManagerId(0.0)\n            .tenantId(0.0)\n            .addUrl("string")\n            .build();\n        InsuranceVerificationVerifyResponse response = client.insuranceVerification().verify(params);\n    }\n}',
+          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.insuranceVerification.verify({\n  propertyManagerId: 0,\n  tenantId: 0,\n  urls: ['string'],\n});\n\nconsole.log(response.message);",
       },
       python: {
         method: 'insurance_verification.verify',
         example:
           'import os\nfrom beagle import Beagle\n\nclient = Beagle(\n    api_key=os.environ.get("BEAGLE_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.insurance_verification.verify(\n    property_manager_id=0,\n    tenant_id=0,\n    urls=["string"],\n)\nprint(response.message)',
       },
+      java: {
+        method: 'insuranceVerification().verify',
+        example:
+          'package com.beagle.api.example;\n\nimport com.beagle.api.client.BeagleClient;\nimport com.beagle.api.client.okhttp.BeagleOkHttpClient;\nimport com.beagle.api.models.insuranceverification.InsuranceVerificationVerifyParams;\nimport com.beagle.api.models.insuranceverification.InsuranceVerificationVerifyResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        BeagleClient client = BeagleOkHttpClient.fromEnv();\n\n        InsuranceVerificationVerifyParams params = InsuranceVerificationVerifyParams.builder()\n            .propertyManagerId(0.0)\n            .tenantId(0.0)\n            .addUrl("string")\n            .build();\n        InsuranceVerificationVerifyResponse response = client.insuranceVerification().verify(params);\n    }\n}',
+      },
+      go: {
+        method: 'client.InsuranceVerification.Verify',
+        example:
+          'package main\n\nimport (\n\t"context"\n\t"fmt"\n\n\t"github.com/stainless-sdks/beagle-go"\n\t"github.com/stainless-sdks/beagle-go/option"\n)\n\nfunc main() {\n\tclient := beagle.NewClient(\n\t\toption.WithAPIKey("My API Key"),\n\t)\n\tresponse, err := client.InsuranceVerification.Verify(context.TODO(), beagle.InsuranceVerificationVerifyParams{\n\t\tPropertyManagerID: 0,\n\t\tTenantID:          0,\n\t\tURLs:              []string{"string"},\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf("%+v\\n", response.Message)\n}\n',
+      },
       ruby: {
         method: 'insurance_verification.verify',
         example:
           'require "beagle"\n\nbeagle = Beagle::Client.new(\n  api_key: "My API Key",\n  environment: "staging" # defaults to "production"\n)\n\nresponse = beagle.insurance_verification.verify(property_manager_id: 0, tenant_id: 0, urls: ["string"])\n\nputs(response)',
       },
-      typescript: {
-        method: 'client.insuranceVerification.verify',
+      csharp: {
+        method: 'InsuranceVerification.Verify',
         example:
-          "import Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle({\n  apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.insuranceVerification.verify({\n  propertyManagerId: 0,\n  tenantId: 0,\n  urls: ['string'],\n});\n\nconsole.log(response.message);",
+          'InsuranceVerificationVerifyParams parameters = new()\n{\n    PropertyManagerID = 0,\n    TenantID = 0,\n    Urls =\n    [\n        "string"\n    ],\n};\n\nvar response = await client.InsuranceVerification.Verify(parameters);\n\nConsole.WriteLine(response);',
+      },
+      http: {
+        example:
+          'curl https://developer.beagleforpm.com/api/insurance-verification \\\n    -H \'Content-Type: application/json\' \\\n    -H "x-api-key: $BEAGLE_API_KEY" \\\n    -d \'{\n          "propertyManagerId": 0,\n          "tenantId": 0,\n          "urls": [\n            "string"\n          ]\n        }\'',
       },
     },
   },
