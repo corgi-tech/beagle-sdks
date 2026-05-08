@@ -48,6 +48,8 @@ describe('resource tenants', () => {
         phone: '(123) 456-7890',
       },
       propertyManagerId: 123,
+      expectedMoveInDate: 'expectedMoveInDate',
+      expectedMoveOutDate: 'expectedMoveOutDate',
     });
   });
 

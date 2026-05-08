@@ -33,7 +33,25 @@ describe('resource enrollments', () => {
       propertyManagerId: 123,
       tenantId: 123,
       note: 'note',
+      product: 'product',
       status: 'Issued, Not Paid',
+      tenant: {
+        id: 123,
+        address: {
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Main St.',
+          zip: '84115',
+          street2: 'Unit 3',
+        },
+        contact: {
+          email: 'mark.s@example.com',
+          name: { first: 'Mark', last: 'Scout' },
+          phone: '(123) 456-7890',
+        },
+        expectedMoveInDate: 'expectedMoveInDate',
+        expectedMoveOutDate: 'expectedMoveOutDate',
+      },
     });
   });
 
@@ -68,8 +86,10 @@ describe('resource enrollments', () => {
       client.enrollments.list(
         {
           page: 1,
+          product: 'product',
           propertyManagerId: 1,
           size: 1,
+          status: 'status',
         },
         { path: '/_stainless_unknown_path' },
       ),

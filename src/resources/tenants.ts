@@ -132,6 +132,10 @@ export interface Tenant {
   address: Address;
 
   contact: Contact;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
 }
 
 export interface TenantCreateResponse {
@@ -172,12 +176,20 @@ export interface TenantCreateParams {
   contact: Contact;
 
   propertyManagerId: number;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
 }
 
 export interface TenantUpdateParams {
   address?: Address;
 
   contact?: Contact;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
 }
 
 export interface TenantListParams {
