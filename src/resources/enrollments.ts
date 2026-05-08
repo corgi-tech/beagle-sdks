@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as EnrollmentsAPI from './enrollments';
 import * as PropertyManagersAPI from './property-managers';
+import * as TenantsAPI from './tenants';
 import { APIPromise } from '../core/api-promise';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -126,6 +127,10 @@ export interface Enrollment {
    * enrollments
    */
   note?: string;
+
+  product?: string;
+
+  tenant?: TenantsAPI.Tenant;
 }
 
 export interface EnrollmentCreateResponse {
@@ -175,10 +180,14 @@ export interface EnrollmentCreateParams {
    */
   note?: string;
 
+  product?: string;
+
   /**
    * the enrollment status — defaults to 'Issued, Not Paid' if not provided
    */
   status?: 'Premium Paying' | 'Issued, Not Paid';
+
+  tenant?: TenantsAPI.Tenant;
 }
 
 export interface EnrollmentListParams {
@@ -187,12 +196,16 @@ export interface EnrollmentListParams {
    */
   page?: number;
 
+  product?: string | null;
+
   propertyManagerId?: number;
 
   /**
    * Number of items per page.
    */
   size?: number;
+
+  status?: string | null;
 }
 
 export declare namespace Enrollments {
