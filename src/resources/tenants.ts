@@ -103,7 +103,7 @@ export interface Address {
   street1: string;
 
   /**
-   * 5 digit US zip code, ie 94104
+   * US ZIP or ZIP+4. For example: '94104' or '94104-1234'
    */
   zip: string;
 
