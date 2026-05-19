@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from '@corgi-tech/beagle/internal/to-file';
 import { toFile } from '@corgi-tech/beagle/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
