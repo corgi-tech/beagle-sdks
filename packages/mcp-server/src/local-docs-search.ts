@@ -59,9 +59,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) plans > (method) list',
     qualified: 'client.plans.list',
     response:
-      '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }[]; success: true; }',
+      '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]; success: true; }',
     markdown:
-      "## list\n\n`client.plans.list(): { data: plan[]; success: true; }`\n\n**get** `/api/plans`\n\nList all available insurance plans that tenants can be enrolled in.\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }[]; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }[]`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plans = await client.plans.list();\n\nconsole.log(plans);\n```",
+      "## list\n\n`client.plans.list(): { data: plan[]; success: true; }`\n\n**get** `/api/plans`\n\nList all available insurance plans that tenants can be enrolled in.\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plans = await client.plans.list();\n\nconsole.log(plans);\n```",
     perLanguage: {
       typescript: {
         method: 'client.plans.list',
@@ -108,9 +108,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.plans.retrieve',
     params: ['code: string;'],
     response:
-      '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }; success: true; }',
+      '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }; success: true; }',
     markdown:
-      "## retrieve\n\n`client.plans.retrieve(code: string): { data: plan; success: true; }`\n\n**get** `/api/plans/{code}`\n\nretrieve a specific plans details by its code.\n\n### Parameters\n\n- `code: string`\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; value?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan);\n```",
+      "## retrieve\n\n`client.plans.retrieve(code: string): { data: plan; success: true; }`\n\n**get** `/api/plans/{code}`\n\nretrieve a specific plans details by its code.\n\n### Parameters\n\n- `code: string`\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan);\n```",
     perLanguage: {
       typescript: {
         method: 'client.plans.retrieve',
