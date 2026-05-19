@@ -48,6 +48,21 @@ export interface Plan {
   liability?: number;
 
   /**
+   * the maximum monthly rent for a Rent Guarantee plan band.
+   */
+  rentBandMax?: number;
+
+  /**
+   * the minimum monthly rent for a Rent Guarantee plan band.
+   */
+  rentBandMin?: number;
+
+  /**
+   * the Rent Guarantee plan term in months, when applicable.
+   */
+  termMonths?: number;
+
+  /**
    * general value field, this is currently used for SDR and SDD plans for the
    * replacement or discount value.
    */
