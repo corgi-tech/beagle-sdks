@@ -10,14 +10,23 @@ import { path } from '../internal/utils/path';
  */
 export class Plans extends APIResource {
   /**
-   * retrieve a specific plans details by its code.
+   * Retrieve a specific plan's details by its code. Rent Guarantee plans are priced
+   * by lease term and monthly rent range, and are only available when enabled for
+   * your API key. For example, RG*3M_RENT_750_1000 is a 3-month Rent Guarantee plan
+   * for monthly rent between $750 and $1,000. Rent Guarantee plan codes use the
+   * format RG*{term}M*RENT*{min}\_{max}.
    */
   retrieve(code: string, options?: RequestOptions): APIPromise<PlanRetrieveResponse> {
     return this._client.get(path`/api/plans/${code}`, options);
   }
 
   /**
-   * List all available insurance plans that tenants can be enrolled in.
+   * List all available insurance plans that tenants can be enrolled in. Rent
+   * Guarantee plans are priced by lease term and monthly rent range. They are
+   * client-specific and only appear when enabled for your API key. For example,
+   * RG*3M_RENT_750_1000 is a 3-month Rent Guarantee plan for monthly rent between
+   * $750 and $1,000. Rent Guarantee plan codes use the format
+   * RG*{term}M*RENT*{min}\_{max}.
    */
   list(options?: RequestOptions): APIPromise<PlanListResponse> {
     return this._client.get('/api/plans', options);
