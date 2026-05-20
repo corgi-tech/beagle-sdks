@@ -56,13 +56,13 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'get',
     summary: 'List Plans',
     description:
-      'List all available insurance plans that tenants can be enrolled in. Rent Guarantee plans are priced by lease term and monthly rent range. They are client-specific and only appear when enabled for your API key. For example, RG_3M_RENT_750_1000 is a 3-month Rent Guarantee plan for monthly rent between $750 and $1,000. Rent Guarantee plan codes use the format RG_{term}M_RENT_{min}_{max}.',
+      "List all insurance plans available to your API key. Plan availability, coverage details, and pricing can vary by client configuration. Use the plan's name/code when creating enrollments.",
     stainlessPath: '(resource) plans > (method) list',
     qualified: 'client.plans.list',
     response:
       '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]; success: true; }',
     markdown:
-      "## list\n\n`client.plans.list(): { data: plan[]; success: true; }`\n\n**get** `/api/plans`\n\nList all available insurance plans that tenants can be enrolled in. Rent Guarantee plans are priced by lease term and monthly rent range. They are client-specific and only appear when enabled for your API key. For example, RG_3M_RENT_750_1000 is a 3-month Rent Guarantee plan for monthly rent between $750 and $1,000. Rent Guarantee plan codes use the format RG_{term}M_RENT_{min}_{max}.\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plans = await client.plans.list();\n\nconsole.log(plans);\n```",
+      "## list\n\n`client.plans.list(): { data: plan[]; success: true; }`\n\n**get** `/api/plans`\n\nList all insurance plans available to your API key. Plan availability, coverage details, and pricing can vary by client configuration. Use the plan's name/code when creating enrollments.\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }[]`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plans = await client.plans.list();\n\nconsole.log(plans);\n```",
     perLanguage: {
       typescript: {
         method: 'client.plans.list',
@@ -105,14 +105,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'get',
     summary: 'Get Plan',
     description:
-      "Retrieve a specific plan's details by its code. Rent Guarantee plans are priced by lease term and monthly rent range, and are only available when enabled for your API key. For example, RG_3M_RENT_750_1000 is a 3-month Rent Guarantee plan for monthly rent between $750 and $1,000. Rent Guarantee plan codes use the format RG_{term}M_RENT_{min}_{max}.",
+      "Retrieve a specific plan's details by its code. Plans are only returned when they are available to your API key, and pricing can vary by client configuration.",
     stainlessPath: '(resource) plans > (method) retrieve',
     qualified: 'client.plans.retrieve',
     params: ['code: string;'],
     response:
       '{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }; success: true; }',
     markdown:
-      "## retrieve\n\n`client.plans.retrieve(code: string): { data: plan; success: true; }`\n\n**get** `/api/plans/{code}`\n\nRetrieve a specific plan's details by its code. Rent Guarantee plans are priced by lease term and monthly rent range, and are only available when enabled for your API key. For example, RG_3M_RENT_750_1000 is a 3-month Rent Guarantee plan for monthly rent between $750 and $1,000. Rent Guarantee plan codes use the format RG_{term}M_RENT_{min}_{max}.\n\n### Parameters\n\n- `code: string`\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan);\n```",
+      "## retrieve\n\n`client.plans.retrieve(code: string): { data: plan; success: true; }`\n\n**get** `/api/plans/{code}`\n\nRetrieve a specific plan's details by its code. Plans are only returned when they are available to your API key, and pricing can vary by client configuration.\n\n### Parameters\n\n- `code: string`\n\n### Returns\n\n- `{ data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }; success: true; }`\n\n  - `data: { description: string; name: string; rate: number; contents?: number; liability?: number; rentBandMax?: number; rentBandMin?: number; termMonths?: number; value?: number; }`\n  - `success: true`\n\n### Example\n\n```typescript\nimport Beagle from '@corgi-tech/beagle';\n\nconst client = new Beagle();\n\nconst plan = await client.plans.retrieve('code');\n\nconsole.log(plan);\n```",
     perLanguage: {
       typescript: {
         method: 'client.plans.retrieve',
