@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Trigger insurance document parsing and verifications on demand. This is currently under development please reach out for support integrating.
+ */
 export class InsuranceVerification extends APIResource {
   /**
    * trigger a job to parse a tenants insurance document(s)

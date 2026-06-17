@@ -1,5 +1,5 @@
 import { inspect } from 'node:util';
-import { buildHeaders, type HeadersLike, type NullableHeaders } from 'beagle/internal/headers';
+import { buildHeaders, type HeadersLike, type NullableHeaders } from '@corgi-tech/beagle/internal/headers';
 
 function inspectNullableHeaders(headers: NullableHeaders) {
   return `NullableHeaders {${[

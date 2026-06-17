@@ -164,9 +164,9 @@ export class PropertyManagersPagination<Item>
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const currentPage = this.pagination?.page;
+    const currentPage = this.pagination?.page ?? 1;
 
-    if (currentPage >= this.pagination?.pages) {
+    if (this.pagination.pages != null && currentPage >= this.pagination.pages) {
       return null;
     }
 
@@ -234,9 +234,9 @@ export class TenantsPagination<Item> extends AbstractPage<Item> implements Tenan
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const currentPage = this.pagination?.page;
+    const currentPage = this.pagination?.page ?? 1;
 
-    if (currentPage >= this.pagination?.pages) {
+    if (this.pagination.pages != null && currentPage >= this.pagination.pages) {
       return null;
     }
 
@@ -307,9 +307,9 @@ export class EnrollmentsPagination<Item>
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const currentPage = this.pagination?.page;
+    const currentPage = this.pagination?.page ?? 1;
 
-    if (currentPage >= this.pagination?.pages) {
+    if (this.pagination.pages != null && currentPage >= this.pagination.pages) {
       return null;
     }
 
@@ -380,9 +380,9 @@ export class WebhookEndpointsPagination<Item>
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const currentPage = this.pagination?.page;
+    const currentPage = this.pagination?.page ?? 1;
 
-    if (currentPage >= this.pagination?.pages) {
+    if (this.pagination.pages != null && currentPage >= this.pagination.pages) {
       return null;
     }
 

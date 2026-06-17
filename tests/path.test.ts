@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'beagle/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@corgi-tech/beagle/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

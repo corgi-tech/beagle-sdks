@@ -19,7 +19,7 @@ done
 # and does a few other minor things
 PKG_JSON_PATH=../../packages/mcp-server/package.json node ../../scripts/utils/make-dist-package-json.cjs > dist/package.json
 
-# updates the `beagle` dependency to point to NPM
+# updates the `@corgi-tech/beagle` dependency to point to NPM
 node scripts/postprocess-dist-package-json.cjs
 
 # build to .js/.mjs/.d.ts files
@@ -29,4 +29,28 @@ cp tsconfig.dist-src.json dist/src/tsconfig.json
 
 chmod +x dist/index.js
 
-DIST_PATH=./dist PKG_IMPORT_PATH=beagle-mcp/ node ../../scripts/utils/postprocess-files.cjs
+DIST_PATH=./dist PKG_IMPORT_PATH=@corgi-tech/beagle-mcp/ node ../../scripts/utils/postprocess-files.cjs
+
+# mcp bundle
+rm -rf dist-bundle corgi_tech_beagle_api.mcpb; mkdir dist-bundle
+
+# copy package.json
+PKG_JSON_PATH=../../packages/mcp-server/package.json node ../../scripts/utils/make-dist-package-json.cjs > dist-bundle/package.json
+
+# copy files
+node scripts/copy-bundle-files.cjs
+
+# install runtime deps
+cd dist-bundle
+npm install
+cd ..
+
+# pack bundle
+cp manifest.json dist-bundle
+
+npx mcpb pack dist-bundle corgi_tech_beagle_api.mcpb
+
+npx mcpb sign corgi_tech_beagle_api.mcpb --self-signed
+
+# clean up
+rm -rf dist-bundle

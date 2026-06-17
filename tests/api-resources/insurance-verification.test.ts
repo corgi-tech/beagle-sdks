@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: 'My API Key',
@@ -8,7 +8,7 @@ const client = new Beagle({
 });
 
 describe('resource insuranceVerification', () => {
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('verify: only required params', async () => {
     const responsePromise = client.insuranceVerification.verify({
       propertyManagerId: 0,
@@ -24,7 +24,7 @@ describe('resource insuranceVerification', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('verify: required and optional params', async () => {
     const response = await client.insuranceVerification.verify({
       propertyManagerId: 0,

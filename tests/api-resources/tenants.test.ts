@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: 'My API Key',
@@ -8,12 +8,20 @@ const client = new Beagle({
 });
 
 describe('resource tenants', () => {
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.tenants.create({
-      address: { city: 'city', state: 'xx', street1: 'street1', zip: '60513' },
-      contact: { email: 'dev@stainless.com', name: { first: 'first', last: 'last' } },
-      propertyManagerId: 0,
+      address: {
+        city: 'South Salt Lake',
+        state: 'UT',
+        street1: '123 Main St.',
+        zip: '84115',
+      },
+      contact: {
+        email: 'mark.s@example.com',
+        name: { first: 'Mark', last: 'Scout' },
+      },
+      propertyManagerId: 123,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,18 +32,30 @@ describe('resource tenants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.tenants.create({
-      address: { city: 'city', state: 'xx', street1: 'street1', zip: '60513', street2: 'street2' },
-      contact: { email: 'dev@stainless.com', name: { first: 'first', last: 'last' }, phone: 'phone' },
-      propertyManagerId: 0,
+      address: {
+        city: 'South Salt Lake',
+        state: 'UT',
+        street1: '123 Main St.',
+        zip: '84115',
+        street2: 'Unit 3',
+      },
+      contact: {
+        email: 'mark.s@example.com',
+        name: { first: 'Mark', last: 'Scout' },
+        phone: '(123) 456-7890',
+      },
+      propertyManagerId: 123,
+      expectedMoveInDate: 'expectedMoveInDate',
+      expectedMoveOutDate: 'expectedMoveOutDate',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.tenants.retrieve(42);
+    const responsePromise = client.tenants.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,9 +65,9 @@ describe('resource tenants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.tenants.update(42, {});
+    const responsePromise = client.tenants.update(123, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,7 +77,7 @@ describe('resource tenants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.tenants.list();
     const rawResponse = await responsePromise.asResponse();
@@ -69,17 +89,24 @@ describe('resource tenants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.tenants.list({ page: 1, propertyManagerId: 1, size: 1 }, { path: '/_stainless_unknown_path' }),
+      client.tenants.list(
+        {
+          page: 1,
+          propertyManagerId: 1,
+          size: 1,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.tenants.delete(42);
+    const responsePromise = client.tenants.delete(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

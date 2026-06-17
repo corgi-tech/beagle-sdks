@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: 'My API Key',
@@ -8,13 +8,13 @@ const client = new Beagle({
 });
 
 describe('resource enrollments', () => {
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.enrollments.create({
-      effectiveDate: 'effectiveDate',
-      plan: 'plan',
-      propertyManagerId: 0,
-      tenantId: 0,
+      effectiveDate: '2025-11-10T19:50:20.638Z',
+      plan: 'TLL_100K_CONTENTS_5K_ACV',
+      propertyManagerId: 123,
+      tenantId: 123,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,20 +25,39 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.enrollments.create({
-      effectiveDate: 'effectiveDate',
-      plan: 'plan',
-      propertyManagerId: 0,
-      tenantId: 0,
+      effectiveDate: '2025-11-10T19:50:20.638Z',
+      plan: 'TLL_100K_CONTENTS_5K_ACV',
+      propertyManagerId: 123,
+      tenantId: 123,
       note: 'note',
+      product: 'product',
+      status: 'Issued, Not Paid',
+      tenant: {
+        id: 123,
+        address: {
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Main St.',
+          zip: '84115',
+          street2: 'Unit 3',
+        },
+        contact: {
+          email: 'mark.s@example.com',
+          name: { first: 'Mark', last: 'Scout' },
+          phone: '(123) 456-7890',
+        },
+        expectedMoveInDate: 'expectedMoveInDate',
+        expectedMoveOutDate: 'expectedMoveOutDate',
+      },
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.enrollments.retrieve(42);
+    const responsePromise = client.enrollments.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,7 +67,7 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.enrollments.list();
     const rawResponse = await responsePromise.asResponse();
@@ -60,20 +79,26 @@ describe('resource enrollments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.enrollments.list(
-        { page: 1, propertyManagerId: 1, size: 1 },
+        {
+          page: 1,
+          product: 'product',
+          propertyManagerId: 1,
+          size: 1,
+          status: 'status',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('lapse', async () => {
-    const responsePromise = client.enrollments.lapse(42);
+    const responsePromise = client.enrollments.lapse(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

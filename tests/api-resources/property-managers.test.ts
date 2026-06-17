@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: 'My API Key',
@@ -8,43 +8,66 @@ const client = new Beagle({
 });
 
 describe('resource propertyManagers', () => {
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.propertyManagers.create({
-      addresses: [{ city: 'city', state: 'xx', street1: 'street1', zip: '60513', kind: 'billing' }],
-      contacts: [{ email: 'dev@stainless.com', name: { first: 'first', last: 'last' }, kind: 'agreements' }],
-      name: 'name',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.propertyManagers.create({
       addresses: [
-        { city: 'city', state: 'xx', street1: 'street1', zip: '60513', street2: 'street2', kind: 'billing' },
+        {
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Electric Ave.',
+          zip: '84115',
+          kind: 'place of business',
+        },
       ],
       contacts: [
         {
-          email: 'dev@stainless.com',
-          name: { first: 'first', last: 'last' },
-          phone: 'phone',
-          kind: 'agreements',
+          email: 'mr.milchick@example.com',
+          name: { first: 'Seth', last: 'Milchick' },
+          kind: 'reporting',
         },
       ],
-      name: 'name',
+      name: 'Lumon Apartments',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.propertyManagers.create({
+      addresses: [
+        {
+          city: 'South Salt Lake',
+          state: 'UT',
+          street1: '123 Electric Ave.',
+          zip: '84115',
+          street2: 'street2',
+          kind: 'place of business',
+        },
+      ],
+      contacts: [
+        {
+          email: 'mr.milchick@example.com',
+          name: { first: 'Seth', last: 'Milchick' },
+          phone: '(123) 456-7890',
+          kind: 'reporting',
+        },
+      ],
+      name: 'Lumon Apartments',
+      clickWrapAt: 1773359774000,
+      totalUnits: 0,
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.propertyManagers.retrieve(42);
+    const responsePromise = client.propertyManagers.retrieve(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,9 +77,9 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.propertyManagers.update(42, {});
+    const responsePromise = client.propertyManagers.update(123, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +89,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.propertyManagers.list();
     const rawResponse = await responsePromise.asResponse();
@@ -78,7 +101,7 @@ describe('resource propertyManagers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -86,9 +109,9 @@ describe('resource propertyManagers', () => {
     ).rejects.toThrow(Beagle.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.propertyManagers.delete(42);
+    const responsePromise = client.propertyManagers.delete(123);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

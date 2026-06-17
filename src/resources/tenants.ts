@@ -1,57 +1,96 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as TenantsAPI from './tenants';
+import * as PropertyManagersAPI from './property-managers';
 import { APIPromise } from '../core/api-promise';
-import { PagePromise, TenantsPagination, type TenantsPaginationParams } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Maintain your tenant directory and their primary contact and address. You can create, update, retrieve, list, or delete tenant records. Listings support pagination and filtering by property manager.
+ */
 export class Tenants extends APIResource {
   /**
    * create a new tenant.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.create({
+   *   address: {
+   *     city: 'South Salt Lake',
+   *     state: 'UT',
+   *     street1: '123 Main St.',
+   *     zip: '84115',
+   *   },
+   *   contact: {
+   *     email: 'mark.s@example.com',
+   *     name: { first: 'Mark', last: 'Scout' },
+   *   },
+   *   propertyManagerId: 123,
+   * });
+   * ```
    */
-  create(body: TenantCreateParams, options?: RequestOptions): APIPromise<Tenant> {
+  create(body: TenantCreateParams, options?: RequestOptions): APIPromise<TenantCreateResponse> {
     return this._client.post('/api/tenants', { body, ...options });
   }
 
   /**
    * retrieve a single tenant by their id.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.retrieve(123);
+   * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<Tenant> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<TenantRetrieveResponse> {
     return this._client.get(path`/api/tenants/${id}`, options);
   }
 
   /**
    * update an existing tenant by their id.
+   *
+   * @example
+   * ```ts
+   * const tenant = await client.tenants.update(123);
+   * ```
    */
-  update(id: number | null, body: TenantUpdateParams, options?: RequestOptions): APIPromise<Tenant> {
+  update(id: number, body: TenantUpdateParams, options?: RequestOptions): APIPromise<TenantUpdateResponse> {
     return this._client.patch(path`/api/tenants/${id}`, { body, ...options });
   }
 
   /**
    * list all tenants, this endpoint is paginated and allows for queries by
    * individual property manager.
+   *
+   * @example
+   * ```ts
+   * const tenants = await client.tenants.list();
+   * ```
    */
   list(
     query: TenantListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<TenantsTenantsPagination, Tenant> {
-    return this._client.getAPIList('/api/tenants', TenantsPagination<Tenant>, { query, ...options });
+  ): APIPromise<TenantListResponse> {
+    return this._client.get('/api/tenants', { query, ...options });
   }
 
   /**
    * delete an existing tenant by their id.
+   *
+   * @example
+   * ```ts
+   * await client.tenants.delete(123);
+   * ```
    */
-  delete(id: number | null, options?: RequestOptions): APIPromise<void> {
+  delete(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/tenants/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
-
-export type TenantsTenantsPagination = TenantsPagination<Tenant>;
 
 export interface Address {
   city: string;
@@ -64,7 +103,7 @@ export interface Address {
   street1: string;
 
   /**
-   * 5 digit US zip code, ie 94104
+   * US ZIP or ZIP+4. For example: '94104' or '94104-1234'
    */
   zip: string;
 
@@ -93,6 +132,42 @@ export interface Tenant {
   address: Address;
 
   contact: Contact;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
+}
+
+export interface TenantCreateResponse {
+  data: Tenant;
+
+  success: true;
+}
+
+export interface TenantRetrieveResponse {
+  data: Tenant;
+
+  success: true;
+}
+
+export interface TenantUpdateResponse {
+  data: Tenant;
+
+  success: true;
+}
+
+export interface TenantListResponse {
+  data: TenantListResponse.Data;
+
+  success: true;
+}
+
+export namespace TenantListResponse {
+  export interface Data {
+    items: Array<TenantsAPI.Tenant>;
+
+    pagination: PropertyManagersAPI.Pagination;
+  }
 }
 
 export interface TenantCreateParams {
@@ -101,16 +176,34 @@ export interface TenantCreateParams {
   contact: Contact;
 
   propertyManagerId: number;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
 }
 
 export interface TenantUpdateParams {
   address?: Address;
 
   contact?: Contact;
+
+  expectedMoveInDate?: string;
+
+  expectedMoveOutDate?: string;
 }
 
-export interface TenantListParams extends TenantsPaginationParams {
+export interface TenantListParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
   propertyManagerId?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
 }
 
 export declare namespace Tenants {
@@ -118,7 +211,10 @@ export declare namespace Tenants {
     type Address as Address,
     type Contact as Contact,
     type Tenant as Tenant,
-    type TenantsTenantsPagination as TenantsTenantsPagination,
+    type TenantCreateResponse as TenantCreateResponse,
+    type TenantRetrieveResponse as TenantRetrieveResponse,
+    type TenantUpdateResponse as TenantUpdateResponse,
+    type TenantListResponse as TenantListResponse,
     type TenantCreateParams as TenantCreateParams,
     type TenantUpdateParams as TenantUpdateParams,
     type TenantListParams as TenantListParams,

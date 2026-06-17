@@ -1,54 +1,99 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as EnrollmentsAPI from './enrollments';
+import * as PropertyManagersAPI from './property-managers';
+import * as TenantsAPI from './tenants';
 import { APIPromise } from '../core/api-promise';
-import { EnrollmentsPagination, type EnrollmentsPaginationParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Handle the connections of tenants to plans over time. Create, list, retrieve, or lapse an enrollment records. Enrollments record the chosen plan, effective date, and optional notes.
+ */
 export class Enrollments extends APIResource {
   /**
    * create a new enrollment for a tenant.
+   *
+   * @example
+   * ```ts
+   * const enrollment = await client.enrollments.create({
+   *   effectiveDate: '2025-11-10T19:50:20.638Z',
+   *   plan: 'TLL_100K_CONTENTS_5K_ACV',
+   *   propertyManagerId: 123,
+   *   tenantId: 123,
+   * });
+   * ```
    */
-  create(body: EnrollmentCreateParams, options?: RequestOptions): APIPromise<Enrollment> {
+  create(body: EnrollmentCreateParams, options?: RequestOptions): APIPromise<EnrollmentCreateResponse> {
     return this._client.post('/api/enrollments', { body, ...options });
   }
 
   /**
    * get a specific enrollment by its id.
+   *
+   * @example
+   * ```ts
+   * const enrollment = await client.enrollments.retrieve(123);
+   * ```
    */
-  retrieve(id: number | null, options?: RequestOptions): APIPromise<Enrollment> {
+  retrieve(id: number, options?: RequestOptions): APIPromise<EnrollmentRetrieveResponse> {
     return this._client.get(path`/api/enrollments/${id}`, options);
   }
 
   /**
    * list all enrollments, this endpoint is paginated and allows for queries by
    * individual property manager.
+   *
+   * @example
+   * ```ts
+   * const enrollments = await client.enrollments.list();
+   * ```
    */
   list(
     query: EnrollmentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<EnrollmentsEnrollmentsPagination, Enrollment> {
-    return this._client.getAPIList('/api/enrollments', EnrollmentsPagination<Enrollment>, {
-      query,
-      ...options,
-    });
+  ): APIPromise<EnrollmentListResponse> {
+    return this._client.get('/api/enrollments', { query, ...options });
   }
 
   /**
    * lapses a specific enrollment for a tenant, note that if a tenant has multiple
    * enrollments (e.g., SDR and TLL), each must be lapsed individually
+   *
+   * @example
+   * ```ts
+   * await client.enrollments.lapse(123);
+   * ```
    */
-  lapse(id: number | null, options?: RequestOptions): APIPromise<void> {
+  lapse(id: number, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/api/enrollments/${id}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
-}
 
-export type EnrollmentsEnrollmentsPagination = EnrollmentsPagination<Enrollment>;
+  /**
+   * get the certificate of enrollment for a given enrollment
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.enrollments.retrieveCertificate(123);
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  retrieveCertificate(id: number, options?: RequestOptions): APIPromise<Response> {
+    return this._client.get(path`/api/enrollments/${id}/certificate`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/pdf' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+}
 
 export interface Enrollment {
   id: number;
@@ -65,6 +110,16 @@ export interface Enrollment {
 
   propertyManagerId: number;
 
+  status:
+    | 'Premium Paying'
+    | 'Issued, Not Paid'
+    | 'Expired'
+    | 'Lapsed'
+    | 'Suspended'
+    | 'Cancelled'
+    | 'Not taken'
+    | 'Declined';
+
   tenantId: number;
 
   /**
@@ -72,6 +127,36 @@ export interface Enrollment {
    * enrollments
    */
   note?: string;
+
+  product?: string;
+
+  tenant?: TenantsAPI.Tenant;
+}
+
+export interface EnrollmentCreateResponse {
+  data: Enrollment;
+
+  success: true;
+}
+
+export interface EnrollmentRetrieveResponse {
+  data: Enrollment;
+
+  success: true;
+}
+
+export interface EnrollmentListResponse {
+  data: EnrollmentListResponse.Data;
+
+  success: true;
+}
+
+export namespace EnrollmentListResponse {
+  export interface Data {
+    items: Array<EnrollmentsAPI.Enrollment>;
+
+    pagination: PropertyManagersAPI.Pagination;
+  }
 }
 
 export interface EnrollmentCreateParams {
@@ -94,16 +179,41 @@ export interface EnrollmentCreateParams {
    * enrollments
    */
   note?: string;
+
+  product?: string;
+
+  /**
+   * the enrollment status — defaults to 'Issued, Not Paid' if not provided
+   */
+  status?: 'Premium Paying' | 'Issued, Not Paid';
+
+  tenant?: TenantsAPI.Tenant;
 }
 
-export interface EnrollmentListParams extends EnrollmentsPaginationParams {
+export interface EnrollmentListParams {
+  /**
+   * Page number to fetch.
+   */
+  page?: number;
+
+  product?: string | null;
+
   propertyManagerId?: number;
+
+  /**
+   * Number of items per page.
+   */
+  size?: number;
+
+  status?: string | null;
 }
 
 export declare namespace Enrollments {
   export {
     type Enrollment as Enrollment,
-    type EnrollmentsEnrollmentsPagination as EnrollmentsEnrollmentsPagination,
+    type EnrollmentCreateResponse as EnrollmentCreateResponse,
+    type EnrollmentRetrieveResponse as EnrollmentRetrieveResponse,
+    type EnrollmentListResponse as EnrollmentListResponse,
     type EnrollmentCreateParams as EnrollmentCreateParams,
     type EnrollmentListParams as EnrollmentListParams,
   };

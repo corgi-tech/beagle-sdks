@@ -1,6 +1,6 @@
 # Beagle TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/beagle.svg?label=npm%20(stable)>)](https://npmjs.org/package/beagle) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/beagle)
+[![NPM version](<https://img.shields.io/npm/v/@corgi-tech/beagle.svg?label=npm%20(stable)>)](https://npmjs.org/package/@corgi-tech/beagle) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@corgi-tech/beagle)
 
 This library provides convenient access to the Beagle REST API from server-side TypeScript or JavaScript.
 
@@ -8,14 +8,20 @@ The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
+## MCP Server
+
+Use the Beagle MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40corgi-tech%2Fbeagle-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBjb3JnaS10ZWNoL2JlYWdsZS1tY3AiXSwiZW52Ijp7IkJFQUdMRV9BUElfS0VZIjoiTXkgQVBJIEtleSJ9fQ)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40corgi-tech%2Fbeagle-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40corgi-tech%2Fbeagle-mcp%22%5D%2C%22env%22%3A%7B%22BEAGLE_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)
+
+> Note: You may need to set environment variables in your MCP client.
+
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/beagle-typescript.git
+npm install @corgi-tech/beagle
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install beagle`
 
 ## Usage
 
@@ -23,7 +29,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted
@@ -31,6 +37,8 @@ const client = new Beagle({
 });
 
 const plans = await client.plans.list();
+
+console.log(plans.data);
 ```
 
 ### Request & Response types
@@ -39,7 +47,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   apiKey: process.env['BEAGLE_API_KEY'], // This is the default and can be omitted
@@ -125,37 +133,6 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
-## Auto-pagination
-
-List methods in the Beagle API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllTenants(params) {
-  const allTenants = [];
-  // Automatically fetches more pages as needed.
-  for await (const tenant of client.tenants.list()) {
-    allTenants.push(tenant);
-  }
-  return allTenants;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.tenants.list();
-for (const tenant of page.tenants) {
-  console.log(tenant);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
-
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
@@ -176,7 +153,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: plans, response: raw } = await client.plans.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(plans);
+console.log(plans.data);
 ```
 
 ### Logging
@@ -193,7 +170,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   logLevel: 'debug', // Show all log messages
@@ -221,7 +198,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 import pino from 'pino';
 
 const logger = pino();
@@ -290,7 +267,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 import fetch from 'my-fetch';
 
 const client = new Beagle({ fetch });
@@ -301,7 +278,7 @@ const client = new Beagle({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   fetchOptions: {
@@ -318,7 +295,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -332,7 +309,7 @@ const client = new Beagle({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Beagle from 'beagle';
+import Beagle from '@corgi-tech/beagle';
 
 const client = new Beagle({
   fetchOptions: {
@@ -344,7 +321,7 @@ const client = new Beagle({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Beagle from 'npm:beagle';
+import Beagle from 'npm:@corgi-tech/beagle';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Beagle({
@@ -366,7 +343,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/beagle-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/corgi-tech/beagle-sdks/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

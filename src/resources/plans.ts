@@ -5,17 +5,23 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Retrieve a list of all plans or look up details by plan code. Each plan defines its name, description, rate, and any coverage values.
+ */
 export class Plans extends APIResource {
   /**
-   * retrieve a specific plans details by its code.
+   * Retrieve a specific plan's details by its code. Plans are only returned when
+   * they are available to your API key, and pricing can vary by client
+   * configuration.
    */
-  retrieve(code: string, options?: RequestOptions): APIPromise<Plan> {
+  retrieve(code: string, options?: RequestOptions): APIPromise<PlanRetrieveResponse> {
     return this._client.get(path`/api/plans/${code}`, options);
   }
 
   /**
-   * list all available plans, note this endpoint is currently unpaginated unlike all
-   * other list endpoints.
+   * List all insurance plans available to your API key. Plan availability, coverage
+   * details, and pricing can vary by client configuration. Use the plan's name/code
+   * when creating enrollments.
    */
   list(options?: RequestOptions): APIPromise<PlanListResponse> {
     return this._client.get('/api/plans', options);
@@ -26,7 +32,7 @@ export interface Plan {
   description: string;
 
   /**
-   * the plans name/code, this is used when creating enrollments.
+   * the plan's name/code, this is used when creating enrollments.
    */
   name: string;
 
@@ -46,14 +52,48 @@ export interface Plan {
   liability?: number;
 
   /**
+   * for approved-partner Rent Guarantee plans, the maximum monthly rent covered by
+   * this rent band. Rent Guarantee plan codes use the format
+   * RG*{term}M_RENT*{min}\_{max}; for example, RG_3M_RENT_750_1000 covers a 3-month
+   * term with monthly rent from $750 to $1,000.
+   */
+  rentBandMax?: number;
+
+  /**
+   * for approved-partner Rent Guarantee plans, the minimum monthly rent covered by
+   * this rent band.
+   */
+  rentBandMin?: number;
+
+  /**
+   * for approved-partner Rent Guarantee plans, the lease term in months. Match this
+   * to the tenant's lease term when choosing a plan.
+   */
+  termMonths?: number;
+
+  /**
    * general value field, this is currently used for SDR and SDD plans for the
    * replacement or discount value.
    */
   value?: number;
 }
 
-export type PlanListResponse = Array<Plan>;
+export interface PlanRetrieveResponse {
+  data: Plan;
+
+  success: true;
+}
+
+export interface PlanListResponse {
+  data: Array<Plan>;
+
+  success: true;
+}
 
 export declare namespace Plans {
-  export { type Plan as Plan, type PlanListResponse as PlanListResponse };
+  export {
+    type Plan as Plan,
+    type PlanRetrieveResponse as PlanRetrieveResponse,
+    type PlanListResponse as PlanListResponse,
+  };
 }
