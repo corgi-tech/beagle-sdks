@@ -29,7 +29,7 @@ export const newMcpServer = async ({
   new McpServer(
     {
       name: 'corgi_tech_beagle_api',
-      version: '0.0.1-alpha.0',
+      version: '2.0.0',
     },
     {
       instructions: await getInstructions({ stainlessApiKey, customInstructionsPath }),

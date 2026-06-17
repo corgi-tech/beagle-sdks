@@ -1,6 +1,6 @@
 {
   "name": "@corgi-tech/beagle",
-  "version": "0.0.1-alpha.0",
+  "version": "2.0.0",
   "description": "The official TypeScript library for the Beagle API",
   "author": "Beagle <>",
   "types": "dist/index.d.ts",
